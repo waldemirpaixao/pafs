@@ -82,7 +82,7 @@ class AreceberController extends Controller
         //Por padrão a forma de pagamento será boleto - CONTINUAR AQUI
 
 
-        parei aqui
+        parei aqui também
 
 
 

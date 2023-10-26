@@ -7,8 +7,7 @@ use \Models\FormaDePagamento;
 
 class BancosController extends Controller{
 
-
-
+    //Array
     private $viewData = array();
    
     public function index() {
