@@ -1,0 +1,17 @@
+{
+    "require": {
+        "mpdf/mpdf": "^8.1",
+        "dompdf/dompdf": "^2.0"
+    },
+
+
+"autoload":{
+
+    "psr-4": {
+        "Controllers\\":"Controllers/",
+        "Core\\":"Core/",
+        "Models\\":"Models/"
+
+    }
+}
+}

@@ -1,0 +1,1770 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30/01/2019, 21:21:55
+    Author     : waldemir
+*/
+
+*{
+    font-family: 'News Cycle', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+
+}
+
+
+body{
+    
+    
+  
+}
+
+
+
+h2{
+    
+    text-align: center;
+}
+
+.leftmenu{
+
+    width: 200px;
+    /*background-color:  #483D8B;*/   
+    background-color: #1f232a;
+    position: absolute;
+    left: 0px;
+    top:0px;
+   
+   margin-bottom: 0px;
+   padding-bottom: 0px;
+  
+
+    
+
+}
+
+.fechado{
+    font-weight: bolder;
+    font-size: 20px;
+   color: #FF6347;
+}
+
+.fechadoOpacity{
+    
+    
+   color: #FF6347;
+   opacity:0.5;
+       
+}
+
+.aberto{
+    font-weight: bolder;
+    font-size: 20px;
+    color: #00BE8B;
+}
+.abertoOpacity{
+    
+    color: #00BE8B;
+    opacity: 0.5;
+    
+}
+
+
+.containertop{
+
+    margin-left: 200px;
+
+}
+
+.top{
+
+  
+    /*background-color: #40367c;*/
+    background-color: #232830;
+    color:#FFF;
+    height: 50px;
+     line-height:50px;
+    padding-right: 50px;
+    display: flex;
+
+
+}
+
+.top_right{
+    float: right;
+    padding-right: 10px;
+    width: 100%;
+ 
+  
+}
+
+.alinhamentoDireita{
+    
+    text-align: right;
+    
+}
+
+.top_right a {
+
+  
+    color:#FFF;
+    transition: 0.2s linear;
+}
+
+.top_right a:hover {
+    
+      text-decoration: none;
+      color: #DC143C;
+      font-size: 16px;
+      font-weight: bold;
+    
+    
+}
+
+.infoCompany{
+
+
+    padding: 5px;
+    width: 200px;
+    color: #FFFFFF;
+    text-align: center;
+  
+    line-height: 1%;
+    margin-bottom: 10px;
+
+}
+
+.allname{
+
+
+    margin-top: 60px;
+    color:#FFF;
+margin-bottom: 30px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.menuarea, .menuServicos, .menuProdutos{
+
+  
+    margin-top: 5px;
+    
+}
+
+.menuarea ul, .menuProdutos ul, .menuServicos ul{
+
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+  
+}
+
+.menu ul li a{
+    
+     color: rgba(245,245,245,0.5);
+}
+
+
+.menuarea  li:hover, .menuProdutos li:hover, .menuServicos li:hover{
+
+    background-color: #000;
+    border-left: 2px solid #FFD700;
+    color: #fff;
+
+
+
+}
+
+.stiloFixo{
+    
+    background-color: #000;
+    border-left: 2px solid #FFD700;
+
+}
+
+
+.stiloFixoSubmenu{
+    
+    /*background-color: #000;*/
+    border-left: 2px solid #FFF;
+
+}
+
+
+.menuarea li, .menuProdutos li, .menuServicos li{
+
+    height: 40px;
+    line-height: 40px;
+    padding-left:30px; 
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    background-position: 8px 14px;
+
+
+
+}
+
+.menuarea li a, .menuProdutos li a, .menuServicos li a{
+
+
+    display: block;
+    text-decoration: none;
+    color:#fff;
+
+
+}
+
+.menuarea li:nth-child(1){ /*Home*/
+
+
+    background-image: url(../imagens/home.png);
+    
+    
+}
+
+.menuarea li:nth-child(2){
+
+
+    background-image: url(../imagens/service.png);
+}
+
+#submenuConfiguracoes li:nth-child(1){
+
+
+    background-image: url(../imagens/company.png);
+}
+
+#submenuConfiguracoes li:nth-child(2){
+
+
+    background-image: url(../imagens/cadastrar.png);
+    
+}
+
+
+#submenuConfiguracoes li:nth-child(3){
+
+
+    background-image: url(../imagens/order.png);
+}
+
+#submenuConfiguracoes li:nth-child(4){
+
+
+    background-image: url(../imagens/check.svg);
+}
+
+
+#submenuConfiguracoes li:nth-child(5){
+
+
+    background-image: url(../imagens/partner.png);
+}
+
+
+
+
+.menuarea li:nth-child(4){
+
+
+    background-image: url(../imagens/seller.png);
+}
+
+
+.menuarea li:nth-child(6){
+
+
+    background-image: url(../imagens/credit-cards.png);
+}
+
+
+#submenuVendas li:nth-child(1){
+
+
+    background-image: url(../imagens/profile.png);
+}
+
+
+#submenuVendas li:nth-child(2){
+
+
+    background-image: url(../imagens/cadastrar.png);
+}
+
+
+#submenuVendas li:nth-child(3){
+
+
+    background-image: url(../imagens/product.png);
+}
+
+
+#submenuFinanceiro li:nth-child(1){
+
+
+    background-image: url(../imagens/dollar.png);
+}
+
+#submenuFinanceiro li:nth-child(2){
+
+
+    background-image: url(../imagens/money.png);
+}
+
+#submenuFinanceiro li:nth-child(3){
+
+
+    background-image: url(../imagens/lucro.png);
+}
+
+
+.menuarea li:nth-child(8){
+
+
+    background-image: url(../imagens/category.png);
+}
+
+
+
+/*.menuarea li:nth-child(4){
+
+
+    background-image: url(../imagens/order.png);
+}
+
+#submenu li:nth-child(1){
+
+
+    background-image: url(../imagens/category.png);
+}
+
+#submenu li:nth-child(2){
+
+
+    background-image: url(../imagens/cadastrar.png);
+}
+
+#submenu li:nth-child(3){
+
+
+    background-image: url(../imagens/list.png);
+}
+
+
+.menuarea li:nth-last-child(5){
+
+
+
+    background-image: url(../imagens/credit-cards.png);
+}
+
+
+
+.menuarea li:nth-child(7){
+
+
+    background-image: url(../imagens/notice.png);
+}
+
+
+.menuarea li:nth-last-child(3){
+
+
+    background-image: url(../imagens/suggestion.png);
+}
+
+.menuarea li:nth-last-child(2){
+
+
+    background-image: url(../imagens/help.png);
+}
+
+.menuarea li:nth-last-child(1){
+
+
+    background-image: url(../imagens/partner.png);
+}
+
+.menuProdutos li:nth-child(1){
+
+    background-image: url(../imagens/restaurant.png);
+}
+
+.menuServicos li:nth-child(1){
+    background-image: url(../imagens/service.png);
+
+}*/
+
+.areaContentLogin{
+
+    padding: 10px;
+    
+  
+}
+
+.areaPerfil{
+
+    width:100%;
+    color:#483D8B;
+
+
+}
+
+
+.formPerfil{
+
+    width: 80%;
+
+
+    margin:  50px auto;
+
+}
+
+.labelPerfil{
+    margin-top: 50px;
+    margin-bottom: 10px;
+
+
+    width: 100%;
+    /*background-color: #FFD700;*/
+
+    margin-right: 10px;
+}
+
+.subtitle{
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 10px;
+
+
+}
+
+.estiloBorda{
+
+
+    width: 100%;
+    border-left: 4px solid #FFD700;
+    padding:  10px;
+
+}
+
+
+
+.containerFoto{
+
+    width: 50%;
+
+
+
+
+}
+
+.dadosPessoais{
+
+    width: 50%;
+    padding-top: 20px;
+
+
+
+
+
+
+
+}
+
+
+.margem{
+
+    width: 80%;
+    margin: auto;
+    color:#483D8B;
+    margin-top:20px;
+        
+
+
+
+}
+
+
+.btn-salvar100{
+
+
+    background-color: #90EE90;
+    padding: 15px;
+    width: 100%;
+    color:#483D8B;
+    border-radius: 10px;
+    /*float:right;*/
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+
+.btn-salvar100:hover{
+
+    background-color: #1b6d85;
+    color:#fff;
+
+}
+
+
+
+
+.btn-salvar80{
+
+
+    background-color: #90EE90;
+    padding: 15px;
+    width: 100%;
+    color:#483D8B;
+    border-radius: 10px;
+    /*float:right;*/
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+
+.btn-salvar80:hover{
+
+    background-color: #1b6d85;
+    color:#fff;
+
+}
+
+
+
+
+
+
+
+.perfilContainer{
+
+    display: flex;
+
+
+}
+
+.foto{
+
+    height: 300px;
+    width: 300px;
+    background-color: #eee;
+    margin: 12% auto;
+    border-radius:150px;
+    box-sizing: border-box;
+
+}
+
+.profileImage{
+
+    height: 300px;
+    width: 300px;
+    margin:  auto;
+    border-radius:150px;
+}
+
+
+.profilePerfil{
+
+    height: 100px;
+    width: 100px;
+    margin:  auto;
+    border-radius:50px;
+    border: 1px solid  #ffffff;
+}
+
+.cameraAttachImage{
+
+    background-color: #eee;
+    margin: auto; 
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    line-height: 100%;
+    border-radius: 10px;
+
+
+}
+
+
+.imgCamAttach{
+    margin-top: 5px;
+    height: 20%;
+    width: 20%;
+    cursor: pointer;
+
+
+
+}
+
+.fieldName{
+
+    font-size: 20px;
+    font-weight: bolder;
+
+}
+
+.inputProfile{
+
+
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 15px;
+    width: 100%;
+    color: #483D8B;
+    margin-bottom: 15px;
+    border:  1px solid #483D8B;
+
+
+
+
+}
+
+.inputProfile:focus{
+
+    border: 2px solid #483D8B;
+    border-radius: 10px;
+    background-color: #FFD700;
+
+
+}
+
+
+/* Customize the label (the container) */
+.containerCheckBox{
+
+    display:inline-block    ;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+
+}
+
+/* Hide the browser's default checkbox */
+.containerCheckBox input{
+
+    position: absolute;
+    opacity: 0;
+    cursor:pointer;
+    height: 0px;
+    width:0px;
+
+}
+
+
+/* Create a custom checkbox */
+.customCheckBox{
+
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border:1px solid #2196F3;   
+
+}
+
+/* On mouse-over, add a grey background color */
+
+.containerCheckBox input:checked ~ .customCheckBox{
+
+    background-color: #2196F3;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.customCheckBox:after{
+
+
+    content: "";
+    position: absolute;
+    display: none;
+
+
+}
+
+
+/* Show the checkmark when checked */
+
+.containerCheckBox input:checked ~ .customCheckBox:after{
+
+    display: block;
+}
+
+
+
+/* Style the checkmark/indicator */
+
+
+.containerCheckBox .customCheckBox:after{
+
+
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+
+
+}
+
+
+.btn-salvar{
+
+
+    background-color: #90EE90;
+    padding: 15px;
+    width: 100%;
+    color:#483D8B;
+    border-radius: 10px;
+    /*float:right;*/
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+
+}
+
+.btn-salvar:hover{
+
+    background-color: #1b6d85;
+    color:#fff;
+
+}
+
+.enderecoPerfil{
+
+    margin-top: 20px;
+
+}
+
+.upload-btn{
+
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 20px;
+
+
+
+}
+
+
+.btn{
+
+
+    background: none;
+    border:none;
+    padding: 30px 20px;
+
+
+    font-weight: bold;
+
+
+    background-image: url("../imagens/attach.png");
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.boxUploadImage{
+
+
+    border:1px solid #ddd;
+    width: 100%;
+    display: flex;
+    padding: 100px;
+    background-color: #F5F5F5;
+
+
+
+
+
+}
+
+.documentDelete{
+
+    width: 30%;
+    height: 30%;
+    margin: 10px;
+
+}
+
+.documentImage{
+
+    width: 100%; 
+    height: 100%;
+
+}
+
+.fotoItem{
+
+    border: 1px solid #ddd;
+    width: 300px; 
+    height:300px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+.upload-btn input[type="file"]{
+
+
+    font-size:100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+
+}
+
+.danger{
+
+    background-color:#F08080;
+    border: 2px solid  	#CD5C5C;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.warning{
+
+    background-color:#FFD700;
+    border: 2px solid  #DAA520;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    margin:10px;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+
+
+.success{
+
+    background-color:#2F4F4F;
+    border: 2px solid  #8FBC8F;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    margin:10px;
+    border-radius: 5px;
+    text-align: center;
+    
+
+}
+
+
+.dashboard{
+    
+    
+    
+   background-color: #696969;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+}
+
+/* The switch - the box around the slider */
+.switch{
+    
+    margin-right: 10px;
+    margin-left: 10px;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    
+}
+
+/* Hide default HTML checkbox */
+
+.switch input{
+    
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+
+.slider{
+    
+    position: absolute;
+    cursor: pointer;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0px;
+    background-color: #FF6347;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before{
+    
+    
+    position:absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff;
+    -webkit-transition: .4s;
+}
+
+input:checked + .slider{
+    
+    background-color: #00BE8B;
+}
+
+input:focus + .slider{
+    
+    box-shadow: 0 0 1px #00BE8B;
+}
+
+input:checked + .slider:before{
+    
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+
+.slider.round{
+    
+    border-radius: 34px;
+}
+
+.slider.round:before{
+    
+    
+    border-radius: 50%;
+}
+
+.barra{
+    
+    background-color: #f5f5f5;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+    
+}
+
+
+/*snackbar*/
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar{
+    
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px;/* Set a default minimum width */
+    margin-left: -125px;/* Divide value of min-width by 2 */
+    background-color: #333;/* Black background color */
+    color: #fff;/* White text color */
+    text-align: center;/* Centered text */
+    border-radius: 2px;/* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed;/* Sit on top of the screen */
+    z-index: 1;/* Add a z-index if needed */
+    left: 50%;/* Center the snackbar */
+    bottom: 30px/* 30px from the bottom */
+}
+
+#snackbar.show{
+    
+    visibility: visible;/* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+  However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5;
+    animation:  fadein 0.5s, fadeout 0.5s 2.5s;  
+}
+
+
+ /* Animations to fade the snackbar in and out */
+    
+ @-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+.cardsPayment{
+    
+    
+    margin: 5% auto;
+    background: #ccc;
+   
+    width: 80%;
+    
+    
+}
+
+#submenuConfiguracoes,#submenuVendas,#submenuFinanceiro, #submenuCadastros{
+    
+    position: relative;
+    display: none;
+    background: #2E3D44;
+    color:rgba(245,245,245,0.5);
+    
+    
+}
+
+/*formulários*/
+
+.planosTotal{
+
+    width: 85%;
+    margin: auto;
+    font-size: 20px;
+    color: #372D7A;
+
+
+
+}
+
+
+.planos{
+    
+    
+    display:flex;
+    width: 100%;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.titulo{
+    text-align: center;
+    padding: 10px;
+    width:100%;
+    background-color: rgba(200, 192, 155,1);
+    font-weight: bold;
+}
+
+.conteudoPlano{
+    
+    
+    padding: 10px;
+   background-color: rgba(200, 192, 155,0.3);
+    width:100%;
+    height: 35vh;
+}
+
+.prata,.bronze, .ouro{
+    
+    
+    width:100%;
+}
+
+.conteudo{
+
+    width: 100%;
+    display: flex;
+}
+
+.logo{
+
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+
+
+}
+
+.infoEmpresa{
+    padding: 20px;
+    width: 70%;
+   
+    text-align: center;
+
+}
+
+
+.formularioTotal{
+
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+
+}
+
+.colunasConteudo{
+
+
+    display:flex;
+    width: 100%;
+
+}
+
+.rotulo{
+
+  
+    color: #372D7A;
+    font-size: 12pt;
+
+
+
+}
+
+.campo{
+
+    width: 100%;
+    font-size: 20px;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom:20px;
+    padding: 5px;
+    border-radius: 5px;
+
+
+}
+
+
+
+.campoTexto:focus{
+  
+     background: rgba(194, 194, 154,0.2);
+    
+}
+
+
+.campoTexto{
+
+
+    width: 100%;
+    font-size: 12pt;
+    padding:5px;
+    
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #372D7A;
+    outline: none;
+    box-sizing: border-box;
+
+}
+.colunas{
+
+    width:33%;
+    padding: 5px;
+
+
+}
+
+
+
+.linha{
+
+    background: #333;
+}
+
+.colunaUnica{
+
+    padding: 10px;
+    width: 99%;
+    display: flex;
+}
+
+
+.colunaUnicaFormulario{
+
+    padding: 10px;
+    width: 99%;
+    
+}
+
+.colunaUnicaPlanos{
+
+    padding: 10px;
+    display: flex;
+
+
+}
+
+.alinhamentoCentro{
+
+    text-align: center;
+}
+
+
+.colunaTotal{
+
+
+    width: 20%;
+    
+ 
+
+}
+.coluna6{
+
+    background: #f5f5f5;
+
+    border: 1px solid #000;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+
+.colunaDependentes{
+    
+    background: #f5f5f5;
+
+    border: 1px solid #000;
+    padding: 5px;
+    margin:auto;
+    width: 100%;
+    text-align: center;
+}
+
+.colunaComSemSeguro{
+    
+    
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    
+}
+
+.colunaConteudo{
+
+
+    padding-left:10px;
+}
+
+
+
+#vendedor{
+
+    width: 100%;
+    font-size: 12pt;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 5px;;
+
+
+}
+
+
+
+
+.colunaVendedor{
+
+    width:50%;
+    padding: 10px;
+
+
+}
+
+/* login*/
+
+.boxLogin{
+
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5 !important;   
+    font-size: 20px;
+    color: #372D7A;
+  
+
+}
+
+
+
+.box{
+
+    width: 50%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 10%;
+    left: 25%;
+    z-index: 1;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+
+
+
+}
+
+.right{
+    
+   
+    text-decoration: none;
+    width: 100%;
+    margin-right: 0px;
+    
+    
+    
+    
+    
+}
+
+.botao{
+
+
+    background-color: #90EE90;
+    padding: 20px;
+    width: 100%;
+    color:#483D8B;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+
+}
+
+
+.botao:hover{
+    
+    
+    background: rgba(60, 179, 113,0.5);
+}
+
+
+.logoLogin{
+
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+
+
+}
+
+.margem{
+
+    width: 80%;
+    box-sizing: border-box;
+    margin: auto;
+    box-sizing: border-box;
+
+}
+
+.metadeTela1{
+
+    width: 30%;
+    padding: 10px;
+    box-sizing: border-box;
+   
+}
+
+
+.metadeTela2{
+
+    width: 70%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(194, 194, 154,0.2);
+}
+
+.numero{
+
+    font-size: 35pt;
+    font-weight: bold;
+}
+
+.coluna{
+
+    background-color: #f1f1f1;
+    width: 100%; 
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.boxDashBoard{
+
+    display: flex;
+}
+
+
+.labelAzulMaisClaro{
+    
+   color: #4969A9 !important;
+    
+}
+
+.imagemLogo{
+    
+    
+    
+    
+    width: 300px;
+    height: 300px;
+    background-color: #d3d3d3;
+   border-radius: 150px;
+   margin: auto;
+    
+}
+
+
+
+.imagemLogoTamanho{
+    
+    
+     width: 300px;
+    height: 300px;
+     border-radius: 150px;
+   
+    
+   
+    
+    
+}
+
+.circulo{
+    
+    
+    background: #00BE8B;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-bottom: 50px;
+   
+}
+
+.card{
+    
+    
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+     position: absolute;
+     left:88%;
+     margin-top: 26px;
+
+}
+
+.tirinhas{
+    
+    font-size: 20px;
+  
+   
+    display: flex;
+    background-color: rgba(194, 194, 154,0.2);
+    width: 100%;
+    border-radius: 20px;
+    margin: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+    
+  
+  
+      
+}
+
+.margin-15{
+
+    
+    margin-left: 15px;
+}
+
+.assinaturaDigital{
+
+    display: flex;
+}
+
+
+.detalhes{
+    
+    font-size: 20px;
+  
+   
+   
+    background-color: rgba(194, 194, 154,0.2);
+    width: 100%;
+    border-radius: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+    
+  
+  
+      
+}
+
+.detalhesConteudo{
+   
+    width: 100%;
+    padding: 40px;
+    line-height: 20px;
+    
+  
+}
+
+.subtirinhas{
+   
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    line-height: 20px;
+
+ 
+}
+
+.ponteiro{
+
+    cursor: pointer;
+}
+
+
+.alinhamentoDireito{
+    text-align: right;
+}
+
+
+.fonte{
+    font-size: 12pt;
+}
+
+.coresPlanos{
+    
+   margin: auto;
+    width: 25px;
+   height: 25px;
+    border-radius:50%;
+    background-color: #c0c0c0;
+    text-align: center;
+    
+    
+    
+}
+
+
+.imagemPequena{
+    
+    width: 50px;
+    position: relative;
+    top:-10px;
+    margin-right: 20px;
+}
+
+.cabecalho{
+    
+    
+    width: 100%;
+    display: flex;
+}
+
+
+
+.contrato{
+    
+    
+  
+    margin: auto;
+    max-width: 80%;
+    width: 100%;
+    font-size: 18px;
+    text-align: left;
+    
+    
+}
+
+
+.contratoInner{
+    
+    text-align: center;
+    margin: auto;
+    max-width: 80%;
+    width: 100%;
+    
+    
+    
+}
+
+
+
+
+.contratoBox{
+    
+margin-top: 10vh;
+
+
+
+    
+    
+}
+
+
+
+.alinea{
+    
+    
+    text-indent: 1.5em;
+}
+
+
+
+.assinatura{
+    
+    
+    margin-top: 20px;
+    width:100%;
+    display: flex;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.contratante{
+    
+   width:50%; 
+    
+}
+
+.contratada{
+    
+    
+    width:50%;
+    
+}
+.separador{
+    
+    
+    margin-bottom: 10vh;
+}
+
+
+
+.total{
+    
+    
+    padding: 10px;
+    width:85%;
+    margin-bottom: 5vh;
+    margin: auto;
+   
+}
+
+.painel{
+
+    width: 100%;
+    text-align: center;
+    color: white;
+    background: linear-gradient(to right,#6ea5c5 ,#372D7A);
+    padding: 5px;
+    margin: auto;
+   
+}
+
+.painelBotao{
+
+    width: 85%;
+    margin: auto;
+}
+
+
+
+.colunaTotal{
+
+
+    width: 100%;
+
+}
+
+
+.colunaConteudo{
+
+
+    padding: 10px;
+}
+
+.bordasTabelas{
+
+    border: 1px solid #696969;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(176,196,222, 0.3);
+    color: #000;
+    padding: 10px;
+    
+}
+
+.conteudoTabelas{
+
+    border: 1px solid #696969;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    
+}
+
+.linhasColunas{
+
+    display: flex;
+}
+
+
+
+
+.alinhamentoImagem{
+
+    text-align:right;
+    cursor: pointer;
+}
+.flexivel{
+
+    display: flex;
+}
+
+
+
+.clickPlanos{}/*esta sendo usado no javascript*/

@@ -1,0 +1,320 @@
+
+/* 
+    Created on : 04/11/2019, 14:29:50
+    Author     : waldemir
+*/
+
+
+
+
+*{
+
+    color: #372D7A;
+   
+                                                                                               
+}
+
+body{
+    
+    
+    background: #f5f5f5 !important;
+}
+
+
+.planosTotal{
+
+    width: 80%;
+    font-size: 20px;
+    color: #372D7A;
+
+
+
+}
+
+.conteudo{
+
+    width: 100%;
+    display: flex;
+}
+
+.logo{
+
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+
+
+}
+
+.infoEmpresa{
+    padding: 20px;
+    width: 70%;
+    height:100px;
+    text-align: center;
+
+}
+
+
+.formularioTotal{
+
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+
+}
+
+.colunasConteudo{
+
+
+    display:flex;
+    width: 100%;
+
+}
+
+.rotulo{
+
+    font-weight: bold;
+    color: #372D7A;
+    font-size: 12pt;
+
+
+
+}
+
+.campo{
+
+    width: 100%;
+    font-size: 12pt;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom:20px;
+    border-radius: 5px;
+
+
+}
+
+
+
+.campoTexto:focus{
+  
+     background: rgba(194, 194, 154,0.2);
+    
+}
+
+
+.campoTexto{
+
+
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #372D7A;
+    outline: none;
+    box-sizing: border-box;
+
+}
+.colunas{
+
+    width:33%;
+    padding: 5px;
+
+
+}
+
+
+
+.linha{
+
+    background: #333;
+}
+
+.colunaUnica{
+
+    padding: 10px;
+    width: 99%;
+}
+
+
+.colunaUnicaPlanos{
+
+    padding: 10px;
+    display: flex;
+
+
+}
+
+
+
+.colunaTotal{
+
+
+    width: 100%;
+
+}
+.coluna6{
+
+    background: #f5f5f5;
+
+    border: 1px solid #000;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+
+.colunaConteudo{
+
+
+    padding: 10px;
+}
+
+
+
+#vendedor{
+
+    width: 100%;
+    font-size: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+
+}
+
+
+
+
+.colunaVendedor{
+
+    width:50%;
+    padding: 10px;
+
+
+}
+
+/* login*/
+
+.boxLogin{
+
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5 !important;   
+    font-size: 20px;
+    color: #372D7A;
+  
+
+}
+
+
+
+.box{
+
+    width: 400px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+   
+   
+    left: 25%;
+    z-index: 1;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+margin:10vh auto;
+
+
+}
+
+.right{
+    
+   
+    text-decoration: none;
+    width: 100%;
+    margin-right: 0px;
+    
+    
+    
+    
+    
+}
+
+.botao{
+
+
+    background-color: #90EE90;
+    padding: 20px;
+    width: 100%;
+    color:#483D8B;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+
+}
+
+
+.botao:hover{
+    
+    
+    background: rgba(60, 179, 113,0.5);
+}
+
+
+.logoLogin{
+
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+
+
+}
+
+.margem{
+
+    width: 80%;
+    box-sizing: border-box;
+    margin: auto;
+    box-sizing: border-box;
+
+}
+
+.metadeTela{
+
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+.labelAzulMaisClaro{
+    
+   color: #4969A9 !important;
+    
+}
+
+
+.danger{
+
+    background-color:#F08080;
+    border: 2px solid  	#CD5C5C;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.alinhamentoCentro{
+
+    text-align: center;
+   
+}
