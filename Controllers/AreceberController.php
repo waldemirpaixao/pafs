@@ -5,8 +5,10 @@ namespace Controllers;
 
 use Core\Controller;
 use DateTime;
+use Models\Bancos;
 use Models\DiaAreceber;
 use Models\EstatusPagamento;
+use Models\FormaDePagamento;
 use Models\PagamentosReceber;
 use Models\Venda;
 
@@ -80,9 +82,16 @@ class AreceberController extends Controller
 
 
         //Por padrão a forma de pagamento será boleto - CONTINUAR AQUI
+        $formaDePagamento = new FormaDePagamento();
+        $formPagamentoArray = $formaDePagamento->getFormaPagamento($this::BOLETO, $_SESSION['idEmpresa']);
+        $formaPagamento = $formPagamentoArray['nomeformaPagamento'];
 
 
-        parei aqui também
+        
+        
+
+
+       
 
 
 
@@ -121,7 +130,7 @@ class AreceberController extends Controller
               //inserir o último boleto atual
 
 
-              $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $banco, $idVenda, $idVendedor, $anoSistema);
+              $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
 
               //liberando a variável para não haver acúmulo de parcelas
               unset($numeroParcelas);

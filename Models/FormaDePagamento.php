@@ -111,4 +111,31 @@ class  FormaDePagamento extends Model{
 
     }
 
+
+
+    public function getFormaPagamento($boleto, $idEmpresa){
+
+
+
+        $sql = "select * from formaPagamento where empresa_idEmpresa = :idEmpresa and nomeformaPagamento = :nomeformaPagamento";
+
+        $select = $this->db->prepare($sql);
+
+        $select->bindValue(":idEmpresa",$idEmpresa); 
+        $select->bindValue(":nomeformaPagamento",$boleto); 
+
+        $executado = $select->execute();
+
+        if($executado && $select->rowCount() > 0){
+
+            return $select->fetch();
+        }else{
+
+            return null;
+        }
+
+
+    }
+
+
 }

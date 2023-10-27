@@ -18,7 +18,7 @@ class PagamentosReceber extends Model{
     
 
     
-    public function inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $statusPagamento, $formaPagamento, $banco, $idVenda, $idVendedor, $ano ){
+    public function inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $statusPagamento, $formaPagamento, $idVenda, $idVendedor, $ano ){
         
         
       
