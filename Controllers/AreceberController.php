@@ -5,8 +5,11 @@ namespace Controllers;
 
 use Core\Controller;
 use DateTime;
+use Email\Email;
 use Models\Bancos;
+use Models\Clientes;
 use Models\DiaAreceber;
+use Models\Empresa;
 use Models\EstatusPagamento;
 use Models\FormaDePagamento;
 use Models\PagamentosReceber;
@@ -27,9 +30,11 @@ class AreceberController extends Controller
   }
 
 
+ 
   private const ULTIMO = "último";
   private const PENDENTE = "Pendente";
   private const BOLETO = "boleto" ;
+  private const ASSUNTO = "Geração de boleto";
 
   public function aReceber()
   {
@@ -51,6 +56,7 @@ class AreceberController extends Controller
 
       $anoBoleto = intval($vendaArray['ano']);
       $anoSistema = intval(date("Y"));
+      
 
       //ano 
 
@@ -64,6 +70,23 @@ class AreceberController extends Controller
         $idCliente = $vendaArray['clientes_idClientes'];
         $idEmpresa = $vendaArray['empresa_idEmpresa'];
 
+        //pegar o nome do cliente pelo id do cliente
+        $cliente = new Clientes();
+        $clienteArray = $cliente->getClientById($idCliente);
+
+        //pegar o nome do cliente para adicionar na mansagem de e-mail
+        $nomeCliente = $clienteArray['nomeClientes'];
+
+        $mensagem = "Foi criado o boleto para o cliente ". $nomeCliente;
+
+        //pegar o e-mail de cada empresa
+        $empresa = new Empresa();
+        $empresaArray = $empresa->getEmpresaById($idEmpresa);
+        $para = $empresaArray['nomeEmpresa'];
+
+
+
+
         // A data de pagamento e vencimento serão as mesmas por padrão depois o usuário muda
         $dataPagamento = $vendaArray['dataVencimentoVenda'];
         $dataVencimento = $vendaArray['dataVencimentoVenda'];
@@ -71,6 +94,9 @@ class AreceberController extends Controller
         
         $valor = $vendaArray['valorPlanos'];
         $desconto = $vendaArray['desconto'];
+
+        $idVenda = $vendaArray['idVenda'];
+        $idVendedor = $vendaArray['vendedores_idVendedores'];
 
 
 
@@ -134,6 +160,12 @@ class AreceberController extends Controller
 
               //liberando a variável para não haver acúmulo de parcelas
               unset($numeroParcelas);
+
+              //enviar e-mail
+              $email = new Email();
+              $email->sendEmail($para, $this::ASSUNTO, $mensagem);
+
+
             } //endif
 
 
