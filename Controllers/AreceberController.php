@@ -244,4 +244,6 @@ class AreceberController extends Controller
       echo "<hr/>";
     }
   }
+
+  oi
 }
