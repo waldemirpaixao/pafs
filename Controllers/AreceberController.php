@@ -245,5 +245,4 @@ class AreceberController extends Controller
     }
   }
 
-  oi
 }
