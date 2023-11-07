@@ -73,15 +73,15 @@ and open the template in the editor.
 
         <label class="rotulo">Titular</label>
 
-        <select class="campoTexto" name="titular">
+        <!--<select class="campoTexto" name="titular">-->
             <?php
 
-            foreach ($todosOsClientesArray as $todosOsClientes) :
+           // foreach ($todosOsClientesArray as $todosOsClientes) :
 
             ?>
-                <option <?php echo  $todosOsClientes['idClientes'] == $dependentes['clientes_idclientes']? 'selected' : '';?> value="<?php echo $todosOsClientes['idClientes']; ?>"><?php echo $todosOsClientes['nomeClientes']; ?></option>
-            <?php endforeach; ?>
-        </select>
+                <!--<option <?php //echo  $todosOsClientes['idClientes'] == $dependentes['clientes_idclientes']? 'selected' : '';?> value="<?php //echo $todosOsClientes['idClientes']; ?>"><?php //echo $todosOsClientes['nomeClientes']; ?></option>-->
+            <?php //endforeach; ?>
+        <!--</select>-->
         <label class="rotulo">Nome Completo</label>
 
         <input class="campoTexto" type="text" name="nome" value="<?php echo  $dependentes['nomeDependentes']; ?>" />

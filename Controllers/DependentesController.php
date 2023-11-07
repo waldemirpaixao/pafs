@@ -79,11 +79,14 @@ class DependentesController extends Controller{
     public function atualizar(){
         
         $id = addslashes($_POST['id']);
+       // $titular = addslashes($_POST['titular']);
+
         $nome = addslashes($_POST['nome']);
         $cpf = addslashes($_POST['cpf']);
         $dataNascimento = addslashes($_POST['dataNascimento']);
         
         $dependente = new Dependentes();
+        //$atualizado = $dependente->update($id, $nome,$cpf, $dataNascimento, $titular);
         $atualizado = $dependente->update($id, $nome,$cpf, $dataNascimento);
         if($atualizado){
             
