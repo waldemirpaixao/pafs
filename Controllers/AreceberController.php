@@ -85,7 +85,7 @@ class AreceberController extends Controller
         //pegar o e-mail de cada empresa
         $empresa = new Empresa();
         $empresaArray = $empresa->getEmpresaById($idEmpresa);
-        $para = $empresaArray['nomeEmpresa'];
+        $para = $empresaArray['emailEmpresa'];
 
 
 
@@ -150,18 +150,26 @@ class AreceberController extends Controller
               if($atualizadoAnterior){
               //inserir o último boleto atual
               $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
-
+              unset($numeroParcelas);
               //liberando a variável para não haver acúmulo de parcelas
               //enviar e-mail
+              $de = $para;
+              if(isset($para)){
+             
               $email = new Email();
               $enviado = $email->sendEmail($para, $this::ASSUNTO, $mensagem);
-              unset($numeroParcelas);
+              $saida = new saida();
+              $saida->envidados($de,$para, $this::ASSUNTO, $mensagem);
+              }
+             
               }else{
                 
                 $mensagem = "Não foi possível criar o boleto para o cliente " . $nomeCliente . ",por favor, Entre encontato com o Desenvolvedor do sistema! ";
 
                 $email = new Email();
               $enviado = $email->sendEmail($para, $this::ASSUNTOERRO, $mensagem);
+              $saida = new saida();
+              $saida->envidados($de,$para, $this::ASSUNTO, $mensagem);
               }
 
               
