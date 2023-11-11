@@ -13,6 +13,7 @@ use Models\EstatusPagamento;
 use Models\FormaDePagamento;
 use Models\PagamentosReceber;
 use Models\Venda;
+use Models\Saida;
 
 class AreceberController extends Controller
 {
@@ -141,7 +142,7 @@ class AreceberController extends Controller
             $diaAreceber = new DiaAreceber();
             $diaConfiguradoDaEmpresa = intval($diaAreceber->getAllByEmpresa($idEmpresa));
 
-
+            $de = $para;
             if ($dias == $diaConfiguradoDaEmpresa) {
 
               // o ultimo boleto serar anterior
@@ -153,13 +154,13 @@ class AreceberController extends Controller
               unset($numeroParcelas);
               //liberando a variável para não haver acúmulo de parcelas
               //enviar e-mail
-              $de = $para;
+           
               if(isset($para)){
              
               $email = new Email();
               $enviado = $email->sendEmail($para, $this::ASSUNTO, $mensagem);
-              $saida = new saida();
-              $saida->envidados($de,$para, $this::ASSUNTO, $mensagem);
+              $saida = new Saida();
+              $saida->envidados($de,$para, $this::ASSUNTO, $mensagem,$idEmpresa);
               }
              
               }else{
@@ -168,8 +169,8 @@ class AreceberController extends Controller
 
                 $email = new Email();
               $enviado = $email->sendEmail($para, $this::ASSUNTOERRO, $mensagem);
-              $saida = new saida();
-              $saida->envidados($de,$para, $this::ASSUNTO, $mensagem);
+              $saida = new Saida();
+              $saida->envidados($de,$para, $this::ASSUNTOERRO, $mensagem, $idEmpresa);
               }
 
               
