@@ -77,6 +77,63 @@ class PagamentosReceber extends Model
     }
 
 
+    public function inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $statusPagamento, $formaPagamento, $idVenda, $idVendedor, $ano)
+    {
+
+
+
+
+        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParceclas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
+            . " VALUES (:idEmpresa, :idClientes, :numeroParceclas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+
+
+        $inserir = $this->db->prepare($sql);
+
+        try {
+
+            $this->db->beginTransaction();
+           
+            $inserir->bindValue(':idEmpresa', $idEmpresa);
+            $inserir->bindValue(':idClientes', $idCliente);
+            $inserir->bindValue(':numeroParceclas', $numeroParcelas);
+            $inserir->bindValue(':dataPagamento', $dataPagamento);
+            $inserir->bindValue(':dataVencimentoBoleto', $dataVencimento);
+            $inserir->bindValue(':desconto', $desconto);
+            $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
+            $inserir->bindValue(':idFormaPagamento', $formaPagamento);
+            $inserir->bindValue(':idVenda', $idVenda);
+            $inserir->bindValue(':idVendedores', $idVendedor);
+            $inserir->bindValue(':ano', $ano);
+    
+            $inserido = $inserir->execute();
+            $comitado = $this->db->commit();
+
+            if($inserido && $comitado){
+
+                return $this->db->lastInsertId();
+            }else{
+
+
+                return 0;
+            }
+
+
+
+        } catch (PDOException $ex) {
+
+            $this->db->rollBack();
+            return $ex->getMessage();
+         
+            
+
+        }
+
+      
+
+
+    }
+
+
     public function existeIdCliente($idCleinte)
     {
 
@@ -141,6 +198,44 @@ class PagamentosReceber extends Model
             $update->bindValue(":idClientes", $idCliente);
             $update->bindValue(":ultimo", $ultimo);
             $update->bindValue(":anterior", $this::ANTERIOR);
+
+            $executado = $update->execute();
+            $comitado = $update->commit();
+
+            if ($executado && $comitado) {
+
+                return true;
+            } else {
+
+                return false;
+            }
+        } catch (PDOException $ex) {
+
+            $this->db->rollBack();
+            return $ex->getMessage();
+        }
+    }
+
+
+    public function atualizarAnteriorUltimoId($ultimo, $idCliente, $ultimoId)
+    {
+
+
+
+
+        $sql = "update pagamentos_receber set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and anteriorultimo = :ultimo and idPagamentos = :idPagamentos";
+
+        $update = $this->db->prepare($sql);
+
+        try {
+
+            $this->db->beginTransaction();
+
+
+            $update->bindValue(":idClientes", $idCliente);
+            $update->bindValue(":ultimo", $ultimo);
+            $update->bindValue(":anterior", $this::ANTERIOR);
+            $update->bindValue(":idPagamentos", $ultimoId);
 
             $executado = $update->execute();
             $comitado = $update->commit();

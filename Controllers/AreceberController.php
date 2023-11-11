@@ -24,7 +24,13 @@ class AreceberController extends Controller
   {
 
 
+    $dataAtual = new DateTime("now");
+    $dataVenda = new DateTime('2023-09-11');
+    $diferenca = $dataVenda->diff($dataAtual);
+    $mes = intval($diferenca->format("%m"));
+    echo $mes;
 
+    echo "\n";
     $ano = intval(date("Y"));
     echo $ano;
   }
@@ -36,6 +42,7 @@ class AreceberController extends Controller
   private const BOLETO = "boleto";
   private const ASSUNTO = "Geração de boleto";
   private const ASSUNTOERRO = "Erro ao gerar o boleto";
+  private const ASSUNTONOVO = "Gerado um novo boleto";
 
   public function aReceber()
   {
@@ -44,34 +51,28 @@ class AreceberController extends Controller
     $arrayVenda = $venda->getAllVenda();
 
 
-
-
-
-
-
-
     //A RECEBER - OK
     //verificar se existe idvenda, na tabela de pagamentos_receber - ok
 
-    foreach ($arrayVenda as $vendaArray) {
 
-      $pagamentosReceber = new PagamentosReceber();
+    if (isset($arrayVenda)) {
+      foreach ($arrayVenda as $vendaArray) {
 
-
-      $idCliente = $vendaArray['clientes_idClientes'];
-      $idEmpresa = $vendaArray['empresa_idEmpresa'];
+        $pagamentosReceber = new PagamentosReceber();
 
 
-      $anoSistema = intval(date("Y"));
+        $idCliente = $vendaArray['clientes_idClientes'];
+        $idEmpresa = $vendaArray['empresa_idEmpresa'];
 
 
-      //ano 
+        //ano 
+        $anoSistema = intval(date("Y"));
 
-      //verificar se existe cliente na tabela pagamento_receber
-      $existe = $pagamentosReceber->existeIdCliente($idCliente);
+        //verificar se existe cliente na tabela pagamento_receber
+        $existe = $pagamentosReceber->existeIdCliente($idCliente);
 
-      //caso exista
-      if ($existe) {
+
+
 
         //pegar o nome do cliente pelo id do cliente
         $cliente = new Clientes();
@@ -87,8 +88,6 @@ class AreceberController extends Controller
         $empresa = new Empresa();
         $empresaArray = $empresa->getEmpresaById($idEmpresa);
         $para = $empresaArray['emailEmpresa'];
-
-
 
 
         // A data de pagamento e vencimento serão as mesmas por padrão depois o usuário muda
@@ -110,7 +109,7 @@ class AreceberController extends Controller
 
         //Por padrão a forma de pagamento será boleto 
         $formaDePagamento = new FormaDePagamento();
-        $formPagamentoArray = $formaDePagamento->getFormaPagamento($this::BOLETO, $_SESSION['idEmpresa']);
+        $formPagamentoArray = $formaDePagamento->getFormaPagamento($this::BOLETO, $idEmpresa);
         $formaPagamento = $formPagamentoArray['nomeformaPagamento'];
 
         //pegar o último boleto gerado OBS: adicionar o campo chamado anteriorultimo que terá o valor:último ou anterior - OK
@@ -124,79 +123,128 @@ class AreceberController extends Controller
 
         $anoBoleto = intval($ultimoBoleto['ano']);
 
+        //neste cado de e para são iguais
+        $de = $para;
+        
 
-        if (isset($ultimoBoleto)) {
+        //caso exista
+        if ($existe) {
 
-          //verificar se o último boleto é igual do ano corrente
-          if ($anoSistema == $anoBoleto) {
-            //Caso falte 10 dias para o vencimento adicionar na tabela pagamentos_receber pegar o idEmpresa
-            //OBS:Adicinar no menu configuração a quantidade de dias que o cliente  deseja para ser gerados o a receber 
+          
+          if (isset($ultimoBoleto)) {
 
-            //$vendaArray['empresa_idEmpresa']
 
-            $dataAtual = new DateTime("now");
-            $dataDoUltimoBoleto = new DateTime($ultimoBoleto['dataVencimentoBoleto']);
-            $diferenca = $dataDoUltimoBoleto->diff($dataAtual);
-            $dias = intval($diferenca->format("%d"));
+            //verificar se o último boleto é igual do ano corrente
+            if ($anoSistema == $anoBoleto) {
+              //Caso falte 10 dias para o vencimento adicionar na tabela pagamentos_receber pegar o idEmpresa
+              //OBS:Adicinar no menu configuração a quantidade de dias que o cliente  deseja para ser gerados o a receber - ok
 
-            $diaAreceber = new DiaAreceber();
-            $diaConfiguradoDaEmpresa = intval($diaAreceber->getAllByEmpresa($idEmpresa));
+              //$vendaArray['empresa_idEmpresa']
 
-            $de = $para;
-            if ($dias == $diaConfiguradoDaEmpresa) {
+              $dataAtual = new DateTime("now");
+              $dataDoUltimoBoleto = new DateTime($ultimoBoleto['dataVencimentoBoleto']);
+              $diferenca = $dataDoUltimoBoleto->diff($dataAtual);
+              $dias = intval($diferenca->format("%d"));
 
-              // o ultimo boleto serar anterior
-              $atualizadoAnterior = $pagamentosReceber->atualizarAnterior($this::ULTIMO, $idCliente); //atualizado o ultimo boleto para anterior
+              $diaAreceber = new DiaAreceber();
+              $diaConfiguradoDaEmpresa = intval($diaAreceber->getAllByEmpresa($idEmpresa));
 
-              if($atualizadoAnterior){
-              //inserir o último boleto atual
+
+              if ($dias == $diaConfiguradoDaEmpresa) {
+
+                // o ultimo boleto será anterior
+                $atualizadoAnterior = $pagamentosReceber->atualizarAnterior($this::ULTIMO, $idCliente); //atualizado o ultimo boleto para anterior
+
+                if ($atualizadoAnterior) {
+                  //inserir o último boleto atual
+                  $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
+
+                  //liberando a variável para não haver acúmulo de parcelas
+                  unset($numeroParcelas);
+
+                  //enviar e-mail
+
+                  if (isset($para)) {
+
+                    $email = new Email();
+                    $enviado = $email->sendEmail($para, $this::ASSUNTO, $mensagem);
+                    $saida = new Saida();
+                    $saida->envidados($de, $para, $this::ASSUNTO, $mensagem, $idEmpresa);
+                  }
+                } else {
+
+                  $mensagem = "Não foi possível criar o boleto para o cliente " . $nomeCliente . ",por favor, Entre encontato com o Desenvolvedor do sistema! ";
+
+                  $email = new Email();
+                  $enviado = $email->sendEmail($para, $this::ASSUNTOERRO, $mensagem);
+                  $saida = new Saida();
+                  $saida->envidados($de, $para, $this::ASSUNTOERRO, $mensagem, $idEmpresa);
+                }
+              } //endif
+
+
+            } /*endif*/ else {
+              //recomeçar a contagem de parcelas
+              $numeroParcelas = 1;
+              //inserir novo pagamento_receber
+
               $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
-              unset($numeroParcelas);
-              //liberando a variável para não haver acúmulo de parcelas
-              //enviar e-mail
-           
-              if(isset($para)){
-             
-              $email = new Email();
-              $enviado = $email->sendEmail($para, $this::ASSUNTO, $mensagem);
-              $saida = new Saida();
-              $saida->envidados($de,$para, $this::ASSUNTO, $mensagem,$idEmpresa);
-              }
-             
-              }else{
-                
-                $mensagem = "Não foi possível criar o boleto para o cliente " . $nomeCliente . ",por favor, Entre encontato com o Desenvolvedor do sistema! ";
+
+              if ($inserido) {
+
+                $mensagem = "Criado um novo boleto para o Cliente " . $nomeCliente;
 
                 $email = new Email();
-              $enviado = $email->sendEmail($para, $this::ASSUNTOERRO, $mensagem);
-              $saida = new Saida();
-              $saida->envidados($de,$para, $this::ASSUNTOERRO, $mensagem, $idEmpresa);
+                $enviado = $email->sendEmail($para, $this::ASSUNTONOVO, $mensagem);
+                $saida = new Saida();
+                $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);
               }
-
-              
-            } //endif
-
-
-          } /*endif*/ {
-
-            //caso não exista
-            //Gerar todos os boletos possíveis a partir da contagem da quantidade de meses passados
-
-
+            }
+          }/*endif*/ else {
+            //inserir boleto
             $numeroParcelas = 1;
+            $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
+
+            if ($inserido) {
+
+              $mensagem = "Criado um novo boleto para o Cliente " . $nomeCliente;
+
+              $email = new Email();
+              $enviado = $email->sendEmail($para, $this::ASSUNTONOVO, $mensagem);
+              $saida = new Saida();
+              $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);
+            }
+          } //endelse
+        } else {
+          //caso não exista
+          //Gerar todos os boletos possíveis a partir da contagem da quantidade de meses passados
+          $dataAtual = new DateTime("now");
+          $dataVenda = new DateTime($vendaArray['dataVencimentoBoleto']);
+          $diferenca = $dataVenda->diff($dataAtual);
+          $mes = intval($diferenca->format("%m"));
+
+
+          for ($m = 0; $m < $mes; $m++) {
+            $numeroParcelas = 1;
+
+            //inserir
+            //inserir o último boleto atual
+            $ultimoId = $pagamentosReceber->inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
+
+            //liberar numero de parcelas
+            unset($numeroParcelas);
+            //Atualizar o que acabou de inserir
+            $atualizadoAnterior = $pagamentosReceber->atualizarAnteriorUltimoId($this::ULTIMO, $idCliente,$ultimoId); //atualizado o ultimo boleto para anterior
+
           }
 
 
-          //resetar a parcela para um
-        }/*endif*/ else {
-        } //endelse
-      } else {
 
-        //inserir os dados
-      }
-    } //end foreaach
+          //inserir os dados
+        }
+      } //end foreaach
 
-
+    }
     //adicionar o log do sistema para este processo se ocorreu tudo certo
 
     // se ano do sistema igual ao ano do boleto-> continue caso contrário resete a contagem da parcela para um
@@ -253,5 +301,4 @@ class AreceberController extends Controller
       echo "<hr/>";
     }
   }
-
 }
