@@ -7,20 +7,23 @@
  */
 
 
- namespace Models;
- use \Core\Model;
- 
-class Dependentes extends Model {
+namespace Models;
 
-    public function getAllDependentes($idEmpresa) {
+use \Core\Model;
+
+class Dependentes extends Model
+{
+
+    public function getAllDependentes($idEmpresa)
+    {
 
 
-        
+
         $sql = "SELECT *, idClientes, nomeClientes FROM dependentes JOIN clientes on idClientes = clientes_idclientes WHERE dependentes.empresa_idEmpresa = :id ORDER BY nomeClientes";
 
         $select = $this->db->prepare($sql);
         $select->bindValue(":id", $idEmpresa);
-        
+
         $selected = $select->execute();
 
 
@@ -33,7 +36,8 @@ class Dependentes extends Model {
         }
     }
 
-    public function inserir($nome,$cpf, $dataNascimento,$idClientes ,$idEmpresa){
+    public function inserir($nome, $cpf, $dataNascimento, $idClientes, $idEmpresa)
+    {
 
 
 
@@ -45,7 +49,7 @@ class Dependentes extends Model {
         $insert->bindValue(":nome", $nome);
         $insert->bindValue(":cpf", $cpf);
         $insert->bindValue(":dataNascimento", $dataNascimento);
-       $insert->bindValue(":idClientes", $idClientes);
+        $insert->bindValue(":idClientes", $idClientes);
         $insert->bindValue(":idEmpresa", $idEmpresa);
 
 
@@ -62,31 +66,30 @@ class Dependentes extends Model {
             return "Não foi possível cadastrar o dependete!";
         }
     }
-    
-    
-    
-    
-    public function checkCpf($cpfDependente){
-        
-         $sql = "SELECT cpfDependentes FROM dependentes WHERE cpfDependentes = :cpf";
-         
-         $select = $this->db->prepare($sql);
-         $select->bindValue(":cpf",$cpfDependente);
-         $selecionado = $select->execute();
-         
-         if($select->rowCount() > 0 && $selecionado){
-             
-             return TRUE;
-         }else{
-             
-             return FALSE;
-             
-         }
-         
-        
+
+
+
+
+    public function checkCpf($cpfDependente)
+    {
+
+        $sql = "SELECT cpfDependentes FROM dependentes WHERE cpfDependentes = :cpf";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":cpf", $cpfDependente);
+        $selecionado = $select->execute();
+
+        if ($select->rowCount() > 0 && $selecionado) {
+
+            return TRUE;
+        } else {
+
+            return FALSE;
+        }
     }
 
-    public function getDependentesById($id) {
+    public function getDependentesById($id)
+    {
 
 
         $sql = "SELECT * FROM dependentes WHERE idDependentes = :id";
@@ -109,13 +112,16 @@ class Dependentes extends Model {
         }
     }
 
-    
-    
-    public function update($id, $nome,$cpf, $dataNascimento) {
+
+
+    //public function update($id, $nome,$cpf, $dataNascimento, $titular) {
+    public function update($id, $nome, $cpf, $dataNascimento)
+    {
 
 
 
 
+        // $sql = "UPDATE dependentes SET nomeDependentes = :nome, cpfDependentes = :cpf, dataNascimentoDependentes = :dataNascimento, clientes_idclientes = :idclientes WHERE idDependentes = :id";
         $sql = "UPDATE dependentes SET nomeDependentes = :nome, cpfDependentes = :cpf, dataNascimentoDependentes = :dataNascimento WHERE idDependentes = :id";
 
 
@@ -124,7 +130,8 @@ class Dependentes extends Model {
         $update->bindValue(":nome", $nome);
         $update->bindValue(":cpf", $cpf);
         $update->bindValue(":dataNascimento", $dataNascimento);
-       
+        // $update->bindValue(":idclientes", $titular);
+
         $atualizado = $update->execute();
 
 
@@ -138,35 +145,26 @@ class Dependentes extends Model {
         }
     }
 
-    
-    
-    public function getDependentesByIdTitular($id){
-        
-        
+
+
+    public function getDependentesByIdTitular($id)
+    {
+
+
         $sql = "SELECT * FROM dependentes WHERE clientes_idclientes = :idClientes";
-        
+
         $select = $this->db->prepare($sql);
-        
+
         $select->bindValue(":idClientes", $id);
         $select->execute();
-        
-        if ($select -> rowCount() > 0){
-            
-            return $select-> fetchAll();
-            
-            
-        }else{
-            
-            
+
+        if ($select->rowCount() > 0) {
+
+            return $select->fetchAll();
+        } else {
+
+
             return NULL;
         }
-        
-                
-                
     }
-    
-    
-    
-    
-    
 }

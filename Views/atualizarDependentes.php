@@ -21,10 +21,15 @@ and open the template in the editor.
 
     <?php
 
+    use Models\Clientes;
     use \Models\Dependentes;
 
     $dependente = new Dependentes();
     $dependentes = $dependente->getDependentesById($id);
+    $idEmpresa = $_SESSION['idEmpresa'];
+
+    $titular = new Clientes();
+    $todosOsClientesArray = $titular->getAllCliente($idEmpresa)
 
 
 
@@ -65,6 +70,18 @@ and open the template in the editor.
         <br>
         <br>
         <input type="hidden" name="id" value="<?php echo $id ?>">
+
+        <label class="rotulo">Titular</label>
+
+        <!--<select class="campoTexto" name="titular">-->
+            <?php
+
+           // foreach ($todosOsClientesArray as $todosOsClientes) :
+
+            ?>
+                <!--<option <?php //echo  $todosOsClientes['idClientes'] == $dependentes['clientes_idclientes']? 'selected' : '';?> value="<?php //echo $todosOsClientes['idClientes']; ?>"><?php //echo $todosOsClientes['nomeClientes']; ?></option>-->
+            <?php //endforeach; ?>
+        <!--</select>-->
         <label class="rotulo">Nome Completo</label>
 
         <input class="campoTexto" type="text" name="nome" value="<?php echo  $dependentes['nomeDependentes']; ?>" />
