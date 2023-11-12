@@ -238,9 +238,6 @@ class AreceberController extends Controller
 
           }
 
-
-
-          //inserir os dados
         }
       } //end foreaach
 
@@ -250,7 +247,7 @@ class AreceberController extends Controller
     // se ano do sistema igual ao ano do boleto-> continue caso contrário resete a contagem da parcela para um
 
 
-
+   
 
     //ATRASADO
 
