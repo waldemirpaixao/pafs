@@ -216,7 +216,6 @@ class AreceberController extends Controller
               $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);
             }
           } //endelse
-          //Caso não exista
         } else {
           //Gerar todos os boletos possíveis a partir da contagem da quantidade de meses passados
           $dataAtual = new DateTime("now");
@@ -224,10 +223,9 @@ class AreceberController extends Controller
           $diferenca = $dataVenda->diff($dataAtual);
           $mes = intval($diferenca->format("%m"));
 
-          // se mês maio do que zero
-          if ($mes > 0) {
-            for ($m = 0; $m < $mes; $m++) {
-              $numeroParcelas = 1;
+
+          for ($m = 0; $m < $mes; $m++) {
+            $numeroParcelas = 1;
 
               //se m maior do que dois para atualizar e seguir na sequência dos outros boletos
               //adicionei o zero no m para que tenha atraso pois o último item não precisa atualizar agora somente com 10 antes de começar o próximo mês
@@ -255,7 +253,6 @@ class AreceberController extends Controller
         }
       } //end foreaach
 
-    }
     //adicionar o log do sistema para este processo se ocorreu tudo certo
 
     // se ano do sistema igual ao ano do boleto-> continue caso contrário resete a contagem da parcela para um
