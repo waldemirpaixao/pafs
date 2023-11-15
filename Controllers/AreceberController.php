@@ -252,6 +252,7 @@ class AreceberController extends Controller
           }
         }
       } //end foreaach
+<<<<<<< HEAD
 
     //adicionar o log do sistema para este processo se ocorreu tudo certo
 
@@ -310,3 +311,8 @@ class AreceberController extends Controller
     }
   }
 }
+=======
+    }
+  }//AreceberController 
+  
+>>>>>>> main
