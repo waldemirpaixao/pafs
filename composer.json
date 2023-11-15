@@ -13,5 +13,8 @@
         "Models\\":"Models/"
 
     }
-}
+},
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    }
 }
