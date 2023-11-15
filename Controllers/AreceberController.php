@@ -216,14 +216,14 @@ class AreceberController extends Controller
               $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);
             }
           } //endelse
-          //Caso não exista
+          //Caso não exista - OK - Falta Testar
         } else {
           //Gerar todos os boletos possíveis a partir da contagem da quantidade de meses passados
           $dataAtual = new DateTime("now");
           $dataVenda = new DateTime($vendaArray['dataVencimentoBoleto']);
           $diferenca = $dataVenda->diff($dataAtual);
           $mes = intval($diferenca->format("%m"));
-
+          
           // se mês maio do que zero
           if ($mes > 0) {
             for ($m = 0; $m < $mes; $m++) {
