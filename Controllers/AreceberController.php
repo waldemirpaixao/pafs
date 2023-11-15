@@ -252,67 +252,6 @@ class AreceberController extends Controller
           }
         }
       } //end foreaach
-<<<<<<< HEAD
-
-    //adicionar o log do sistema para este processo se ocorreu tudo certo
-
-    // se ano do sistema igual ao ano do boleto-> continue caso contrário resete a contagem da parcela para um
-
-
-
-
-    //ATRASADO
-
-
-    //RECEBIDOS
-
-    foreach ($arrayVenda as $vendaArray) {
-
-
-      print("[vendedores_idVendedores] = " . $vendaArray['vendedores_idVendedores']);
-      echo "<br/>";
-      print("[dataVenda] = " . $vendaArray['dataVenda']);
-      echo "<br/>";
-      print("[valorPlanos] = " . $vendaArray['valorPlanos']);
-      echo "<br/>";
-      print("[valorExtraDependente] = " . $vendaArray['valorExtraDependente']);
-      echo "<br/>";
-      print("[adesaoVenda] = " . $vendaArray['adesaoVenda']);
-      echo "<br/>";
-      print("[dataVencimentoVenda] = " . $vendaArray['dataVencimentoVenda']);
-
-      $dataAntiga  = new DateTime($vendaArray['dataVencimentoVenda']);
-      $dataAgora = new DateTime("now");
-      $intervalo = $dataAntiga->diff($dataAgora);
-      echo "<br/>";
-      echo "Intervalo de dias entre as datas " . $intervalo->days;
-      echo "<br/>";
-      echo "Intervalo de Dias = " . $intervalo->format("%d dias");
-      echo "<br/>";
-      echo "Intervalo de Anos = " . $intervalo->format("%y ano");
-      echo "<br/>";
-      echo "Intervalo de Meses = " . $intervalo->format("%m mês");
-
-      echo "<br/>";
-      print("[clientes_idClientes] = " . $vendaArray['clientes_idClientes']);
-      echo "<br/>";
-      print("[idVenda] = " . $vendaArray['idVenda']);
-      echo "<br/>";
-      print("[planos_idPlanos] = " . $vendaArray['planos_idPlanos']);
-      echo "<br/>";
-      print("[empresa_idEmpresa] = " . $vendaArray['empresa_idEmpresa']);
-      echo "<br/>";
-      print("[dataAdesao] = " . $vendaArray['dataAdesao']);
-      echo "<br/>";
-      print("[desconto] = " . $vendaArray['desconto']);
-      echo "<br/>";
-      print("[complementoPlano_idComplementoPlano] = " . $vendaArray['complementoPlano_idComplementoPlano']);
-      echo "<hr/>";
-    }
-  }
-}
-=======
     }
   }//AreceberController 
   
->>>>>>> main
