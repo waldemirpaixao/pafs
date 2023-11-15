@@ -254,6 +254,7 @@ class AreceberController extends Controller
       } //end foreaach
 
     }
+  }
     //adicionar o log do sistema para este processo se ocorreu tudo certo
 
     // se ano do sistema igual ao ano do boleto-> continue caso contrário resete a contagem da parcela para um
@@ -309,5 +310,4 @@ class AreceberController extends Controller
       print("[complementoPlano_idComplementoPlano] = " . $vendaArray['complementoPlano_idComplementoPlano']);
       echo "<hr/>";
     }
-  }
-}
+
