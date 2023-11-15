@@ -252,7 +252,6 @@ class AreceberController extends Controller
           }
         }
       } //end foreaach
-
     }
-  }
+  }//AreceberController 
   
