@@ -236,28 +236,12 @@ class AreceberController extends Controller
             for ($m = 0; $m < $mes; $m++) {
               $numeroParcelas = 1;
 
-              //se m maior do que dois para atualizar e seguir na sequência dos outros boletos
-              //adicionei o zero no m para que tenha atraso pois o último item não precisa atualizar agora somente com 10 antes de começar o próximo mês
-              if ($mes >= 2) {//caso tem dois ou maia meses sem ter gerado o boleto no sistema
-                //inserir o último boleto atual
-                $ultimoId = $pagamentosReceber->inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
+            //se m maior do que dois para atualizar e seguir na sequência dos outros boletos
+            //adicionei o zero no m para que tenha atraso pois o último item não precisa atualizar agora somente com 10 antes de começar o próximo mês
+            if ($mes >= 2) { //caso tem dois ou maia meses sem ter gerado o boleto no sistema
+              //inserir o último boleto atual
+              $ultimoId = $pagamentosReceber->inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
 
-                $m = +1;
-                //se dierente continua se for igual não faz
-                if ($m != $mes) {
-                  //Atualizar o que acabou de inserir
-                  $atualizadoAnterior = $pagamentosReceber->atualizarAnteriorUltimoId($this::ULTIMO, $idCliente, $ultimoId); //atualizado o ultimo boleto para anterior
-                }
-
-                //se mês maior do que um mês
-                //caso tenha apenas um mês no sitema
-              } else if($mes > 0){
-                //inserir
-                $ultimoId = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
-              }
-              //liberar numero de parcelas
-              unset($numeroParcelas);
-            }
                 $m = +1;
                 //se dierente continua se for igual não faz
                 if ($m != $mes) {
@@ -278,5 +262,6 @@ class AreceberController extends Controller
         }
       } //end foreaach
     }
-
+  }
+  }//AreceberController 
   
