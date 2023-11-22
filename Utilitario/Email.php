@@ -21,7 +21,7 @@ class Email {
 
    public function sendEmail($para, $assunto, $mensagem){
 
-    $headers = 'From: contato@pafs.com.br' . "\r\n" .
+    $headers = 'From: naoresponda@sistema.pafs.com.br' . "\r\n" .
     'Reply-To: contato@pafs.com.br, waldemir.ufs@gmail.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
