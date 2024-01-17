@@ -25,7 +25,7 @@ class  EstatusPagamento extends Model{
     $executado = $select->execute();
 
 
-    if($executado && $select->roCount() > 0){
+    if($executado && $select->rowCount() > 0){
 
         return $select->fetch();
     }else{

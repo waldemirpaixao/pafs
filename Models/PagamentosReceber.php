@@ -26,8 +26,8 @@ class PagamentosReceber extends Model
 
 
 
-        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParceclas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
-            . " VALUES (:idEmpresa, :idClientes, :numeroParceclas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
+            . " VALUES (:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
 
 
         $inserir = $this->db->prepare($sql);
@@ -38,9 +38,10 @@ class PagamentosReceber extends Model
            
             $inserir->bindValue(':idEmpresa', $idEmpresa);
             $inserir->bindValue(':idClientes', $idCliente);
-            $inserir->bindValue(':numeroParceclas', $numeroParcelas);
+            $inserir->bindValue(':numeroParcelas', $numeroParcelas);
             $inserir->bindValue(':dataPagamento', $dataPagamento);
             $inserir->bindValue(':dataVencimentoBoleto', $dataVencimento);
+            $inserir->bindValue(':valor', $valor);
             $inserir->bindValue(':desconto', $desconto);
             $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
             $inserir->bindValue(':idFormaPagamento', $formaPagamento);
@@ -83,8 +84,8 @@ class PagamentosReceber extends Model
 
 
 
-        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParceclas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
-            . " VALUES (:idEmpresa, :idClientes, :numeroParceclas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
+            . " VALUES (:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
 
 
         $inserir = $this->db->prepare($sql);
@@ -95,9 +96,10 @@ class PagamentosReceber extends Model
            
             $inserir->bindValue(':idEmpresa', $idEmpresa);
             $inserir->bindValue(':idClientes', $idCliente);
-            $inserir->bindValue(':numeroParceclas', $numeroParcelas);
+            $inserir->bindValue(':numeroParcelas', $numeroParcelas);
             $inserir->bindValue(':dataPagamento', $dataPagamento);
             $inserir->bindValue(':dataVencimentoBoleto', $dataVencimento);
+            $inserir->bindValue(':valor',$valor);
             $inserir->bindValue(':desconto', $desconto);
             $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
             $inserir->bindValue(':idFormaPagamento', $formaPagamento);
@@ -106,11 +108,12 @@ class PagamentosReceber extends Model
             $inserir->bindValue(':ano', $ano);
     
             $inserido = $inserir->execute();
+            $ultimoId = $this->db->lastInsertId();
             $comitado = $this->db->commit();
 
             if($inserido && $comitado){
 
-                return $this->db->lastInsertId();
+                return $ultimoId;
             }else{
 
 
@@ -200,7 +203,7 @@ class PagamentosReceber extends Model
             $update->bindValue(":anterior", $this::ANTERIOR);
 
             $executado = $update->execute();
-            $comitado = $update->commit();
+            $comitado = $this->db->commit();
 
             if ($executado && $comitado) {
 
@@ -217,13 +220,13 @@ class PagamentosReceber extends Model
     }
 
 
-    public function atualizarAnteriorUltimoId($ultimo, $idCliente, $ultimoId)
+    public function atualizarAnteriorUltimoId($idCliente, $ultimoId)
     {
 
 
 
 
-        $sql = "update pagamentos_receber set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and anteriorultimo = :ultimo and idPagamentos = :idPagamentos";
+        $sql = "update pagamentos_receber set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and idPagamentos = :idPagamentos";
 
         $update = $this->db->prepare($sql);
 
@@ -233,12 +236,11 @@ class PagamentosReceber extends Model
 
 
             $update->bindValue(":idClientes", $idCliente);
-            $update->bindValue(":ultimo", $ultimo);
             $update->bindValue(":anterior", $this::ANTERIOR);
             $update->bindValue(":idPagamentos", $ultimoId);
 
             $executado = $update->execute();
-            $comitado = $update->commit();
+            $comitado = $this->db->commit();
 
             if ($executado && $comitado) {
 
