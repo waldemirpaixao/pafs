@@ -79,7 +79,7 @@ class AreceberController extends Controller
         echo "IdEmpresa = " . $idEmpresa . "<br/>";
 
 
-        //ano 
+        //ano do sistema
         $anoSistema = intval(date("Y"));
 
         //verificar se existe cliente na tabela pagamento_receber
@@ -201,6 +201,8 @@ class AreceberController extends Controller
 
             //verificar se o último boleto é igual do ano corrente
             if ($anoSistema == $anoBoleto) {
+
+              echo "Ano igual a ano";
               //Caso falte 10 dias para o vencimento adicionar na tabela pagamentos_receber pegar o idEmpresa
               //OBS:Adicinar no menu configuração a quantidade de dias que o cliente  deseja para ser gerados o a receber - ok
 
@@ -233,10 +235,10 @@ class AreceberController extends Controller
 
                   if (isset($para)) {
 
-                    $email = new Email();
+                    /* $email = new Email();
                     $enviado = $email->sendEmail($para, $this::ASSUNTO, $mensagem);
                     $saida = new Saida();
-                    $saida->envidados($de, $para, $this::ASSUNTO, $mensagem, $idEmpresa);
+                    $saida->envidados($de, $para, $this::ASSUNTO, $mensagem, $idEmpresa);*/
                   }
                 } else {
 
@@ -252,23 +254,86 @@ class AreceberController extends Controller
 
             } /*endif*/ else {
 
-              //recomeçar a contagem de parcelas
-              $numeroParcelas = 1;
-              //inserir novo pagamento_receber
+              $dataVencimentoBoletoAcrescidoUmMes = date("Y-m-d", strtotime("+1 month", strtotime($ultimoBoleto['dataVencimentoBoleto'])));
 
-              $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimentoAcrescidoUmMes, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
+              //Verificar se o últmo boleto pertene ao ano anterior ou ao ano corrente
+              $ultimaDataDoBoleto = explode("-", $ultimoBoleto['dataVencimentoBoleto']);
 
-              if ($inserido) {
+              //pegar a diferença de dias 
+              $dataAtual = new DateTime("now");
+              $dataDoUltimoBoleto = new DateTime($ultimoBoleto['dataVencimentoBoleto']);
+              $diferenca = $dataDoUltimoBoleto->diff($dataAtual);
+              $meses = intval($diferenca->format("%m"));
 
-                $mensagem = "Criado um novo boleto para o Cliente " . $nomeCliente;
+              echo "meses" . $meses;
 
-                $email = new Email();
+              //Checar se os meses maior do que 01
+              if ($meses > 1) {
+
+                for ($i = 1; $i <= $meses; $i++) {
+
+
+                  $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimentoBoletoAcrescidoUmMes, $valor, $desconto, $idStatusPagamento, $idFormaPagamento, $idVenda, $idVendedor, $anoSistema);
+                  $dataVencimentoBoletoAcrescidoUmMes = date("Y-m-d", strtotime("+1 month", strtotime($ultimoBoleto['dataVencimentoBoleto'])));
+
+                  //$numeroParcelas = $numeroParcelas + intval($ultimoBoleto['numeroParcelas']);
+                  $numeroParcelas = $numeroParcelas + intval(1);
+
+                }
+              } else {
+
+
+
+
+                echo "Ano diferente de ano";
+
+                //realizar a soma de um mês
+                //$dataVencimentoAcrescidoUmAno = date("Y-m-d", strtotime("+1 year", strtotime($dataVencimento)));
+
+
+
+                //recomeçar a contagem de parcelas
+                $numeroParcelas = 1;
+                //inserir novo pagamento_receber
+
+                //verificar quantos meses de atraso para fazer a atualização
+
+                echo "idEmpre" . $idEmpresa . "<br/>";
+                echo "idCliente" . $idCliente . "<br/>";
+                echo "idNúmero de parcelas" . $numeroParcelas . "<br/>";
+                echo "dataPagemento" . $dataPagamento . "<br/>";
+                echo "dataVencimentoBoletoAcrescidoUmMes" . $dataVencimentoBoletoAcrescidoUmMes . "<br/>";
+                echo "valor" . $valor . "<br/>";
+                echo "desconto" . $desconto . "<br/>";
+                echo "idestatus pagamento" . $idStatusPagamento . "<br/>";
+                echo "formapagamento" . $formaPagamento . "<br/>";
+                echo "idVenda" . $idVenda . "<br/>";
+                echo "idVendedor" . $idVendedor . "<br/>";
+                echo "Ano sistema" . $anoSistema . "<br/>";
+
+                // $pagamentosReceber = new PagamentosReceber(); 
+
+                $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimentoBoletoAcrescidoUmMes, $valor, $desconto, $idStatusPagamento, $idFormaPagamento, $idVenda, $idVendedor, $anoSistema);
+
+
+                if ($inserido) {
+
+                  //o prnúltimo bolet fica com anterior
+                  //verificar no ano corrente a soma da parelas
+                  //verificar mesmo que tenha gerado em um ano posterior a parcela continua normalmente sem reiniciar
+
+                  $mensagem = "Criado um novo boleto para o Cliente " . $nomeCliente;
+
+                  echo $mensagem;
+
+                  /*$email = new Email();
                 $enviado = $email->sendEmail($para, $this::ASSUNTONOVO, $mensagem);
                 $saida = new Saida();
-                $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);
+                $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);*/
+                }
               }
             }
-          }/*endif*/ else {
+          }/*endif*/ else { //se não tem o ultimo boleto adicionar o primeiro boleto novo
             //inserir boleto
             $numeroParcelas = 1;
             $inserido = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimentoAcrescidoUmMes, $valor, $desconto, $idStatusPagamento, $formaPagamento, $idVenda, $idVendedor, $anoSistema);
@@ -283,8 +348,10 @@ class AreceberController extends Controller
               $saida->envidados($de, $para, $this::ASSUNTONOVO, $mensagem, $idEmpresa);
             }
           } //endelse
-          //caso não exista pagamento de cliente
-        } else {
+
+
+
+        } else {  //caso não exista cliente em pagamento
 
 
 
@@ -305,15 +372,15 @@ class AreceberController extends Controller
           for ($m = 0; $m < $mes; $m++) {
 
 
-            //repensar sobre o mês para adicionar e fazer uma nova consulta com o último id salbo e pegar a data datavencida
+            //repensar sobre o mês para adicionar e fazer uma nova consulta com o último id salvo e pegar a data vencida
 
             //fazer a contagem para adicionar um mês
             //$dataVencimento = $dataVencimentoAcrescidoUmMes;
 
-            
+
             //realizar a soma de um mês
-           
-            echo "data vencimento 1".$dataVencimentoAcrescidoUmMes;
+
+            echo "data vencimento 1" . $dataVencimentoAcrescidoUmMes;
             echo "<br/>";
             echo "Entrou no for";
             echo "<br/>";
@@ -325,12 +392,12 @@ class AreceberController extends Controller
             if ($mes >= 2) { //caso tem dois ou mais meses sem ter gerado o boleto no sistema
               //inserir o último boleto atual
 
-            
-              
+
+
               echo "<br/>";
               echo "Entrou no maior do que dois";
               echo "<br/>";
-              echo "contador".$m."<br/>";
+              echo "contador" . $m . "<br/>";
               $ultimoId = $pagamentosReceber->inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimentoAcrescidoUmMes, $valor, $desconto, $idStatusPagamento, $idFormaPagamento, $idVenda, $idVendedor, $anoSistema);
               $dataVencimentoAcrescidoUmMes = date("Y-m-d", strtotime("+1 month", strtotime($dataVencimentoAcrescidoUmMes)));
 
@@ -365,7 +432,7 @@ class AreceberController extends Controller
               echo "<br/>";
 
 
-              
+
               //inserir
               $ultimoId = $pagamentosReceber->inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimentoAcrescidoUmMes, $valor, $desconto, $idStatusPagamento, $idFormaPagamento, $idVenda, $idVendedor, $anoSistema);
             }
@@ -373,13 +440,12 @@ class AreceberController extends Controller
             unset($numeroParcelas);
             $j = +1;
 
-           
 
-            echo "data vencimento 2 ".$dataVencimentoAcrescidoUmMes;
-            
+
+            echo "data vencimento 2 " . $dataVencimentoAcrescidoUmMes;
           } //end foreaach
         } //end else
       } //end foreach
-    }
+    } //end if
   }
 }//AreceberController 

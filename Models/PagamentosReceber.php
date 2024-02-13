@@ -27,7 +27,7 @@ class PagamentosReceber extends Model
 
 
         $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
-            . " VALUES (:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+            . " VALUES(:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
 
 
         $inserir = $this->db->prepare($sql);
@@ -53,6 +53,8 @@ class PagamentosReceber extends Model
             $comitado = $this->db->commit();
 
             if($inserido && $comitado){
+
+              
 
                 return true;
             }else{
