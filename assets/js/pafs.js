@@ -202,27 +202,51 @@ $(function(){
      //var idPlano = 0;
      let id = 0;
      let novoId = 0;
-     let preco = 0;
+     let precoNovo = 0;
+     let valorDependente = "";    
+   $('.clickPlanos').bind('click',function(e){
+
     
-    $('.clickPlanos').bind('click',function(){
        
    
-        preco = 0;
+        //preco = 0;
         $('.total div #valorPlano').val("0");
         //idPlano = $(this).val();
         id = $(this).attr('id');
-      
+              
         novoId = id.split("a");
 
-        preco = $("#"+valor+novoId[1]).val();
-              
-        preco = parseInt(preco)+ parseInt($('.total div #valorPlano').val()) + parseInt($("#dependente").val());
-        precoAtual = preco.toLocaleString('pt-br', {minimumFractionDigits: 2});
+        precoNovo = $("#"+valor+novoId[1]).val();
+
+        valorDependente = $("#dependente").val();
+
+    
+        if(valorDependente == undefined){
+
+            precoNovo = parseFloat(precoNovo)+ parseFloat($('.total div #valorPlano').val());
+            precoAtual = precoNovo.toLocaleString('pt-br', {minimumFractionDigits: 2});
+           
+            $('.total div #valor').html(precoAtual);
+            precoComPonto = precoAtual.replaceAll(",",".");
+            $('.total div #valorPlano').val(precoComPonto);
+            
+
+        }else{
+
+            precoNovo = parseFloat(precoNovo)+ parseFloat($('.total div #valorPlano').val()) + parseFloat($("#dependente").val());
+            precoAtual = precoNovo.toLocaleString('pt-br', {minimumFractionDigits: 2});
+           
+            $('.total div #valor').html(precoAtual);
+            precoComPonto = precoAtual.replaceAll(",",".");
+            $('.total div #valorPlano').val(precoComPonto);
+            
+
+
+        }
+
        
-        $('.total div #valor').html(precoAtual);
-        precoComPonto = precoAtual.replaceAll(",",".")
-        $('.total div #valorPlano').val(precoComPonto);
-        
+              
+     
        
      
         

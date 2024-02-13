@@ -156,7 +156,6 @@ id = $(input).attr('id');
 
 preco = $("#"+valor+id).val();
 
-
 $("#valor").html(preco);
 $("#valorPlano").val(preco.replace(",","."));
 

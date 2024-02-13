@@ -225,7 +225,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
             ?>
 
             
-            <?php if (count($dependent) > 7) : ?>
+            <?php if (count($dependent) > 8) : ?>
 
                 <?php foreach ($dependent as $depende) : ?>
                 <div class="linhasColunas">
@@ -244,7 +244,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
                     <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ 5,00 reais por pessoa, a quantidade de Dependentes é superior a 8 </h3>
                 </div>
 
-                <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent)-7)*5  ;?>">
+                <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent)-8)*5  ;?>">
 
               
 
