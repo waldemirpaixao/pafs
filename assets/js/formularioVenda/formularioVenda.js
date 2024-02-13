@@ -146,13 +146,20 @@ $(function(){
 
 function valorPlano(elemento){
 
+
 let input = elemento;
 let id = 0 ;
 const valor = "valor";
+let preco = 0;
 
 id = $(input).attr('id');
 
 preco = $("#"+valor+id).val();
+
+
+$("#valor").html(preco);
+$("#valorPlano").val(preco.replace(",","."));
+
 
 
 
