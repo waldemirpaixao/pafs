@@ -128,8 +128,8 @@ class formularioVendaPlanosController extends Controller
         /* Tabela Contrato */
         $numeroContrato = str_replace("-", "", str_replace(".", "", $cpf)) . "/" . date('Y');
 
-        $assinaturaDigitalClientes = addslashes($_POST['assinaturaDigitalClientes']); //ok
-        $assinaturaDigitalVendedor = addslashes($_POST['assinaturaDigitalVendedor']);//OK
+        //$assinaturaDigitalClientes = addslashes($_POST['assinaturaDigitalClientes']); //ok
+        //$assinaturaDigitalVendedor = addslashes($_POST['assinaturaDigitalVendedor']);//OK
         $observacao = addslashes($_POST['observacao']);
         $portabilidade = addslashes($_POST['portabilidade']);
 
@@ -173,11 +173,11 @@ class formularioVendaPlanosController extends Controller
 
           
 
-            $this->contratoFeito =  $contrato->criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo, $assinaturaDigitalClientes,$idVenda,$idVendedor, $assinaturaDigitalVendedor,$portabilidade,$observacao);
+            $this->contratoFeito =  $contrato->criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
         } else {
 
 
-           $this->contratoFeito = $contrato->criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo, $assinaturaDigitalClientes,$idVenda,$idVendedor, $assinaturaDigitalVendedor, $portabilidade,$observacao);
+           $this->contratoFeito = $contrato->criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
         }
        
         

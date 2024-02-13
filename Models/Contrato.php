@@ -11,7 +11,7 @@ class Contrato extends Model{
     const CARENCIA = 90;
     const ANO = 12;
 
-    public function criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarencia, $idEmpresa, $idClientes,$dataFimContrato, $assinaturaDigitalClientes,$idVenda,$idVendedor, $assinaturaDigitalVendedor,$portabilidade,$observacao){
+    public function criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarencia, $idEmpresa, $idClientes,$dataFimContrato,$idVenda,$idVendedor ,$portabilidade,$observacao){
 
 
 
