@@ -24,10 +24,8 @@ class Contrato extends Model{
             empresa_idEmpresa, 
             clientes_idClientes, 
             dataFinalContrato,
-            assinaturaDigitalClientes, 
             venda_idVenda, 
             venda_vendedores_idVendedores,
-            assinaturaDigitalVendedor,
             portabilidade,
             observacao) values(  
             :dataAdesao, 
@@ -38,10 +36,8 @@ class Contrato extends Model{
             :empresa_idEmpresa, 
             :clientes_idClientes, 
             :dataFinalContrato,
-            :assinaturaDigitalClientes, 
             :venda_idVenda, 
             :venda_vendedores_idVendedores,
-            :assinaturaDigitalVendedor,
             :portabilidade,
             :observacao)";
 
@@ -63,10 +59,10 @@ class Contrato extends Model{
             $inserir->bindValue(":empresa_idEmpresa",$idEmpresa);
             $inserir->bindValue(":clientes_idClientes", $idClientes);
             $inserir->bindValue(":dataFinalContrato", $dataFimContrato);
-            $inserir->bindValue(":assinaturaDigitalClientes",$assinaturaDigitalClientes);
+          //  $inserir->bindValue(":assinaturaDigitalClientes",$assinaturaDigitalClientes);
             $inserir->bindValue(":venda_idVenda", $idVenda);
             $inserir->bindValue(":venda_vendedores_idVendedores", $idVendedor);
-            $inserir->bindValue(":assinaturaDigitalVendedor", $assinaturaDigitalVendedor);
+            //$inserir->bindValue(":assinaturaDigitalVendedor", $assinaturaDigitalVendedor);
             $inserir->bindValue(":portabilidade", $portabilidade);
             $inserir->bindValue(":observacao", $observacao);
 
