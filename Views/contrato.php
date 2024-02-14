@@ -1905,6 +1905,7 @@ and open the template in the editor.
     $dependente = new Dependentes();
     $dependent = $dependente->getDependentesByIdTitular($id);
 
+
     //planos
 
     $planos = new Planos();
@@ -2159,25 +2160,25 @@ and open the template in the editor.
 
 
                 <?php if ($dependent != NULL) : ?>
-                    <?php if (count($dependent) > 8) : ?>
+                    <?php if (count($dependent) <= 8 || count($dependent) >= 8) : ?>
 
                         <div class="subtirinhas">
                             <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ 5,00 reais por pessoa, a quantidade de Dependentes é superior a 8 </h3>
                         </div>
 
-                        <input type="hidden" name="valorExtraDependente" value="<?php echo count($depende) * 8; ?>">
+                        <input type="hidden" name="valorExtraDependente" value="<?php echo count($dependent) * 8; ?>">
 
 
                     <?php else : ?>
                         <input type="hidden" name="valorExtraDependente" value="<?php echo 0; ?>">
 
                     <?php endif; ?>
-                    <?php foreach ($dependent as $depende) : ?>
+                    <?php foreach ($dependent as $dependeContrato) : ?>
 
 
                         <tr class="">
-                            <td style="font-size: 14pt;" class="conteudoTabelas"><?php echo $depende['nomeDependentes']; ?></td>
-                            <td style="font-size: 14pt;" class="conteudoTabelas"><?php echo $depende['cpfDependentes'] != null ?  $depende['cpfDependentes'] : "Não Informado"; ?></td>
+                            <td style="font-size: 14pt;" class="conteudoTabelas"><?php echo $dependeContrato['nomeDependentes']; ?></td>
+                            <td style="font-size: 14pt;" class="conteudoTabelas"><?php echo $dependeContrato['cpfDependentes'] != null ?  $dependeContrato['cpfDependentes'] : "Não Informado"; ?></td>
                             <!-- <td class="conteudoTabelas"><//?php echo date("d/m/Y", strtotime($depende['dataNascimentoDependentes'])); ?></td>-->
 
                         </tr>

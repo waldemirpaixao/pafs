@@ -72,8 +72,6 @@ class Contrato extends Model{
             $comitado = $this->db->commit();
 
 
-           
-
 
            
             if($comitado && $inserido){

@@ -22,6 +22,8 @@
     <?php
 
     use \Models\Clientes;
+use Models\Venda;
+
     if(isset($mensagem)):
     if($mensagem == "Cliente cadastrado com sucesso!"):
     
@@ -65,6 +67,10 @@
     //print_r($allClient);
     // exit();
 
+    $venda = new Venda();
+    
+   
+
 
 
     if ($allClient != NULL) {
@@ -73,7 +79,12 @@
 
 
         foreach ($allClient as $clientes) {
+            $arrayVenda = $venda->getVendaByIdClinte($clientes['idClientes']);
+
+            if(!isset($arrayVenda)):
             ?>
+
+
 
 
             <div class="tirinhas">   
@@ -88,11 +99,32 @@
 
             </div>
 
+            <?php
 
+            else:
+
+                ?>
+
+
+
+            <div class="tirinhas">   
+
+
+             
+
+                <div class="subtirinhas"><?php echo "Cliente: " . $clientes['nomeClientes']; ?></div>
+               
+                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="#"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena" style="cursor:not-allowed" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a></div>
+             
+
+            </div>
 
 
             <?php
+            endif;
         }//end foreach
+
+
     } else {
         ?>
 

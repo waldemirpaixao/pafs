@@ -225,7 +225,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
             ?>
 
             
-            <?php if (count($dependent) >= 8) : ?>
+            <?php if (count($dependent) <= 8 || count($dependent) >= 8) : ?>
 
                 <?php foreach ($dependent as $depende) : ?>
                 <div class="linhasColunas">
