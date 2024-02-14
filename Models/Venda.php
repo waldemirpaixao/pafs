@@ -65,21 +65,6 @@ class Venda extends Model
 
   public function inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $dataVencimento, $idClientes, $idPlano, $idEmpresa, $dataAdesao, $desconto){
   
- /* echo "IdVendedor". $idVendedor."<br/>";
-  echo "ValorParcialVendedor".$valorPlanoParcial."<br/>";
-  echo "ValorExtraDependente".$valorExtraDependente."<br/>";
-  echo "Adesão".$adesao."<br/>";
-  echo "DataVencimento".$dataVencimento."<br/>"; 
-  echo "IdCliente".$idClientes."<br/>"; 
-  echo "IdPlano".$idPlano."<br/>";
-  echo "Idempresa".$idEmpresa."<br/>"; 
-  echo "DataAdesão".$dataAdesao."<br/>"; 
-  echo "Desconto".$desconto."<br/>";
-  exit;*/
-
-  
-  
-
 
     $sql = "INSERT INTO venda(vendedores_idVendedores, dataVenda, valorPlanos, valorExtraDependente, adesaoVenda, dataVencimentoVenda, clientes_idClientes, planos_idPlanos, empresa_idEmpresa, dataAdesao, desconto) 
         VALUES(:idVendedores, now(), :valorPlanos, :valorExtraDependente, :adesaoVenda, :dataVencimentoVenda, :idClientes, :idPlanos, :idEmpresa, :dataAdesao, :desconto)";
