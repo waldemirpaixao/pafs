@@ -246,11 +246,6 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
 
                 <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent)-8)*5  ;?>">
 
-              
-
-
-                <?php else: ?>
-                    <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo 0 ;?>">
 
                
                 <?php foreach ($dependent as $depende) : ?>
@@ -266,6 +261,9 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
 
             <?php endforeach; ?>
             <?php endif; ?>
+
+            <?php else: ?>
+                    <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo 0 ;?>">
         <?php endif; ?>
 
         <hr>
@@ -279,7 +277,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
         </div>
         <div class="colunaVendedor">
                 <label class="rotulo">Desconto</label>
-                <input id="desconto"class="campoTexto" type="text" name="desconto">
+                <input id="desconto"class="campoTexto" type="text" name="desconto" value="0">
                 <script>
                     $('#desconto').mask("#.##0,##",{reverse:true});
                 </script>

@@ -63,11 +63,28 @@ class Venda extends Model
   //   return $ex->getMessage(); //Mensagem de erro
   // }
 
-  public function inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $dataVencimento, $idClientes, $idPlano, $idEmpresa, $dataAdesao, $desconto)
-  {
+  public function inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $dataVencimento, $idClientes, $idPlano, $idEmpresa, $dataAdesao, $desconto){
+  
+ /* echo "IdVendedor". $idVendedor."<br/>";
+  echo "ValorParcialVendedor".$valorPlanoParcial."<br/>";
+  echo "ValorExtraDependente".$valorExtraDependente."<br/>";
+  echo "Adesão".$adesao."<br/>";
+  echo "DataVencimento".$dataVencimento."<br/>"; 
+  echo "IdCliente".$idClientes."<br/>"; 
+  echo "IdPlano".$idPlano."<br/>";
+  echo "Idempresa".$idEmpresa."<br/>"; 
+  echo "DataAdesão".$dataAdesao."<br/>"; 
+  echo "Desconto".$desconto."<br/>";
+  exit;*/
+
+  
+  
+
 
     $sql = "INSERT INTO venda(vendedores_idVendedores, dataVenda, valorPlanos, valorExtraDependente, adesaoVenda, dataVencimentoVenda, clientes_idClientes, planos_idPlanos, empresa_idEmpresa, dataAdesao, desconto) 
         VALUES(:idVendedores, now(), :valorPlanos, :valorExtraDependente, :adesaoVenda, :dataVencimentoVenda, :idClientes, :idPlanos, :idEmpresa, :dataAdesao, :desconto)";
+
+
 
     $inserir = $this->db->prepare($sql);
 
@@ -93,6 +110,15 @@ class Venda extends Model
       $ultimoId = $this->db->lastInsertId();
 
       $comitado = $this->db->commit();
+
+
+      if ($inserido && $comitado) {
+
+        return $ultimoId;
+      } else {
+  
+        return 0;
+      }
     } catch (PDOException $ex) {
 
       $this->db->rollBack();
@@ -101,33 +127,14 @@ class Venda extends Model
 
 
 
-
-    if ($inserir->rowCount() > 0 && $inserido && $comitado) {
-
-      return $ultimoId;
-    } else {
-
-      return 0;
-    }
+   // if ($inserido) {
 
 
+     // return "Salvo com sucesso!";
+    //} else {
 
-
-
-
-
-
-
-
-
-    if ($inserido) {
-
-
-      return "Salvo com sucesso!";
-    } else {
-
-      return "Problema ao salvar!";
-    }
+      //return "Problema ao salvar!";
+    //}
   }
 
 

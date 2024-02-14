@@ -120,7 +120,11 @@ class formularioVendaPlanosController extends Controller
 
 
         /* vai para a tabela de venda_dependentes */
-        $idDependentes = $_POST['idDependente']; //ok Array
+        if(isset($idDependentes)){
+
+            $idDependentes = $_POST['idDependente']; //ok Array
+        }
+        
 
 
 
