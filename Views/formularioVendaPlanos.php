@@ -270,6 +270,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
 
         <hr>
 
+        <div style="display: flex;" >
         <div class="colunaVendedor">
                 <label class="rotulo">Data de Vigência</label>
                 <input id="dataVigencia"class="campoTexto" type="date" name="dataVencimento">
@@ -285,12 +286,15 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
                 </script>
 
         </div>
+        </div>
 
-        <div class="colunasConteudo">
-            <input id="adesao" type="radio" name="adesao" value="sim"> <label for="adesao" style="cursor: pointer;"> Adesão do plano - É o pagamento antecipado no valor do plano escolhido</label><br/>
+        <hr/>
+        <div class="">
+            <input id="adesao" type="radio" name="adesao" value="sim"> 
+            <label for="adesao" style="cursor: pointer;"> Adesão do plano - É o pagamento antecipado no valor do plano escolhido</label><br/>
            <br/>
         </div>
-        
+        <hr/>
 
              
         <div>
@@ -299,7 +303,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
             <input type="radio" name="portabilidade" id="nao" value="não"> <label for="nao">Não</label>
             <br/>
             <br/>
-
+<hr>
 
             <label>Observação</label><br/>
             <textarea name="observacao"style="width:100%; padding:10px;" rows="3"></textarea>
