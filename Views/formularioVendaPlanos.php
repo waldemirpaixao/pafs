@@ -225,7 +225,7 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
             ?>
 
             
-            <?php if (count($dependent) > 8) : ?>
+            <?php if (count($dependent) >= 8) : ?>
 
                 <?php foreach ($dependent as $depende) : ?>
                 <div class="linhasColunas">
@@ -240,26 +240,28 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
 
             <?php endforeach; ?>
                
+            <?php if (count($dependent) > 8) : ?>
+
                 <div class="subtirinhas">
                     <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ 5,00 reais por pessoa, a quantidade de Dependentes é superior a 8 </h3>
                 </div>
 
                 <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent)-8)*5  ;?>">
-
+                <?php endif;  ?>
 
                
-                <?php foreach ($dependent as $depende) : ?>
+                <!--<//?php foreach ($dependent as $depende) : ?>
                 <div class="linhasColunas">
 
-                    <input type="hidden" name="idDependente[]" value="<?php echo $depende['idDependentes']; ?>" />
-                    <div class="conteudoTabelas"><?php echo $depende['nomeDependentes']; ?></div>
-                    <div class="conteudoTabelas"><?php echo $depende['cpfDependentes']!= null? $depende['cpfDependentes']: 'Não Informado'; ?></div>
+                    <input type="hidden" name="idDependente[]" value="<//?php echo $depende['idDependentes']; ?>" />
+                    <div class="conteudoTabelas"><//?php echo $depende['nomeDependentes']; ?></div>
+                    <div class="conteudoTabelas"><//?php echo $depende['cpfDependentes']!= null? $depende['cpfDependentes']: 'Não Informado'; ?></div>-->
                     <!--<div class="conteudoTabelas"><//?php echo date("d/m/Y", strtotime($depende['dataNascimentoDependentes'])); ?></div>-->
 
 
-                </div>
+                <!--</div>-->
 
-            <?php endforeach; ?>
+            <!--<//?php endforeach; ?>-->
             <?php endif; ?>
 
             <?php else: ?>
