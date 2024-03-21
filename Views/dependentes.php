@@ -19,7 +19,7 @@
 
     if (isset($mensagem)) :
 
-        if ($mensagem == "Dependente cadastrado com sucesso!") :
+        if ($mensagem == "Dependente cadastrado com sucesso!" || $mensagem == "Dependente deletado com sucesso!" ) :
 
 
     ?>
@@ -28,7 +28,7 @@
 
         <?php
 
-        elseif ($mensagem == "Não foi possível cadastrar o dependente!") :
+        elseif ($mensagem == "Não foi possível cadastrar o dependente!" || $mensagem = "Ops! algo deu errado.") :
 
 
         ?>
@@ -96,7 +96,7 @@
                     <div class="alinhamentoDireito">
                         <img id="<?php echo $todosDependentes['idDependentes']; ?>" onclick="mostrar(this)" class="imagemPequena ponteiro" title="Detalhe" src="<?php echo BASE_URL; ?>assets/imagens/detalhes.png" /></a>
                         <a id="atualizar" href="<?php echo BASE_URL; ?>Dependentes/atualizarDependentes/?id=<?php echo $todosDependentes['idDependentes']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
-                        <a href="<?php echo BASE_URL; ?>Dependentes/deletarDependentes/?id=<?php echo $todosDependentes['idDependentes']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
+                        <a href="<?php echo BASE_URL; ?>Dependentes/deletarDependentes/<?php echo $todosDependentes['idDependentes']; ?>"><img  onclick=" return confirm('Deseja escluir realmente o dependente <?= $todosDependentes['nomeDependentes']; ?> ?')"  class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
                         <div>
                         </div>
 

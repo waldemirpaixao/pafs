@@ -167,4 +167,27 @@ class Dependentes extends Model
             return NULL;
         }
     }
+
+
+    public function  deletarDependentes($idDependentes)
+    {
+
+        $sql = "DELETE FROM dependentes WHERE idDependentes = :idDependentes";
+
+        $deletar = $this->db->prepare($sql);
+
+        $deletar->bindValue(":idDependentes", $idDependentes);
+
+        $deletado = $deletar->execute();
+
+
+        if ($deletado) {
+
+            return true;
+        } else {
+
+
+            return false;
+        }
+    }
 }

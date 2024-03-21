@@ -59,5 +59,32 @@ class Venda_dependentes extends Model {
         
     }
 
+
+    public function deletarVendaDependentes($idDependente){
+
+
+        $sql = "DELETE FROM venda_dependentes  WHERE dependentes_idDependentes = :idDependente";
+
+        $deletarVendaDependentes = $this->db->prepare($sql);
+        $deletarVendaDependentes->bindValue(":idDependente",$idDependente);
+        $deletadoVendaDependentes = $deletarVendaDependentes->execute();
+
+        if($deletadoVendaDependentes){
+
+            return true;
+
+
+        }else{
+
+
+            return false;
+        }
+
+
+
+
+        
+    }
+
    
 }

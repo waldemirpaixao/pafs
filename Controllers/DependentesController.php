@@ -9,6 +9,7 @@
 namespace Controllers;
 use \Core\Controller;
 use \Models\Dependentes;
+use Models\Venda_dependentes;
 
 class DependentesController extends Controller{
     
@@ -104,6 +105,66 @@ class DependentesController extends Controller{
         
     }
     
+
+    public function deletarDependentes($idDependentes){
+
+
+
+        $viewData = [];
+
+
+
+        //É NECESSÁRIO QUE DELETE ANTES DA VENDA DEPENDENTES PARA DEPOIS DELETAR DO DEPENDENTE
+        //vENDA dEPENDENTES
+
+        $vendaDependentes = new Venda_dependentes();
+        $deletadoVendaDependente = $vendaDependentes->deletarVendaDependentes($idDependentes);
+
+        if($deletadoVendaDependente){
+
+
+            //DEPENDENTES
+
+        $dependente = new Dependentes();
+        $deletadoDependente = $dependente->deletarDependentes($idDependentes);
+
+        if($deletadoDependente){
+
+
+            $viewData = ['mensagem' => "Dependente deletado com sucesso!"];
+
+
+        }else{
+
+
+            $viewData = ['mensagem' => "Ops! Algo deu errado."];
+
+
+        }
+
+
+
+        }else{
+
+            $viewData = ['mensagem' => "Ops! Algo deu errado."];
+
+
+        }
+
+
+
+
+        
+
+
+       
+
+
+
+
+        $this->loadTemplateLoginCompany("dependentes", $viewData);
+
+    }
     
 
 }
