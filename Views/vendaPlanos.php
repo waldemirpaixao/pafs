@@ -64,8 +64,7 @@ use Models\Venda;
     <h1 class="estiloBorda">Venda de Planos</h1>
     <br/>
     <br/>
-    <br/>
-    <br/>
+
     <!--Link do modal-->
    <!-- <div class=" card circulo">
 
@@ -105,7 +104,7 @@ use Models\Venda;
 
              
 
-                <div class="subtirinhas"><?php echo "Cliente: " . $clientes['nomeClientes']; ?></div>
+                <div class="subtirinhas"><?php echo $clientes['nomeClientes']; ?></div>
                
                 <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a></div>
              
@@ -125,9 +124,9 @@ use Models\Venda;
 
              
 
-                <div class="subtirinhas"><?php  echo "Cliente: " . $clientes['nomeClientes']; ?></div>
+                <div class="subtirinhas"><?php  echo $clientes['nomeClientes']; ?></div>
                
-                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a></div>
+                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png"/></a></div>
              
 
             </div>
