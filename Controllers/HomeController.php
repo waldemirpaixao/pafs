@@ -79,6 +79,9 @@ class HomeController extends Controller {
         $_SESSION['siglaEmpresa'] = $empresas['siglaEmpresa'];
         $_SESSION['logoEmpresa'] = $empresas['logoEmpresa'];
         $_SESSION['cnpj'] = $empresas['cnpjEmpresa'];
+
+        //captura o ano corrente
+        $_SESSION['ano'] =  date("Y");
         
         
         

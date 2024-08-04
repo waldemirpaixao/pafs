@@ -63,11 +63,11 @@ class Venda extends Model
   //   return $ex->getMessage(); //Mensagem de erro
   // }
 
-  public function inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $dataVencimento, $idClientes, $idPlano, $idEmpresa, $dataAdesao, $desconto){
+  public function inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $dataVencimento, $idClientes, $idPlano, $idEmpresa, $dataAdesao, $desconto,$idFormaPagamento){
   
 
-    $sql = "INSERT INTO venda(vendedores_idVendedores, dataVenda, valorPlanos, valorExtraDependente, adesaoVenda, dataVencimentoVenda, clientes_idClientes, planos_idPlanos, empresa_idEmpresa, dataAdesao, desconto) 
-        VALUES(:idVendedores, now(), :valorPlanos, :valorExtraDependente, :adesaoVenda, :dataVencimentoVenda, :idClientes, :idPlanos, :idEmpresa, :dataAdesao, :desconto)";
+    $sql = "INSERT INTO venda(vendedores_idVendedores, dataVenda, valorPlanos, valorExtraDependente, adesaoVenda, dataVencimentoVenda, clientes_idClientes, planos_idPlanos, empresa_idEmpresa, dataAdesao, desconto, formaPagamento_idformaPagamento) 
+        VALUES(:idVendedores, now(), :valorPlanos, :valorExtraDependente, :adesaoVenda, :dataVencimentoVenda, :idClientes, :idPlanos, :idEmpresa, :dataAdesao, :desconto,:idFormaPagamento)";
 
 
 
@@ -88,6 +88,8 @@ class Venda extends Model
       $inserir->bindValue(":idEmpresa", $idEmpresa);
       $inserir->bindValue(":dataAdesao", $dataAdesao);
       $inserir->bindValue(":desconto", $desconto);
+      $inserir->bindValue(":idFormaPagamento", $idFormaPagamento);
+      
 
 
       $inserido = $inserir->execute();

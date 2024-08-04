@@ -11,12 +11,36 @@ use Models\DiaAreceber;
 use Models\Empresa;
 use Models\EstatusPagamento;
 use Models\FormaDePagamento;
-use Models\PagamentosReceber;
+use Models\ReceberPagamentosDosClientes;
 use Models\Venda;
 use Models\Saida;
 
-class AreceberController extends Controller
+/*Classe destinada ao recebimento de pagamentos dos clientes desde a primeira vanda*/
+
+class ReceberPagamentosDosClientesController extends Controller
 {
+
+
+  public function index() {
+
+    $viewData = array();
+
+    
+
+    if (!isset($_SESSION['idColaboradores']) && empty($_SESSION['idColaboradores'])) {
+
+
+        $this->loadTemplate("home", $viewData);
+
+
+   
+    } else {
+
+
+
+        $this->loadTemplateLoginCompany("dashboard", $viewData);
+    }
+}
 
 
 
@@ -33,9 +57,9 @@ class AreceberController extends Controller
     echo "Data Acrescida de um mês <br/>";
     echo date("Y-m-d", strtotime("+1 month", strtotime('2023-09-13')));
 
-    //  echo "\n";
-    //$ano = intval(date("Y"));
-    //echo $ano;
+      echo "\n";
+    $ano = intval(date("Y"));
+    echo $ano;
   }
 
 
@@ -47,20 +71,18 @@ class AreceberController extends Controller
   private const ASSUNTOERRO = "Erro ao gerar o boleto";
   private const ASSUNTONOVO = "Gerado um novo boleto";
 
-  public function aReceber()
+  public function receberPagamentosDosClientes()
   {
 
     $venda = new Venda();
     $arrayVenda = $venda->getAllVenda(); //pegando todas as vendas na base de dados
-    $arrayVenda = $venda->getAllVenda(); //pegando todas as vendas na base de dados
-
-
+   
     //A RECEBER - OK
     //verificar se existe idvenda, na tabela de pagamentos_receber - ok
 
 
-    //Verificando se existe vendas na recuperação de vendas
-    //Verificando se existe vendas na recuperação de vendas
+    /*Verificando se existe vendas na tabela de venda
+    suponhamos que não tem nada na tabela de pagamento_receber*/
     if (isset($arrayVenda)) {
       echo "Tem dados na venda veja \n\n";
       echo "<br/>";
@@ -71,10 +93,8 @@ class AreceberController extends Controller
 
 
         echo "Instanciando a classe Pagamentos a receber <br/>";
-        $pagamentosReceber = new PagamentosReceber(); //instanciar pagamento a receber
-        $pagamentosReceber = new PagamentosReceber(); //instanciar pagamento a receber
-
-
+        $pagamentosReceber = new ReceberPagamentosDosClientes(); //instanciar pagamento a receber
+      
 
         $idCliente = $vendaArray['clientes_idClientes']; //idCliente
         echo "idCliente = " . $idCliente . "<br/>";
@@ -386,5 +406,22 @@ class AreceberController extends Controller
           }
         }
       } //end foreaach
-    }//AreceberController 
+
+
+
+      public function cadastrar(){
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+    }//ReceberPagamentosDosClientesController 
   

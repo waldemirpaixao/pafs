@@ -11,7 +11,7 @@ namespace Models;
 use \Core\Model;
 use PDOException;
 
-class PagamentosReceber extends Model
+class ReceberPagamentosDosClientes extends Model
 {
 
 
@@ -20,14 +20,14 @@ class PagamentosReceber extends Model
 
 
 
-    public function inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $statusPagamento, $formaPagamento, $idVenda, $idVendedor, $ano)
+    public function inserir($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor,$valorExtraDependente ,$desconto, $statusPagamento, $formaPagamento, $idVenda, $idVendedor, $ano)
     {
 
 
 
 
-        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
-            . " VALUES(:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+        $sql = "INSERT INTO receberPagamentosDosClientes(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,valorExtraDependente,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
+            . " VALUES(:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor,:valorExtraDependente, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
 
 
         $inserir = $this->db->prepare($sql);
@@ -42,6 +42,7 @@ class PagamentosReceber extends Model
             $inserir->bindValue(':dataPagamento', $dataPagamento);
             $inserir->bindValue(':dataVencimentoBoleto', $dataVencimento);
             $inserir->bindValue(':valor', $valor);
+            $inserir->bindValue(':valorExtraDependente', $valorExtraDependente);
             $inserir->bindValue(':desconto', $desconto);
             $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
             $inserir->bindValue(':idFormaPagamento', $formaPagamento);
@@ -80,13 +81,13 @@ class PagamentosReceber extends Model
     }
 
 
-    public function inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $desconto, $statusPagamento, $formaPagamento, $idVenda, $idVendedor, $ano)
+    public function inserirRetornaId($idEmpresa, $idCliente, $numeroParcelas, $dataPagamento, $dataVencimento, $valor, $valorExtraDependente,$desconto, $statusPagamento, $formaPagamento, $idVenda, $idVendedor, $ano)
     {
 
 
 
 
-        $sql = "INSERT INTO pagamentos_receber(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
+        $sql = "INSERT INTO receberPagamentosDosClientes(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,valorExtraDependente,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
             . " VALUES (:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
 
 
@@ -102,6 +103,7 @@ class PagamentosReceber extends Model
             $inserir->bindValue(':dataPagamento', $dataPagamento);
             $inserir->bindValue(':dataVencimentoBoleto', $dataVencimento);
             $inserir->bindValue(':valor',$valor);
+            $inserir->bindValue(':valorExtraDependente', $valorExtraDependente);
             $inserir->bindValue(':desconto', $desconto);
             $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
             $inserir->bindValue(':idFormaPagamento', $formaPagamento);
@@ -143,7 +145,7 @@ class PagamentosReceber extends Model
     {
 
 
-        $sql = "select * from pagamentos_receber where clientes_idClientes = :idCliente";
+        $sql = "select * from receberPagamentosDosClientes where clientes_idClientes = :idCliente";
 
         $select = $this->db->prepare($sql);
 
@@ -166,7 +168,7 @@ class PagamentosReceber extends Model
     {
 
 
-        $sql = "select * from pagamentos_receber where clientes_idClientes = :idClientes and anteriorultimo = :ultimo";
+        $sql = "select * from receberPagamentosDosClientes where clientes_idClientes = :idClientes and anteriorultimo = :ultimo";
 
         $select = $this->db->prepare($sql);
 
@@ -191,7 +193,7 @@ class PagamentosReceber extends Model
 
 
 
-        $sql = "update pagamentos_receber set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and anteriorultimo = :ultimo";
+        $sql = "update receberPagamentosDosClientes set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and anteriorultimo = :ultimo";
 
         $update = $this->db->prepare($sql);
 
@@ -228,7 +230,7 @@ class PagamentosReceber extends Model
 
 
 
-        $sql = "update pagamentos_receber set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and idPagamentos = :idPagamentos";
+        $sql = "update receberPagamentosDosClientes set anteriorultimo = :anterior  where clientes_idClientes = :idClientes and idPagamentos = :idPagamentos";
 
         $update = $this->db->prepare($sql);
 

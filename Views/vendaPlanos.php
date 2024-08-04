@@ -17,9 +17,22 @@
     <br>
     
     
-    
+  
     
     <?php
+      echo "SERVER";
+      print_r("\n");
+      echo print_r($_SERVER);
+      print_r("\n");
+      echo "--------------------------------------------";
+      print_r("\n");
+      echo "REQUEST";
+      print_r("\n");
+      echo print_r($_REQUEST);
+      echo "\n";
+        echo "Ano corrente";
+      echo $_SESSION['ano'];
+
 
     use \Models\Clientes;
 use Models\Venda;

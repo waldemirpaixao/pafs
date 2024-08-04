@@ -118,7 +118,7 @@
 
                             <img id="<?php echo $clientes['idClientes']; ?>" onclick="mostrar(this)" class="imagemPequena ponteiro" title="Detalhe" src="<?php echo BASE_URL; ?>assets/imagens/detalhes.png" /></a>
                             <a id="atualizar" href="<?php echo BASE_URL; ?>Clientes/atualizarClientes/?id=<?php echo $clientes['idClientes']; ?>"><img class="imagemPequena" title="Atualizar" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
-                            <a href="<?php echo BASE_URL; ?>Clientes/deletarClientes/?id=<?php echo $clientes['idClientes']; ?>"><img class="imagemPequena" title="Excluir" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
+                            <a href="<?php echo BASE_URL; ?>Clientes/deletarClientes/<?php echo $clientes['idClientes']; ?>"><img  onclick="return confirm('Deseja realmente deletar o cliente <?php echo $clientes['nomeClientes'];?>')" class="imagemPequena" title="Excluir" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
                         </div>
                     </div>
 

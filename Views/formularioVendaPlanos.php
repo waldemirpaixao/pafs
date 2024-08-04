@@ -19,8 +19,7 @@ use \Models\Dependentes;
 use \Models\Planos;
 use \Models\Vendedor;
 use \Models\ComplementoPlano;
-
-
+use Models\FormaDePagamento;
 
 $empresa = new Empresa();
 $dadosEmpresa = $empresa->getEmpresaByIdColaborador($_SESSION['idColaboradores']);
@@ -44,6 +43,11 @@ $vendedor = $vendedores->getAllVendedor($_SESSION['idEmpresa']);
 // complemento
 $complementoPlanos =  new ComplementoPlano();
 $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmpresa']);
+
+
+//Forma De Pagamento
+$formaDePagamento = new FormaDePagamento();
+$formaPagamentoArray = $formaDePagamento->getAllByEmpresa($_SESSION['idEmpresa']);
 
 //require('vendor/autoload.php');
 
@@ -171,6 +175,25 @@ $complementoPlano = $complementoPlanos->getAllComplementoPlanos($_SESSION['idEmp
                 <div class="colunas">
                     <label class="rotulo">Estado</label>
                     <input class="campoTexto" type="texto" placeholder="Estado" name="estado" value="<?php echo $cliente['estadoClientes']; ?>">
+                </div>
+                <div class="colunas">
+                    <label class="rotulo">Forma de Pagamento</label><br/>
+                    <select class="campoTexto"   id="formaPagamento" name="formaPagamento">
+                        <option value="nulo">Escolha a sua opção...</option>
+                       
+                            <?php
+                                foreach ($formaPagamentoArray as $formaPagamento) :
+                            ?>
+                                <option value="<?php echo $formaPagamento['idformaPagamento']; ?>"><?php echo $formaPagamento['nomeformaPagamento'] ?></option>
+
+
+                            <?php
+                                endforeach;
+                            ?>
+
+                    </select>
+                    
+                   
                 </div>
             </div>
 

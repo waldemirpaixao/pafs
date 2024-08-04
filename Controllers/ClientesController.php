@@ -162,5 +162,16 @@ class ClientesController extends Controller {
 
     }
 
+
+
+    public function deletarClientes($idCliente){
+
+
+
+        echo $idCliente;
+        exit;
+
+    }
+
     
 }
