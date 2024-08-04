@@ -1117,8 +1117,8 @@ input:checked + .slider:before{
 .logo{
 
     width: 30%;
-    text-align: center;
-    padding: 20px;
+    padding-left: 27px;
+   
 
 
 }

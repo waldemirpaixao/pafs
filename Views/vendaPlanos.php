@@ -92,9 +92,9 @@ use Models\Venda;
 
 
         foreach ($allClient as $clientes) {
-            $arrayVenda = $venda->getVendaByIdClinte($clientes['idClientes']);
+            $arrayVenda = $venda->getVendaByIdCliente($clientes['idClientes']);
 
-            if(!isset($arrayVenda)):
+           if(!isset($arrayVenda)):
             ?>
 
 
@@ -125,9 +125,9 @@ use Models\Venda;
 
              
 
-                <div class="subtirinhas"><?php echo "Cliente: " . $clientes['nomeClientes']; ?></div>
+                <div class="subtirinhas"><?php  echo "Cliente: " . $clientes['nomeClientes']; ?></div>
                
-                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="#"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena" style="cursor:not-allowed" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a></div>
+                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a></div>
              
 
             </div>

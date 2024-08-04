@@ -55,21 +55,19 @@ $formaPagamentoArray = $formaDePagamento->getAllByEmpresa($_SESSION['idEmpresa']
 
 <section class="planosTotal">
 
-    
-<div class="conteudo">
+    <div class="conteudo">
         <div class="logo">
             <img width="60%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.png">
         </div>
-        </div>
+
+
+    </div>
+
     <form target="_blank" id="salvar" action="<?php echo BASE_URL; ?>FormularioVendaPlanos/registerVenda" method="post">
 
     
         <div class="formularioTotal">
-        
-
-
-   
-        <h1 class="estiloBorda">Venda de Planos</h1>
+        <h1 class="estiloBorda">Atualização de Venda de Planos</h1>
     <br/>
     <br/>
             <div class="colunasConteudo">
@@ -394,7 +392,7 @@ $formaPagamentoArray = $formaDePagamento->getAllByEmpresa($_SESSION['idEmpresa']
         </div>
 
 <div class="painelBotao">
-        <input type="submit" value="Gerar Contrato" name="salvar" class="btn-salvar80">
+        <input type="submit" value="Atualizar Contrato" name="salvar" class="btn-salvar80">
 </div>
         <br/>
         <br/>

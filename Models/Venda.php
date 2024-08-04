@@ -153,7 +153,7 @@ class Venda extends Model
 
 
 
-  public function getVendaByIdClinte($idCliente)
+  public function getVendaByIdCliente($idCliente)
   {
 
     $sql = "select * from venda where clientes_idClientes = :idClientes";
