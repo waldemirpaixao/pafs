@@ -83,7 +83,7 @@
 
 
             $venda = new Venda();
-            $vendaPorCliente = $venda->getVendaByIdClinte($clientes['idClientes']);
+            $vendaPorCliente = $venda->getVendaByIdCliente($clientes['idClientes']);
     ?>
 
             <div id="boxClientes">
