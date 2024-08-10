@@ -102,14 +102,17 @@ use Models\Venda;
             <div class="tirinhas">   
 
 
-             
-
                 <div class="subtirinhas"><?php echo $clientes['nomeClientes']; ?></div>
                
-                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a></div>
+               
+                <div  class="subtirinhas alinhamentoDireito">
+                    <a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Realizar compras" title="carrinho de compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg"/></a>
+                    <a  id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png"/></a>
+                </div>  
+                
              
-
             </div>
+        
 
             <?php
 
@@ -125,9 +128,15 @@ use Models\Venda;
              
 
                 <div class="subtirinhas"><?php  echo $clientes['nomeClientes']; ?></div>
+
+              
                
-                <div  class="subtirinhas alinhamentoDireito"><a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="carrinho de compras" title="carrinho de compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png"/></a></div>
-             
+                <div  class="subtirinhas alinhamentoDireito">
+                    <a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="Atualizar compras" title="Atualizar compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png"/></a>
+                    <a  id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png"/></a>
+                </div>
+                
+                
 
             </div>
 
