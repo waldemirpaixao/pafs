@@ -138,6 +138,16 @@ $(function () {
 
     });
 
+    //submenuvendas
+    $("#submenuContrato").bind("click", function () {
+
+       
+        
+        $('li').eq(12).addClass("stiloFixoSubmenu");
+     
+        // $('li').eq(8).addClass('stiloFixo');
+
+    });
 
 
 //menu finaceiiro
@@ -149,6 +159,17 @@ $(function () {
         $('li').eq(11).addClass('stiloFixo');
 
     });
+
+    //menu finaceiiro
+    $("#menuContrato").bind("click", function () {
+
+        $("#submenuContrato").fadeToggle("slow");
+        $('li').removeClass('stiloFixo');
+        $('li').removeClass('stiloFixoSubmenu');
+        $('li').eq(12).addClass('stiloFixo');
+
+    });
+
 
 
    

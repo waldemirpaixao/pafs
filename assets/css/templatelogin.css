@@ -323,6 +323,13 @@ margin-bottom: 30px;
 }
 
 
+#submenuContrato li:nth-child(3){
+
+
+    background-image: url(../imagens/contrato.png);
+}
+
+
 .menuarea li:nth-child(8){
 
 
@@ -1052,7 +1059,7 @@ input:checked + .slider:before{
     
 }
 
-#submenuConfiguracoes,#submenuVendas,#submenuFinanceiro, #submenuCadastros{
+#submenuConfiguracoes,#submenuVendas,#submenuFinanceiro, #submenuCadastros, #submenuContrato{
     
     position: relative;
     display: none;

@@ -191,7 +191,7 @@ class formularioVendaPlanosController extends Controller
         //setar na venda que este é a venda atual do cliente pois o mesmo pode ter várias vendas mas  não do mesmo produto atual
         $cliente->update($idClientes, $nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoReferencia, $bairro, $cidade, $estado, $situacao);
         $venda = new Venda();
-        $idVenda = $venda->inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $dataVencimento, $idClientes, $idPlano, $idEmpresa, $dataAdesao,$desconto,$idFormaPagamento);//adicionar forma de pagamento
+        $idVenda = $venda->inserir($idVendedor, $valorPlanoParcial, $valorExtraDependente, $adesao, $idClientes, $idPlano, $idEmpresa, $dataAdesao,$desconto,$idFormaPagamento);//adicionar forma de pagamento
         
         //depois da venda adicionar na tabela receberPagamentosDosClientes pois refere-se ao primeiro pagamento recebido
 
@@ -239,11 +239,11 @@ class formularioVendaPlanosController extends Controller
 
           
 
-            $this->contratoFeito =  $contrato->criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
+            $this->contratoFeito =  $contrato->criarContrato($dataAdesao,$dataVencimento, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
         } else {
 
 
-           $this->contratoFeito = $contrato->criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
+           $this->contratoFeito = $contrato->criarContrato($dataAdesao,$dataVencimento,$numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
         }
        
         

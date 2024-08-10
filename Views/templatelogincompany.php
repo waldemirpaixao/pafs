@@ -127,8 +127,11 @@ and open the template in the editor.
                    
                 </div>
 
-                <li><a id="menuContratoPesquisa" href="<?php echo BASE_URL; ?>PesquisarContrato">Pesquisar Contrato</a></li>
-
+                <li><a id="menuContrato" href="#">Contrato &nbsp;&nbsp;<img width="10px" src="<?php echo BASE_URL; ?>/assets/imagens/down.svg"></a></li>
+                <div id="submenuContrato">
+                    <li><a id="menuContratoPesquisa" href="<?php echo BASE_URL; ?>PesquisarContrato">Pesquisar Contrato</a></li>
+                    <li><a id="menuContratoAtualizar" href="<?php echo BASE_URL; ?>AtualizarContrato">Atualizar Contrato</a></li>
+                </div>
 
             </ul>
         </div>

@@ -10,13 +10,15 @@ class Contrato extends Model{
 
     const CARENCIA = 90;
     const ANO = 12;
+    CONST ATIVO = 'sim';
 
-    public function criarContrato($dataAdesao, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarencia, $idEmpresa, $idClientes,$dataFimContrato,$idVenda,$idVendedor ,$portabilidade,$observacao){
+    public function criarContrato($dataAdesao,$dataVencimento, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarencia, $idEmpresa, $idClientes,$dataFimContrato,$idVenda,$idVendedor ,$portabilidade,$observacao){
 
 
 
         $sql = "insert into contrato(
-            dataAdesao, 
+            dataAdesao,
+            dataVencimento,
             numeroContrato, 
             carenciaContrato, 
             dataInicioCarencia, 
@@ -28,7 +30,8 @@ class Contrato extends Model{
             venda_vendedores_idVendedores,
             portabilidade,
             observacao) values(  
-            :dataAdesao, 
+            :dataAdesao,
+            :dataVencimento,
             :numeroContrato, 
             :carenciaContrato, 
             :dataInicioCarencia, 
@@ -52,6 +55,7 @@ class Contrato extends Model{
             $this->db->beginTransaction();
 
             $inserir->bindValue(":dataAdesao",$dataAdesao);
+            $inserir->bindValue(":dataVencimento",$dataVencimento);
             $inserir->bindValue(":numeroContrato", $numeroContrato);
             $inserir->bindValue(":carenciaContrato", $carencia);
             $inserir->bindValue(":dataInicioCarencia", $dataInicioCarencia);
@@ -103,11 +107,13 @@ class Contrato extends Model{
     public function getcontratobyIdCliente($idCliente){
 
 
-        $sql = "select * from contrato where clientes_idClientes =  :idcliente";
+        $sql = "select * from contrato where clientes_idClientes = :idcliente  and contratoAtivo = :sim";
 
         $select = $this->db->prepare($sql);
 
         $select->bindValue(":idcliente",$idCliente);
+        $select->bindValue(":sim",$this::ATIVO);
+
         $executado = $select->execute();
 
         if($select->rowCount() > 0 && $executado){

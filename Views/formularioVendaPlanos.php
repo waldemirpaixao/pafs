@@ -327,9 +327,9 @@ $formaPagamentoArray = $formaDePagamento->getAllByEmpresa($_SESSION['idEmpresa']
 
              
         <div>
-            <label>Portabilidade</label><br/>
-            <input type="radio" name="portabilidade" id="sim" value="sim"> <label for="sim">Sim</label>
-            <input type="radio" name="portabilidade" id="nao" value="não"> <label for="nao">Não</label>
+            <label class="rotulo">Portabilidade</label><br/>
+            <input type="radio" name="portabilidade" id="sim" value="sim"> <label class="rotulo" for="sim">Sim</label>
+            <input type="radio" name="portabilidade" id="nao" value="não"> <label  class="rotulo" for="nao">Não</label>
             <br/>
             <br/>
 <hr>
