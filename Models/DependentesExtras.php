@@ -143,4 +143,31 @@ class DependentesExtras extends Model{
     }
 
 
+    public function getDependentesExtrasByEmpresa($idEmpresa){
+
+
+        $sql = "select * from dependenteExtra where empresa_idEmpresa = :idEmpresa";
+
+        $select = $this->db->prepare($sql);
+
+        $select->bindValue(":idEmpresa",$idEmpresa);
+
+        $executado = $select->execute();
+
+
+        if($select->rowCount() > 0 && $executado){
+
+
+            return $select->fetch();
+
+
+        }else{
+
+
+            return null;
+        }
+
+
+    }
+
 }

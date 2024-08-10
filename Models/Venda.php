@@ -13,7 +13,10 @@ use \Core\Model;
 use PDOException;
 
 class Venda extends Model
+
 {
+
+  const SIM = "sim";
   /* Inserir Vendas */
 
 
@@ -155,12 +158,14 @@ class Venda extends Model
   public function getVendaByIdCliente($idCliente)
   {
 
-    $sql = "select * from venda where clientes_idClientes = :idClientes";
+    $sql = "select * from venda where clientes_idClientes = :idClientes and vendaAtual = :vendaAtual";
 
 
     $select = $this->db->prepare($sql);
 
     $select->bindValue(":idClientes", $idCliente);
+    $select->bindValue(":vendaAtual", $this::SIM);
+   
 
     $executado  = $select->execute();
 

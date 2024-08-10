@@ -17,6 +17,8 @@ use \Models\Vendedor;
 use \Models\ComplementoPlano;
 use Models\Contrato;
 use Models\FormaDePagamento;
+use Models\Venda;
+use Models\DependentesExtras;
 
 $empresa = new Empresa();
 $dadosEmpresa = $empresa->getEmpresaByIdColaborador($_SESSION['idColaboradores']);
@@ -51,7 +53,19 @@ $formaPagamentoArray = $formaDePagamento->getAllByEmpresa($_SESSION['idEmpresa']
 
 //pegar as informações do contrato
 $contrato = new Contrato();
-$contatoArray = $contrato->getcontratobyIdCliente($id);
+$contratoArray = $contrato->getcontratobyIdCliente($id);
+
+
+//venda
+
+$venda = new Venda();
+$arrayVenda = $venda->getVendaByIdCliente($id);
+
+
+
+//dependente extra
+$dependenteExtra = new DependentesExtras();
+$dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSION['idEmpresa']);
 
 ?>
 
@@ -65,7 +79,7 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
 
     </div>
 
-    <form target="_blank" id="salvar" action="<?php echo BASE_URL; ?>FormularioVendaPlanos/registerVenda" method="post">
+    <form target="_blank" id="salvar" action="<?php echo BASE_URL; ?>atualizarFormularioVendaPlanos/atualizarVenda" method="post">
 
 
         <div class="formularioTotal">
@@ -73,7 +87,7 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
             <br />
             <br />
 
-        <label class="estiloBorda">Número do Contrato: <?php echo $contatoArray['numeroContrato'];?></label>
+            <label class="estiloBorda">Número do Contrato: <?php echo $contratoArray['numeroContrato']; ?></label>
 
             <label class="estiloBorda">Contratante: <?php echo $cliente['nomeClientes']; ?></label>
 
@@ -90,7 +104,7 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
                     <input type="hidden" value="<?php echo $cliente['idClientes'] ?>" name="idCliente">
 
                     <label class="rotulo">Data de Adesão</label>
-                    <input id="dataAdesao" class="campoTexto" type="date" name="dataAdesao" value="<?php echo $contatoArray['dataAdesao'];?>">
+                    <input id="dataAdesao" class="campoTexto" type="date" name="dataAdesao" value="<?php echo $contratoArray['dataAdesao']; ?>">
 
                 </div>
 
@@ -98,12 +112,12 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
                 <div style="display: flex;">
                     <div class="colunaVendedor">
                         <label class="rotulo">Data de Vigência</label>
-                        <input id="dataVigencia" class="campoTexto" type="date" name="dataVencimento" value="<?php echo $contatoArray['dataAdesao'];?>">
+                        <input id="dataVigencia" class="campoTexto" type="date" name="dataVencimento" value="<?php echo $contratoArray['dataVencimento']; ?>">
 
                     </div>
                     <div class="colunaVendedor">
                         <label class="rotulo">Desconto</label>
-                        <input id="desconto" class="campoTexto" type="text" name="desconto" value="0">
+                        <input id="desconto" class="campoTexto" type="text" name="desconto" value="<?php echo $arrayVenda['desconto']; ?>">
                         <script>
                             $('#desconto').mask("#.##0,##", {
                                 reverse: true
@@ -126,7 +140,7 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
                         <?php
                         foreach ($vendedor as $todosVendedores) :
                         ?>
-                            <option name="vendedor" value="<?php echo $todosVendedores['idVendedores']; ?>"><?php echo $todosVendedores['nomeVendedores'] ?></option>
+                            <option <?php echo $arrayVenda['vendedores_idVendedores'] == $todosVendedores['idVendedores']  ? 'selected' : ''; ?> name="vendedor" value="<?php echo $todosVendedores['idVendedores']; ?>"><?php echo $todosVendedores['nomeVendedores'] ?></option>
 
 
                         <?php
@@ -150,152 +164,152 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
 
             <div class="colunasConteudo">
                 <div class="colunas">
-                <label class="rotulo">Forma de Pagamento</label><br />
-                <select class="campoTexto" id="formaPagamento" name="formaPagamento">
-                    <option value="nulo">Escolha a sua opção...</option>
+                    <label class="rotulo">Forma de Pagamento</label><br />
+                    <select class="campoTexto" id="formaPagamento" name="formaPagamento">
+                        <option value="nulo">Escolha a sua opção...</option>
 
-                    <?php
-                    foreach ($formaPagamentoArray as $formaPagamento) :
-                    ?>
-                        <option value="<?php echo $formaPagamento['idformaPagamento']; ?>"><?php echo $formaPagamento['nomeformaPagamento'] ?></option>
+                        <?php
+                        foreach ($formaPagamentoArray as $formaPagamento) :
+                        ?>
+                            <option <?php echo $arrayVenda['formaPagamento_idformaPagamento'] == $formaPagamento['idformaPagamento'] ? 'selected' : ''; ?> value="<?php echo $formaPagamento['idformaPagamento']; ?>"><?php echo $formaPagamento['nomeformaPagamento'] ?></option>
 
 
-                    <?php
-                    endforeach;
-                    ?>
+                        <?php
+                        endforeach;
+                        ?>
 
-                </select>
+                    </select>
                 </div>
-                
-                <div class="colunas"  style="padding:25px;">
-                <label class="rotulo">Portabilidade</label><br />
-                <input  type="radio" name="portabilidade" id="sim" value="sim"> <label class="rotulo" for="sim">Sim</label>
-                <input  type="radio" name="portabilidade" id="nao" value="não"> <label class="rotulo" for="nao">Não</label>
-                <br />
-                <br />
-            </div>
 
-
-
-            </div>
-
-            <br/>
-              
-
-            <div >
-                <label>Observação</label><br/>
-                <textarea name="observacao" style="width:100%; padding:10px;" rows="3"></textarea>
-            </div>
-                         
-
-            </div>
-
-            
-            
-    
-         
-
-
-           <br/>
-           <br/>
-            <div class="painel">PLANOS</div>
-
-
-
-            <?php
-            foreach ($plano as $todosPlanos) :
-            ?>
-
-                <div class="colunaTotal">
-
+                <div class="colunas" style="padding:25px;">
+                    <label class="rotulo">Portabilidade</label><br />
+                    <input type="radio" name="portabilidade" id="sim" <?php echo trim($contratoArray['portabilidade']) == "sim" ? 'checked="checked"' : ''; ?> value="sim" /> <label class="rotulo" for="sim">Sim</label>
+                    <input type="radio" name="portabilidade" id="nao" <?php echo trim($contratoArray['portabilidade']) == "não" ? 'checked="checked"' : ''; ?> value="não" /> <label class="rotulo" for="nao">Não</label>
                     <br />
+                    <br />
+                </div>
 
 
-                    <input id="a<?php echo $todosPlanos['idPlanos']; ?>" class="clickPlanos" type="radio" name="plano" value="<?php echo $todosPlanos['idPlanos']; ?> " />
-                    <label for="a<?php echo $todosPlanos['idPlanos']; ?>" onclick="valorPlano(this)" id="<?php echo $todosPlanos['idPlanos']; ?>" class="rotulo" style="cursor: pointer;"> <?php echo $todosPlanos['nomePlanos'] . " - R$ " . $todosPlanos['valorPlanos']; ?> </label>
-                    <input id="valor<?php echo $todosPlanos['idPlanos']; ?>" type="hidden" value="<?php echo $todosPlanos['valorPlanos']; ?>" name="valorPlanoParcial" />
 
-                    <div>
-                        <?php echo $todosPlanos['descricao']; ?>
+            </div>
+
+            <br />
+
+
+            <div>
+                <label>Observação</label><br />
+                <textarea name="observacao" style="width:100%; padding:10px;" rows="3"><?php echo trim($contratoArray['observacao']); ?></textarea>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <br />
+        <br />
+        <div class="painel">PLANOS</div>
+
+
+
+        <?php
+        foreach ($plano as $todosPlanos) :
+        ?>
+
+            <div class="colunaTotal">
+
+                <br />
+
+
+                <input <?php echo $arrayVenda['valorPlanos'] == $todosPlanos['valorPlanos'] ? 'checked="checked"' : ''; ?> id="a<?php echo $todosPlanos['idPlanos']; ?>" class="clickPlanos" type="radio" name="plano" value="<?php echo $todosPlanos['idPlanos']; ?> " />
+                <label for="a<?php echo $todosPlanos['idPlanos']; ?>" onclick="valorPlano(this)" id="<?php echo $todosPlanos['idPlanos']; ?>" class="rotulo" style="cursor: pointer;"> <?php echo $todosPlanos['nomePlanos'] . " - R$ " . $todosPlanos['valorPlanos']; ?> </label>
+                <input id="valor<?php echo $todosPlanos['idPlanos']; ?>" type="hidden" value="<?php echo $todosPlanos['valorPlanos']; ?>" name="valorPlanoParcial" />
+
+                <div>
+                    <?php echo $todosPlanos['descricao']; ?>
+                </div>
+
+            </div>
+
+
+        <?php
+
+        endforeach;
+
+        ?>
+
+
+        <br />
+        <div class="painel">DEPENDENTES</div>
+        <br />
+
+        <div class="linhasColunas">
+
+            <div class="bordasTabelas">Dependentes</div>
+            <div class="bordasTabelas">CPF</div>
+            <!--  <div class="bordasTabelas">Data de Nascimento</div>-->
+
+        </div>
+
+        <?php if ($dependent != NULL) :
+
+        ?>
+
+
+            <?php if (count($dependent) <= intval($dependenteExtraArray['quatidadeMaxima']) || count($dependent) >= intval($dependenteExtraArray['quatidadeMaxima'])) : ?>
+
+                <?php foreach ($dependent as $depende) : ?>
+                    <div class="linhasColunas">
+
+                        <input type="hidden" name="idDependente[]" value="<?php echo $depende['idDependentes']; ?>" />
+                        <div class="conteudoTabelas"><?php echo $depende['nomeDependentes']; ?></div>
+                        <div class="conteudoTabelas"><?php echo $depende['cpfDependentes'] != null ? $depende['cpfDependentes'] : 'Não Informado'; ?></div>
+                        <!--<div class="conteudoTabelas"><//?php echo date("d/m/Y", strtotime($depende['dataNascimentoDependentes'])); ?></div>-->
+
+
                     </div>
 
-                </div>
+                <?php endforeach; ?>
+
+                <?php if (count($dependent) > $dependenteExtraArray['quatidadeMaxima']): ?>
+
+                    <div class="subtirinhas">
+                        <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ <?php $dependenteExtraArray['valor']; ?> reais por pessoa, a quantidade de Dependentes é superior a 8 </h3>
+                    </div>
+
+                    <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent) - $dependenteExtraArray['quatidadeMaxima']) * $dependenteExtraArray['valor']; ?>">
+                <?php endif;  ?>
 
 
-            <?php
-
-            endforeach;
-
-            ?>
-
-
-            <br />
-            <div class="painel">DEPENDENTES</div>
-            <br />
-
-            <div class="linhasColunas">
-
-                <div class="bordasTabelas">Dependentes</div>
-                <div class="bordasTabelas">CPF</div>
-                <!--  <div class="bordasTabelas">Data de Nascimento</div>-->
-
-            </div>
-
-            <?php if ($dependent != NULL) :
-
-            ?>
-
-
-                <?php if (count($dependent) <= 8 || count($dependent) >= 8) : ?>
-
-                    <?php foreach ($dependent as $depende) : ?>
-                        <div class="linhasColunas">
-
-                            <input type="hidden" name="idDependente[]" value="<?php echo $depende['idDependentes']; ?>" />
-                            <div class="conteudoTabelas"><?php echo $depende['nomeDependentes']; ?></div>
-                            <div class="conteudoTabelas"><?php echo $depende['cpfDependentes'] != null ? $depende['cpfDependentes'] : 'Não Informado'; ?></div>
-                            <!--<div class="conteudoTabelas"><//?php echo date("d/m/Y", strtotime($depende['dataNascimentoDependentes'])); ?></div>-->
-
-
-                        </div>
-
-                    <?php endforeach; ?>
-
-                    <?php if (count($dependent) > 8) : ?>
-
-                        <div class="subtirinhas">
-                            <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ 5,00 reais por pessoa, a quantidade de Dependentes é superior a 8 </h3>
-                        </div>
-
-                        <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent) - 8) * 5; ?>">
-                    <?php endif;  ?>
-
-
-                    <!--<//?php foreach ($dependent as $depende) : ?>
+                <!--<//?php foreach ($dependent as $depende) : ?>
                 <div class="linhasColunas">
 
                     <input type="hidden" name="idDependente[]" value="<//?php echo $depende['idDependentes']; ?>" />
                     <div class="conteudoTabelas"><//?php echo $depende['nomeDependentes']; ?></div>
                     <div class="conteudoTabelas"><//?php echo $depende['cpfDependentes']!= null? $depende['cpfDependentes']: 'Não Informado'; ?></div>-->
-                    <!--<div class="conteudoTabelas"><//?php echo date("d/m/Y", strtotime($depende['dataNascimentoDependentes'])); ?></div>-->
+                <!--<div class="conteudoTabelas"><//?php echo date("d/m/Y", strtotime($depende['dataNascimentoDependentes'])); ?></div>-->
 
 
-                    <!--</div>-->
+                <!--</div>-->
 
-                    <!--<//?php endforeach; ?>-->
-                <?php endif; ?>
-
-            <?php else : ?>
-                <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo 0; ?>">
+                <!--<//?php endforeach; ?>-->
             <?php endif; ?>
 
-            <hr>
+        <?php else: ?>
 
+            <div class="conteudoTabelas"><?php echo "Sem dependente vinculado" ?></div>
+         
 
+            <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo 0; ?>">
+        <?php endif; ?>
 
-            <hr />
-            
-            <!--<div class="colunasConteudo">
+        <br/>
+
+        <!--<div class="colunasConteudo">
 
             <div class="colunaVendedor">
 
@@ -341,7 +355,36 @@ $contatoArray = $contrato->getcontratobyIdCliente($id);
 
             <div style="display:flex; ">
 
-                <h1>Total:</h1> ;&nbsp;<h1 id="valor" style="color:red;">R$ 00,00</h1>
+                <?php
+
+
+                //calculo de do valortotal a ser pago
+
+                if($dependent != null){
+                    if (count($dependent) > intval($dependenteExtraArray['quatidadeMaxima'])) {
+
+                        $valorTotalDependente = (count($dependent) - $dependenteExtraArray['quatidadeMaxima']) * $dependenteExtraArray['valor'];
+    
+                        if ($valorTotalDependente > 0) {
+    
+                            $valorTotal = floatval($arrayVenda['valorPlanos'] - $arrayVenda['desconto'] + $valorTotalDependente);
+                        } else {
+    
+                            $valorTotal = floatval($arrayVenda['valorPlanos'] - $arrayVenda['desconto']);
+                        }
+                    }else{
+                        $valorTotal = floatval($arrayVenda['valorPlanos'] - $arrayVenda['desconto']);
+                    }
+
+                }else{
+
+                    $valorTotal = floatval($arrayVenda['valorPlanos'] - $arrayVenda['desconto']);
+                }
+                
+
+
+                ?>
+                <h1>Total:</h1> ;&nbsp;<h1 id="valor" style="color:red;"><?php echo number_format($valorTotal, 2, ",", "."); ?></h1>
                 <input type="hidden" id="valorPlano" name="valorPlano" value="0">
             </div>
         </div>
