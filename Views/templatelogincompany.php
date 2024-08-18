@@ -88,6 +88,7 @@ and open the template in the editor.
                     <li><a href="<?php echo BASE_URL; ?>FormaDePagamento">Forma de Pagamento</a></li>
                     <li><a href="<?php echo BASE_URL; ?>Bancos">Bancos</a></li>
                     <li><a href="<?php echo BASE_URL; ?>DiasAreceber">Dias a receber</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>CarenciaPlano">Dias de carência</a></li>
 
                 </div>
 

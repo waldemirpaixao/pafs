@@ -244,7 +244,7 @@ $dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSIO
 
                 <input <?php echo $arrayVenda['valorPlanos'] == $todosPlanos['valorPlanos'] ? 'checked="checked"' : ''; ?> id="a<?php echo $todosPlanos['idPlanos']; ?>" class="clickPlanos" type="radio" name="idPlano" value="<?php echo $todosPlanos['idPlanos']; ?> " />
                 <label for="a<?php echo $todosPlanos['idPlanos']; ?>" onclick="valorPlano(this)" id="<?php echo $todosPlanos['idPlanos']; ?>" class="rotulo" style="cursor: pointer;"> <?php echo $todosPlanos['nomePlanos'] . " - R$ " . $todosPlanos['valorPlanos']; ?> </label>
-                <input  id="valor<?php echo $todosPlanos['idPlanos']; ?>" type="text" value="<?php echo  $todosPlanos['valorPlanos']; ?>" name="valorPlanoParcial" />
+                <input  id="valor<?php echo $todosPlanos['idPlanos']; ?>" type="hidden" value="<?php echo  $todosPlanos['valorPlanos']; ?>" name="valorPlanoParcial" />
 
                 <div>
                     <?php echo $todosPlanos['descricao']; ?>

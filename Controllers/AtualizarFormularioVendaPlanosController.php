@@ -119,6 +119,7 @@ class AtualizarFormularioVendaPlanosController extends Controller{
         $this->atualizadaVenda = $venda->atualizarVenda($vendedor, $idVenda, $idCliente, $idPlano, $valorPlanoParcial, $desconto, $formaPagamento, $dataAdesao, $dataVencimento,$valorExtraDependente);
 
 
+        //Carência do plano
        
         //Verifica se foi atualizada a venda
         if($this->atualizadaVenda){
