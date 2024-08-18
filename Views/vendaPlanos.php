@@ -132,7 +132,7 @@ use Models\Venda;
               
                
                 <div  class="subtirinhas alinhamentoDireito">
-                    <a  id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="Atualizar compras" title="Atualizar compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png"/></a>
+                    <a  id="atualizar" href="<?php echo BASE_URL; ?>AtualizarFormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="Atualizar compras" title="Atualizar compras" class="imagemPequena"  src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png"/></a>
                     <a  id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png"/></a>
                 </div>
                 

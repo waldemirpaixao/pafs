@@ -11,6 +11,9 @@
 
 class Clientes extends Model {
 
+
+    const ATIVO = "ativo";
+
     public function getAllCliente($idEmpresa) {
 
 
@@ -80,10 +83,11 @@ class Clientes extends Model {
     public function getClientById($id) {
 
 
-        $sql = "SELECT * FROM clientes WHERE idClientes = :id";
+        $sql = "SELECT * FROM clientes WHERE idClientes = :id and situacao = :ativo";
 
         $select = $this->db->prepare($sql);
         $select->bindValue(":id", $id);
+        $select->bindValue(":ativo", $this::ATIVO);
         $selected = $select->execute();
 
         if ($selected) {

@@ -228,8 +228,6 @@ $(function(){
    $('.clickPlanos').bind('click',function(e){
 
     
-       
-   
         //preco = 0;
         $('.total div #valorPlano').val("0");
         //idPlano = $(this).val();

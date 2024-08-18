@@ -19,7 +19,7 @@ use \Models\Venda_dependentes;
 use \Models\ReceberPagamentosDosClientes;
 
 
-class formularioVendaPlanosController extends Controller
+class FormularioVendaPlanosController extends Controller
 {
 
 
@@ -62,27 +62,7 @@ class formularioVendaPlanosController extends Controller
     }
 
 
-    public function atualizarPlanos($id)
-    {
-
-
-        $viewData = array();
-
-        if (!isset($_SESSION['idColaboradores']) && empty($_SESSION['idColaboradores'])) {
-
-
-            $this->loadTemplate("home", $viewData);
-        } else {
-
-            //id do cliente
-
-           
-            $viewData['id'] = $id;
-         
-
-            $this->loadTemplateLoginCompany("atualizarFormularioVendaPlanos", $viewData);
-        }
-    }
+   
 
 
 

@@ -12,7 +12,7 @@ class Contrato extends Model{
     const ANO = 12;
     CONST ATIVO = 'sim';
 
-    public function criarContrato($dataAdesao,$dataVencimento, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarencia, $idEmpresa, $idClientes,$dataFimContrato,$idVenda,$idVendedor ,$portabilidade,$observacao){
+    public function criarContrato($dataAdesao,$dataVencimento, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarencia, $idEmpresa, $idClientes,$dataFimContrato,$idVenda,$portabilidade,$observacao){
 
 
 
@@ -40,7 +40,6 @@ class Contrato extends Model{
             :clientes_idClientes, 
             :dataFinalContrato,
             :venda_idVenda, 
-            :venda_vendedores_idVendedores,
             :portabilidade,
             :observacao)";
 
@@ -65,7 +64,6 @@ class Contrato extends Model{
             $inserir->bindValue(":dataFinalContrato", $dataFimContrato);
           //  $inserir->bindValue(":assinaturaDigitalClientes",$assinaturaDigitalClientes);
             $inserir->bindValue(":venda_idVenda", $idVenda);
-            $inserir->bindValue(":venda_vendedores_idVendedores", $idVendedor);
             //$inserir->bindValue(":assinaturaDigitalVendedor", $assinaturaDigitalVendedor);
             $inserir->bindValue(":portabilidade", $portabilidade);
             $inserir->bindValue(":observacao", $observacao);
@@ -132,5 +130,109 @@ class Contrato extends Model{
 
     }
 
+
+    public function atualizarContratoPortabilidade($portabilidade, $observacao, $dataInicioCarencia, $dataFinalCarencia, $carencia, $dataAdesao, $dataVencimento,$idCliente){
+
+
+
+        $sql = "UPDATE contrato SET 
+        dataAdesao = :dataAdesao,
+        dataVencimento = :dataVencimento,
+        carenciaContrato = :carencia,
+        dataInicioCarencia = :dataInicioCarencia,
+        dataFinalCarencia = :dataFinalCarencia,
+        portabilidade = :portabilidade, 
+        observacao = :observacao
+        WHERE clientes_idClientes = :idCliente";
+
+        $update = $this->db->prepare($sql);
+
+
+        try{
+
+            $this->db->beginTransaction();
+
+            $update->bindValue(":portabilidade",$portabilidade);
+            $update->bindValue(":observacao",$observacao);
+            $update->bindValue(":dataInicioCarencia",$dataInicioCarencia);
+            $update->bindValue(":dataFinalCarencia",$dataFinalCarencia);
+            $update->bindValue(":carencia",$carencia);
+            $update->bindValue(":dataAdesao",$dataAdesao);
+            $update->bindValue(":dataVencimento",$dataVencimento);
+            $update->bindValue(":idCliente", $idCliente);
+        
+
+            $atualizado = $update->execute();
+            $comitado = $this->db->commit();
+
+            if($atualizado && $comitado){
+
+                return true;
+            }else{
+
+                return false;
+            }
+
+
+
+        }catch(PDOException $ex){
+
+            $this->db->rollBack();
+
+            return $ex->getMessage();
+        }
+
+    }
+
+            
+
+           
+    public function atualizarContrato($portabilidade, $observacao,$idCliente){
+
+
+        $sql = "UPDATE contrato SET 
+        portabilidade = :portabilidade, 
+        observacao = :observacao, 
+        WHERE clientes_idClientes = :idCliente";
+
+        $update = $this->db->prepare($sql);
+
+
+        try{
+
+            $this->db->beginTransaction();
+
+            $update->bindValue(":portabilidade",$portabilidade);
+            $update->bindValue(":observacao",$observacao);
+            $update->bindValue(":idCliente", $idCliente);
+        
+
+            $atualizado = $update->execute();
+            $comitado = $this->db->commit();
+
+            if($atualizado && $comitado){
+
+                return true;
+            }else{
+
+                return false;
+            }
+
+
+
+        }catch(PDOException $ex){
+
+            $this->db->rollBack();
+
+            return $ex->getMessage();
+        }
+
+
+
+
+
+
+
+    }
 
 }

@@ -34,7 +34,7 @@ class VendaPlanosController extends Controller {
         $retorno = [];
 
         $venda = new Venda();
-        $retorno['vendaCliente'] = $venda->getVendaByIdClinte($idCliente);
+        $retorno['vendaCliente'] = $venda->getVendaByIdCliente($idCliente);
 
         if(isset($retorno['vendaCliente'])){
 

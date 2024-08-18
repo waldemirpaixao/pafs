@@ -79,8 +79,20 @@ $dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSIO
 
     </div>
 
-    <form target="_blank" id="salvar" action="<?php echo BASE_URL; ?>atualizarFormularioVendaPlanos/atualizarVenda" method="post">
-
+    <form  id="atualizarVenda" action="<?php echo BASE_URL; ?>AtualizarFormularioVendaPlanos/atualizarVenda" method="post">
+<?php
+    if(isset($mensagem)):
+      if($mensagem == "Atualizado com sucesso!") :?>
+      
+      <div class="success alinhamentoCentro"><?php echo $mensagem; ?></div>
+          
+        <?php elseif ($mensagem == "Problema ao atualizar!"):?></div>
+    
+      <div class="danger alinhamentoCentro"><?php echo $mensagem;?></div>
+          <?php endif;
+          endif;?>
+<br/>
+<br/>
 
         <div class="formularioTotal">
             <h1 class="estiloBorda">Atualização de Venda de Planos</h1>
@@ -102,6 +114,11 @@ $dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSIO
 
                     <!--Id do cliente-->
                     <input type="hidden" value="<?php echo $cliente['idClientes'] ?>" name="idCliente">
+
+                     <!--Id do Venda-->
+                    <input type="hidden" value="<?php echo $arrayVenda['idVenda'] ?>" name="idVenda">
+
+            
 
                     <label class="rotulo">Data de Adesão</label>
                     <input id="dataAdesao" class="campoTexto" type="date" name="dataAdesao" value="<?php echo $contratoArray['dataAdesao']; ?>">
@@ -225,9 +242,9 @@ $dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSIO
                 <br />
 
 
-                <input <?php echo $arrayVenda['valorPlanos'] == $todosPlanos['valorPlanos'] ? 'checked="checked"' : ''; ?> id="a<?php echo $todosPlanos['idPlanos']; ?>" class="clickPlanos" type="radio" name="plano" value="<?php echo $todosPlanos['idPlanos']; ?> " />
+                <input <?php echo $arrayVenda['valorPlanos'] == $todosPlanos['valorPlanos'] ? 'checked="checked"' : ''; ?> id="a<?php echo $todosPlanos['idPlanos']; ?>" class="clickPlanos" type="radio" name="idPlano" value="<?php echo $todosPlanos['idPlanos']; ?> " />
                 <label for="a<?php echo $todosPlanos['idPlanos']; ?>" onclick="valorPlano(this)" id="<?php echo $todosPlanos['idPlanos']; ?>" class="rotulo" style="cursor: pointer;"> <?php echo $todosPlanos['nomePlanos'] . " - R$ " . $todosPlanos['valorPlanos']; ?> </label>
-                <input id="valor<?php echo $todosPlanos['idPlanos']; ?>" type="hidden" value="<?php echo $todosPlanos['valorPlanos']; ?>" name="valorPlanoParcial" />
+                <input  id="valor<?php echo $todosPlanos['idPlanos']; ?>" type="text" value="<?php echo  $todosPlanos['valorPlanos']; ?>" name="valorPlanoParcial" />
 
                 <div>
                     <?php echo $todosPlanos['descricao']; ?>
@@ -278,7 +295,7 @@ $dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSIO
                 <?php if (count($dependent) > $dependenteExtraArray['quatidadeMaxima']): ?>
 
                     <div class="subtirinhas">
-                        <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ <?php $dependenteExtraArray['valor']; ?> reais por pessoa, a quantidade de Dependentes é superior a 8 </h3>
+                        <h3 style="color: #ff0000; font-weight: bold;">Será Cobrada uma taxa adicional, igual ao valor de R$ <?php echo number_format($dependenteExtraArray['valor'],2,",","."); ?> reais por pessoa, a quantidade de Dependentes é superior a <?php echo intval($dependenteExtraArray['quatidadeMaxima'])."."; ?></h3>
                     </div>
 
                     <input id="dependente" type="hidden" name="valorExtraDependente" value="<?php echo (count($dependent) - $dependenteExtraArray['quatidadeMaxima']) * $dependenteExtraArray['valor']; ?>">
@@ -390,7 +407,7 @@ $dependenteExtraArray = $dependenteExtra->getDependentesExtrasByEmpresa($_SESSIO
         </div>
 
         <div class="painelBotao">
-            <input type="submit" value="Atualizar Contrato" name="salvar" class="btn-salvar80">
+            <input type="submit" value="Atualizar Contrato" name="atualizarVenda" class="btn-salvar80">
         </div>
         <br />
         <br />

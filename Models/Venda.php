@@ -11,6 +11,7 @@ namespace Models;
 
 use \Core\Model;
 use PDOException;
+use PhpParser\Node\Stmt\TryCatch;
 
 class Venda extends Model
 
@@ -202,6 +203,64 @@ class Venda extends Model
 
 
       return null;
+    }
+
+
+  }
+
+
+
+  public function atualizarVenda($vendedor, $idVenda, $idCliente, $idPlano, $valorPlanoParcial, $desconto, $formaPagamento, $dataAdesao, $dataVencimento, $valorExtraDependente){
+
+
+    $sql = "UPDATE venda SET 
+    vendedores_idVendedores = :vendedor, 
+    planos_idPlanos = :idPlano, 
+    valorPlanos = :valorPlanoParcial, 
+    desconto = :desconto, 
+    formaPagamento_idformaPagamento = :formaPagamento, 
+    dataAdesao = :dataAdesao, 
+    dataVencimentoVenda = :dataVencimento, 
+    valorExtraDependente = :valorExtraDependente 
+    WHERE idVenda = :idVenda AND  clientes_idClientes = :idCliente";
+
+    $update = $this->db->prepare($sql);
+
+    try{
+
+      $this->db->beginTransaction();
+  
+
+      $update->bindValue(":vendedor", $vendedor);
+      $update->bindValue(":idPlano", $idPlano);
+      $update->bindValue(":valorPlanoParcial", $valorPlanoParcial);
+      $update->bindValue(":desconto", $desconto);
+      $update->bindValue(":formaPagamento", $formaPagamento);
+      $update->bindValue(":dataAdesao", $dataAdesao);
+      $update->bindValue(":dataVencimento", $dataVencimento);
+      $update->bindValue(":valorExtraDependente", $valorExtraDependente);
+      $update->bindValue(":idVenda", $idVenda);
+      $update->bindValue(":idCliente", $idCliente);
+
+
+
+      $atualizado = $update->execute();
+      $comitado = $this->db->commit();
+
+      if($atualizado && $comitado){
+      return true;
+
+
+      }else{
+        return false;
+      
+      }
+
+    }catch(PDOException $ex){
+
+      $this->db->rollBack();
+      return $ex->getMessage();
+      
     }
 
 
