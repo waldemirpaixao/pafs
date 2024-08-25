@@ -36,7 +36,7 @@ class Clientes extends Model {
         }
     }
 
-    public function inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $idEmpresa,$assinaturaDigital) {
+    public function inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $idEmpresa) {
 
 
         
@@ -44,7 +44,7 @@ class Clientes extends Model {
         //echo $nome. $dataNascimento. $rg. $cpf. $telefone. $email. $endereco. $complemento. $pontoreferencia. $bairro. $cidade. $estado. $idEmpresa;
 
         //exit();
-        $sql = "INSERT INTO clientes(nomeClientes,rgClientes, cpfClientes, enderecoClientes,cepClientes, bairroClientes,complementoClientes, pontoReferenciaClientes,cidadeClientes, estadoClientes, telefoneClientes, emailClientes, dataNascimentoClientes, empresa_idEmpresa, dataCadastroClientes, dataCadastroAtualizacaoClientes, assinaturaDigitalClientes) VALUES (:nome, :rg, :cpf, :endereco, :cep, :bairro, :complemento, :pontoReferencia, :cidade, :estado, :telefone,:email,:dataNascimento,:idEmpresa, now(),now(),:assinatura)";
+        $sql = "INSERT INTO clientes(nomeClientes,rgClientes, cpfClientes, enderecoClientes,cepClientes, bairroClientes,complementoClientes, pontoReferenciaClientes,cidadeClientes, estadoClientes, telefoneClientes, emailClientes, dataNascimentoClientes, empresa_idEmpresa, dataCadastroClientes, dataCadastroAtualizacaoClientes) VALUES (:nome, :rg, :cpf, :endereco, :cep, :bairro, :complemento, :pontoReferencia, :cidade, :estado, :telefone,:email,:dataNascimento,:idEmpresa, now(),now())";
 
 
         $insert = $this->db->prepare($sql);
@@ -63,7 +63,7 @@ class Clientes extends Model {
         $insert->bindValue(":dataNascimento", $dataNascimento);
         //$insert->bindValue(":situacao", NULL);
         $insert->bindValue(":idEmpresa", $idEmpresa);
-         $insert->bindValue(":assinatura", $assinaturaDigital);
+         //$insert->bindValue(":assinatura", $assinaturaDigital);
 
 
 

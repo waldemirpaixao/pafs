@@ -40,7 +40,7 @@ class ClientesController extends Controller {
         $bairro = addslashes($_POST['bairro']);
         $cidade = addslashes($_POST['cidade']);
         $estado = addslashes($_POST['estado']);
-        $assinaturaDigital = addslashes(md5($_POST['nome']));
+       // $assinaturaDigital = addslashes(md5($_POST['nome']));
 
 
 
@@ -56,7 +56,7 @@ class ClientesController extends Controller {
               $this->loadTemplateLoginCompany("clientes", $viewData);
             
         } else {
-            $viewData["mensagem"] = $clientes->inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $_SESSION['idEmpresa'], $assinaturaDigital);
+            $viewData["mensagem"] = $clientes->inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $_SESSION['idEmpresa']);
 
 
             $this->loadTemplateLoginCompany("clientes", $viewData);
