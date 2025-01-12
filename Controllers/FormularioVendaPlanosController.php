@@ -219,11 +219,11 @@ class FormularioVendaPlanosController extends Controller
 
           
 
-            $this->contratoFeito =  $contrato->criarContrato($dataAdesao,$dataVencimento, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
+            $this->contratoFeito =  $contrato->criarContrato($dataAdesao,$dataVencimento, $numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda, $portabilidade,$observacao);
         } else {
 
 
-           $this->contratoFeito = $contrato->criarContrato($dataAdesao,$dataVencimento,$numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$idVendedor, $portabilidade,$observacao);
+           $this->contratoFeito = $contrato->criarContrato($dataAdesao,$dataVencimento,$numeroContrato, $carencia, $dataInicioCarencia, $dataFimCarenciaNovo, $idEmpresa, $idClientes,$dataFimContratoNovo,$idVenda,$portabilidade,$observacao);
         }
        
         

@@ -58,7 +58,7 @@ $formaPagamentoArray = $formaDePagamento->getAllByEmpresa($_SESSION['idEmpresa']
     
 <div class="conteudo">
         <div class="logo">
-            <img width="60%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.png">
+            <img width="60%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.jpeg">
         </div>
         </div>
     <form target="_blank" id="salvar" action="<?php echo BASE_URL; ?>FormularioVendaPlanos/registerVenda" method="post">

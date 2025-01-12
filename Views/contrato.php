@@ -1946,7 +1946,7 @@ and open the template in the editor.
                 <!-- <div class="colunasConteudo">-->
                 <table class="rotulo" border="0" width="100%">
                     <tr>
-                        <td> <img width="20%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.png"></td>
+                        <td> <img width="20%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.jpeg"></td>
                         <td colspan="4">
                             <?php echo $dadosEmpresa['nomeEmpresa'] . '-' . $dadosEmpresa['siglaEmpresa']; ?>
                             <br />
@@ -2332,7 +2332,7 @@ and open the template in the editor.
 
         <div style="text-align: center; ">
 
-            <img width="20%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.png">
+            <img width="20%" src="<?php echo BASE_URL; ?>/assets/imagens/LogoMarca.jpeg">
             <div>
                 <div class="separador"></div>
 
