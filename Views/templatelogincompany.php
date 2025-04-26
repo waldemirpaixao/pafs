@@ -119,9 +119,9 @@ and open the template in the editor.
 
                 </div>
 
-                <li><a id="menuFinanceiro" href="#">Financeiro &nbsp;&nbsp;<img width="10px" src="<?php echo BASE_URL; ?>/assets/imagens/down.svg"></a></li>
+                <li><a id="menuFinanceiro" href="#">Cobrança &nbsp;&nbsp;<img width="10px" src="<?php echo BASE_URL; ?>/assets/imagens/down.svg"></a></li>
                 <div id="submenuFinanceiro">
-                    <li><a href="<?php echo BASE_URL; ?>Atrasados">Atrasados</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>Cobranca">Todos</a></li>
                     <li><a href="<?php echo BASE_URL; ?>Areceber">A Receber</a></li>
                     <li><a href="<?php echo BASE_URL; ?>Recebidas">Recebidas</a></li>
                     <li><a href="<?php echo BASE_URL; ?>ReceitaDespesas">Receitas e Despesas</a></li>

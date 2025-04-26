@@ -8,7 +8,12 @@ $config = array();
         $config['dbname'] = 'pafs';
         $config['host'] = 'localhost';
         $config['dbuser'] = 'waldemir';
-        $config['dbpass'] = 'waldemir';    
+        $config['dbpass'] = 'waldemir';
+        
+        //ASAAS - url base de cobranças
+        define("BASE_URL_PAYMENT","https://api-sandbox.asaas.com/v3/payments");
+        define("BASE_URL_CUSTOMERS","https://api-sandbox.asaas.com/v3/customers");
+       
     }else{
         //alerar a configuração no servidor
         define("BASE_URL", "https://sistema.pafs.com.br/");
@@ -16,6 +21,10 @@ $config = array();
         $config['host'] = 'localhost';
         $config['dbuser'] = 'pafsco96_systempafs';
         $config['dbpass'] = 'Sucesso@2023'; 
+
+        //ASAAS - url base de cobranças
+        define("BASE_URL_PAYMENT","https://api.asaas.com/v3/payments");
+        define("BASE_URL_CUSTOMERS","https://api.asaas.com/v3/customers");
         
     }
 
