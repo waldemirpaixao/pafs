@@ -134,6 +134,8 @@ and open the template in the editor.
                     <li><a id="menuContratoAtualizar" href="<?php echo BASE_URL; ?>AtualizarContrato">Atualizar Contrato</a></li>
                 </div>
 
+                <li><a id="menuIntegracoes" href="<?php echo BASE_URL; ?>Integracoes/">Integrações</a></li>
+
             </ul>
         </div>
 
