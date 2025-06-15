@@ -13,21 +13,22 @@ use Models\Venda_dependentes;
 
 class DependentesController extends Controller{
     
-    
+    private   $viewData = array();
     
       public function index() {
 
-        $viewData = array();
+      
 
         if (!isset($_SESSION['idColaboradores']) && empty($_SESSION['idColaboradores'])) {
 
 
-            $this->loadTemplate("home", $viewData);
+            $this->loadTemplate("home", $this->viewData);
         } else {
 
 
+            $this->viewData["page"] = 1;
 
-            $this->loadTemplateLoginCompany("dependentes", $viewData);
+            $this->loadTemplateLoginCompany("dependentes", $this->viewData);
         }
     }
     
@@ -165,6 +166,15 @@ class DependentesController extends Controller{
         $this->loadTemplateLoginCompany("dependentes", $viewData);
 
     }
+
+
+      public function pagina($id){
+
+          $this->viewData["page"] = $id;
+
+            $this->loadTemplateLoginCompany("dependentes", $this->viewData);
+      }
+    
     
 
 }

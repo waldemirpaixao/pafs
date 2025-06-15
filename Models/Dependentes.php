@@ -190,4 +190,30 @@ class Dependentes extends Model
             return false;
         }
     }
+
+
+     public function getDependentesPorPagina($pagina, $itensPorPagina, $idEmpresa) {
+        if (!is_numeric($pagina) || $pagina < 1) {
+            $pagina = 1;
+        }
+        $offset = ($pagina - 1) * $itensPorPagina;
+
+        $sql = "SELECT * , idClientes, nomeClientes FROM dependentes as d JOIN clientes on idClientes = clientes_idclientes WHERE d.empresa_idEmpresa = :id   ORDER BY nomeClientes ASC LIMIT :offset, :itensPorPagina";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":offset", $offset, \PDO::PARAM_INT);
+        $select->bindValue(":itensPorPagina", $itensPorPagina, \PDO::PARAM_INT);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+
+            return $select->fetchAll();
+        } else {
+
+            return $select->fetchAll();
+        }
+    }
+
 }

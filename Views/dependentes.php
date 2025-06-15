@@ -70,6 +70,13 @@
     <br />
     <div class="tirinhas">
         <div class="subtirinhas"><strong>Nome</strong></div>
+        <div class="subtirinhas">
+            <div style="text-align:center !important; width:100%"><strong>Titular</strong></div>
+        </div>
+        <div class="subtirinhas">
+            <div style="text-align: right; width:80%;"><strong>Ações</strong></div>
+        </div>
+
 
     </div>
 
@@ -78,17 +85,40 @@
     <?php
     $dependentes = new Dependentes();
     $allDependentes = $dependentes->getAllDependentes($_SESSION['idEmpresa']);
+ 
+
+
+    $pagina = $page; //vindo do clicar na página
+
+
+    $totalDeItens = count($allDependentes);
+
+    $itensPorPagina = 10; //quantidade de itens por página
+
+
+    $respostaDependentesPorPagina = $dependentes->getDependentesPorPagina($pagina, $itensPorPagina, $_SESSION['idEmpresa']);
+
+    $totalPaginas = ceil($totalDeItens / $itensPorPagina); //total de páginas, arredondando para cima
+
+
+
+
+
+
+
+
+
     //print_r($allClient);
     // exit();
 
 
 
-    if ($allDependentes != NULL) {
+    if ($respostaDependentesPorPagina != NULL) {
 
 
 
 
-        foreach ($allDependentes as $todosDependentes) {
+        foreach ($respostaDependentesPorPagina as $todosDependentes) {
     ?>
 
 
@@ -96,9 +126,21 @@
 
 
                 <div class="subtirinhas">
-                    <?php echo $todosDependentes['nomeDependentes']; ?>
+                    <div class="subtirinhas">
+                        <?php echo $todosDependentes['nomeDependentes']; ?>
+                    </div>
+                    <div class="subtirinhas">
+                        <div style="text-align: right !important; width: 100%;">
 
+                            <?php echo $todosDependentes['nomeClientes']; ?>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
+
 
 
                 <div class="subtirinhas">
@@ -147,79 +189,103 @@
 
     <?php
     }
+
+
+    if ($totalPaginas > 1) : //verifica se há mais de uma página
+
     ?>
 
+        <div class="alinhamentoCentro">
+            <ul class="pagination">
+
+                <?php
+                for ($q = 1; $q <= $totalPaginas; $q++) :
+                    if ($pagina == $q) :
+                ?>
+                        <li class="active"><a href="<?php echo BASE_URL; ?>Dependentes/pagina/<?php echo $q; ?>"><?php echo $q; ?></a></li>
+                    <?php else : ?>
+                        <li><a href="<?php echo BASE_URL; ?>Dependentes/pagina/<?php echo $q; ?>"><?php echo $q; ?></a></li>
+                <?php
+                    endif;
+                endfor;
+                ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+
+</div>
 
 
 
 
-    <!--modal-->
+<!--modal-->
 
 
-    <div class="modal" role="dialog" id="clientes">
-        <div class="modal-dialog modal-lg">
+<div class="modal" role="dialog" id="clientes">
+    <div class="modal-dialog modal-lg">
 
-            <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal-content">
+            <div class="modal-header">
 
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title estiloBorda">Cadastro de Dependentes</h2>
-                </div>
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title estiloBorda">Cadastro de Dependentes</h2>
+            </div>
 
-                <div class="modal-body">
+            <div class="modal-body">
 
-                    <form id="form" method="Post" action="<?php echo BASE_URL; ?>Dependentes/registerDependentes">
+                <form id="form" method="Post" action="<?php echo BASE_URL; ?>Dependentes/registerDependentes">
 
-                        <br>
-                        <br>
-                        <br>
+                    <br>
+                    <br>
+                    <br>
 
+                    <?php
+
+                    $clientes = new Clientes();
+                    $cliente = $clientes->getAllCliente($_SESSION['idEmpresa']);
+
+
+                    ?>
+
+                    <label class="rotulo">Escolha o titular do contrato</label>
+                    <select class="campoTexto" name="idCliente">
                         <?php
 
-                        $clientes = new Clientes();
-                        $cliente = $clientes->getAllCliente($_SESSION['idEmpresa']);
-
+                        foreach ($cliente as $todosClientes) :
 
                         ?>
 
-                        <label class="rotulo">Escolha o titular do contrato</label>
-                        <select class="campoTexto" name="idCliente">
-                            <?php
+                            <option value="<?php echo $todosClientes['idClientes']; ?>"><?php echo $todosClientes['nomeClientes']; ?></option>
 
-                            foreach ($cliente as $todosClientes) :
+                        <?php
 
-                            ?>
-
-                                <option value="<?php echo $todosClientes['idClientes']; ?>"><?php echo $todosClientes['nomeClientes']; ?></option>
-
-                            <?php
-
-                            endforeach;
+                        endforeach;
 
 
-                            ?>
-                        </select>
-                        <label class="rotulo">Nome Completo</label>
-                        <input class="campoTexto" type="text" name="nome" placeholder="José da Silva" />
+                        ?>
+                    </select>
+                    <label class="rotulo">Nome Completo</label>
+                    <input class="campoTexto" type="text" name="nome" placeholder="José da Silva" />
 
-                        <label class="rotulo">CPF</label><br>
-                        <input class="campoTexto" type="text" name="cpf" placeholder="033.024.987-00" />
+                    <label class="rotulo">CPF</label><br>
+                    <input class="campoTexto" type="text" name="cpf" placeholder="033.024.987-00" />
 
-                        <label class="rotulo">Data de Nascimento</label>
-                        <input class="campoTexto" type="date" name="dataNascimento" />
+                    <label class="rotulo">Data de Nascimento</label>
+                    <input class="campoTexto" type="date" name="dataNascimento" />
 
 
-                        <input class="botao" type="submit" value="Salvar" />
+                    <input class="botao" type="submit" value="Salvar" />
 
-                    </form>
-                    <div class="modal-footer">
+                </form>
+                <div class="modal-footer">
 
-                        <br />
-                        <h3 class="modal-title estiloBorda">PAFS</h3>
+                    <br />
+                    <h3 class="modal-title estiloBorda">PAFS</h3>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
