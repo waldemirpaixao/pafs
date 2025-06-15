@@ -64,6 +64,9 @@
     <div class="margin-15">
         <input type="text" placeholder="Digite o nome do cliente..." class="campoTexto" id="nomeCliente">
     </div>
+    <br/>
+    <Strong>Nome</Strong>
+    <hr/>
     <?php
 
     $cliente = new Clientes();
@@ -137,6 +140,7 @@
                             <a id="atualizar" href="<?php echo BASE_URL; ?>Clientes/atualizarClientes/?id=<?php echo $clientes['idClientes']; ?>"><img class="imagemPequena" title="Atualizar" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
                             <a href="<?php echo BASE_URL; ?>Clientes/deletarClientes/<?php echo $clientes['idClientes']; ?>"><img onclick="return confirm('Deseja realmente deletar o cliente <?php echo $clientes['nomeClientes']; ?>')" class="imagemPequena" title="Excluir" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
                         </div>
+
                     </div>
 
 
@@ -179,7 +183,7 @@
 
                 </div>
 
-
+<hr/>
 
             <?php
         } //end foreach
