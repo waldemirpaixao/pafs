@@ -35,7 +35,7 @@ class Integracoes extends Model
         }
     }
 
-    public function checKIntegracao($idEmpresa, $nomeBanco, $chave)
+    public function checKIntegracao($idEmpresa, $chave)
     {
         $sql = "SELECT * FROM integracao WHERE empresa_idEmpresa = :idEmpresa AND chave = :chave";
         $check = $this->db->prepare($sql);
@@ -61,18 +61,22 @@ class Integracoes extends Model
         $query->execute();
 
         if ($query->rowCount() > 0) {
-            return $query->fetchAll();
-        } else {
-            return array(); // Retorna um array vazio se não houver integrações
+            return $query->fetch();
+            
         }
     }
-    public function excluir($idIntegracao)
+    public function excluir($idEmpresa)
     {
-        $sql = "DELETE FROM integracao WHERE idIntegracao = :idIntegracao";
+        $sql = "DELETE FROM integracao WHERE empresa_idEmpresa = :idEmpresa";
         $excluir = $this->db->prepare($sql);
 
-        $excluir->bindValue(":idIntegracao", $idIntegracao);
-        return $excluir->execute();
+        $excluir->bindValue(":idEmpresa", $idEmpresa);
+        $executado =  $excluir->execute();
+        if ($executado) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getEmpresaById($idEmpresa)
@@ -88,6 +92,24 @@ class Integracoes extends Model
             return $integracao['chave'];
         } else {
             return null; // Retorna null se não encontrar a integração
+        }
+    }
+
+
+    public function atualizarChave($idEmpresa, $idIntegracao, $chave)
+    {
+        $sql = "UPDATE integracao SET chave = :chave WHERE empresa_idEmpresa = :idEmpresa AND idIntegracao = :idIntegracao";
+        $atualizar = $this->db->prepare($sql);
+
+        $atualizar->bindValue(":chave", $chave);
+        $atualizar->bindValue(":idEmpresa", $idEmpresa);
+        $atualizar->bindValue(":idIntegracao", $idIntegracao);
+
+        $executado =  $atualizar->execute();
+        if ($executado) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

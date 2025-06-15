@@ -78,24 +78,21 @@ and open the template in the editor.
                         </div>
                     </div>
                 </div>
-        </div>
-<hr/>
-            <?php
+            </div>
+            <hr />
+        <?php
         }
     } else {
-            ?>
+        ?>
 
-            <div class="tirinhas">
+        <div class="tirinhas">
 
-                <div class="subtirinhas alinhamentoCentro">
-                    <h3 style="font-size:25px; font-weight:bold;padding-bottom: 10px;">Não há registros</h3>
-                </div>
+            <div class="subtirinhas alinhamentoCentro">
+                <h3 style="font-size:25px; font-weight:bold;padding-bottom: 10px;">Não há registros</h3>
             </div>
+        </div>
 
-        <?php } ?>
-
-
-
+    <?php } ?>
 
 
 
@@ -104,41 +101,42 @@ and open the template in the editor.
 
 
 
-        <!--Modal-->
-        <div class="modal" role="dialog" id="vendedores">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" data-dismiss="modal">&times;</button>
-                        <h2 class="modal-title estiloBorda">Cadastro de Vendedores</h2>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <form method="POST" action="<?php echo BASE_URL; ?>Vendedores/inserirVendedores">
-                            <label class="rotulo">Nome do vendedor</label><br>
-                            <input class="campoTexto" type="text" name="nomeVendedor" required />
 
 
-                            <label class="rotulo">E-mail</label><br>
-                            <input class="campoTexto" type="email" name="emailVendedor" required />
 
-                            <label class="rotulo">Telefone</label><br>
-                            <input id="telefone" class="campoTexto" type="tel" name="telefoneVendedor" required />
-                            <script>
-                                $("#telefone").mask("(99) 99999-9999");
-                            </script>
+    <!--Modal-->
+    <div class="modal" role="dialog" id="vendedores">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title estiloBorda">Cadastro de Vendedores</h2>
+                </div>
 
-                            <input class="botao" type="submit" value="Salvar" />
-                        </form>
-                    </div>
+                <div class="modal-body">
 
-                    <div class="modal-footer">
+                    <form method="POST" action="<?php echo BASE_URL; ?>Vendedores/inserirVendedores">
+                        <label class="rotulo">Nome do vendedor</label><br>
+                        <input class="campoTexto" type="text" name="nomeVendedor" required />
 
 
-                        <h3 class="modal-title estiloBorda">PAFS</h3>
+                        <label class="rotulo">E-mail</label><br>
+                        <input class="campoTexto" type="email" name="emailVendedor" required />
 
-                    </div>
+                        <label class="rotulo">Telefone</label><br>
+                        <input id="telefone" class="campoTexto" type="tel" name="telefoneVendedor" required />
+                        <script>
+                            $("#telefone").mask("(99) 99999-9999");
+                        </script>
+
+                        <input class="botao" type="submit" value="Salvar" />
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+
+
+                    <h3 class="modal-title estiloBorda">PAFS</h3>
 
                 </div>
 
@@ -146,4 +144,6 @@ and open the template in the editor.
 
         </div>
 
-            </div>
+    </div>
+
+</div>
