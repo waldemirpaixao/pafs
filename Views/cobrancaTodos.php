@@ -12,7 +12,8 @@
     <?php
 
     use \Models\Clientes;
-    use  \Models\Venda;
+use Models\Integracoes;
+use  \Models\Venda;
     use Mpdf\Utils\Arrays;
 
     use function PHPUnit\Framework\isEmpty;
@@ -44,6 +45,16 @@
         'REFUND_DENIED' => 'DEVOLUÇÃO NEGADA',
         'REFUND_REQUESTED' => 'DEVOLUÇÃO SOLICITADA'
     );
+
+
+
+$integracoes = new Integracoes();
+$access_token = $integracoes->getEmpresaById($idEmpresa);
+
+
+    
+
+
 
     //require_once('vendor/autoload.php');
 
@@ -109,14 +120,15 @@ echo $responseCliente->getBody();*/
     $response = $client->request('GET', BASE_URL_CUSTOMERS, [
         'headers' => [
             'accept' => 'application/json',
-            'access_token' => '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmZhMzcyMThkLTA1YTctNDJjMC05NTM4LTkwZTcwMjIxMmYwZjo6JGFhY2hfZDk4YmNiNWUtYjhkYy00NzAxLWFmYzItNTMxYmNmNDE2NmIy',
+            //'access_token' => '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmZhMzcyMThkLTA1YTctNDJjMC05NTM4LTkwZTcwMjIxMmYwZjo6JGFhY2hfZDk4YmNiNWUtYjhkYy00NzAxLWFmYzItNTMxYmNmNDE2NmIy',
+            'access_token' => $access_token,
         ],
     ]);
 
     $clientesJson =  json_decode($response->getBody());
 
     $clientes = $clientesJson->data;
-    // print_r($clientesJson);
+   
 
 
 
@@ -176,7 +188,7 @@ echo $responseCliente->getBody();*/
 
     // if ($allClient != NULL) {
 
-   
+
     if ($clientes != NULL) {
 
         //   foreach ($allClient as $clientes) {
@@ -192,22 +204,23 @@ echo $responseCliente->getBody();*/
 
 
 
-             $cobranca = new \GuzzleHttp\Client();
+            $cobranca = new \GuzzleHttp\Client();
 
 
             $respostaCobranca = $cobranca->request('GET', BASE_URL_PAYMENT . "?customer=" . $clientes[$i]->id, [
                 'headers' => [
                     'accept' => 'application/json',
-                    'access_token' => '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmZhMzcyMThkLTA1YTctNDJjMC05NTM4LTkwZTcwMjIxMmYwZjo6JGFhY2hfZDk4YmNiNWUtYjhkYy00NzAxLWFmYzItNTMxYmNmNDE2NmIy',
+                    //'access_token' => '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmZhMzcyMThkLTA1YTctNDJjMC05NTM4LTkwZTcwMjIxMmYwZjo6JGFhY2hfZDk4YmNiNWUtYjhkYy00NzAxLWFmYzItNTMxYmNmNDE2NmIy',
+                    'access_token' => $access_token,
                 ],
             ]);
 
-          
+
             $respostaJson = json_decode($respostaCobranca->getBody());
-           
-            
-           
-            
+
+
+
+
 
 
 
@@ -223,12 +236,12 @@ echo $responseCliente->getBody();*/
                     <div class="subtirinhas"><?php echo $clientes[$i]->name;
                                                 echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
-                                                if($respostaJson->totalCount > 0){
-                                                 if($clientes[$i]->id == $respostaJson->data[0]->customer ){
-                                                 echo $respostaJson->data[0]->status == $statusPagamento['PENDING'] ?  $statusPagamentoTraducao['PENDING'] : ''; 
-                                                 }
-                                                }else{
-                                                  echo "Não há cobranças!";
+                                                if ($respostaJson->totalCount > 0) {
+                                                    if ($clientes[$i]->id == $respostaJson->data[0]->customer) {
+                                                        echo $respostaJson->data[0]->status == $statusPagamento['PENDING'] ?  $statusPagamentoTraducao['PENDING'] : '';
+                                                    }
+                                                } else {
+                                                    echo "Não há cobranças!";
                                                 }
                                                 ?></div>
 
@@ -252,7 +265,7 @@ echo $responseCliente->getBody();*/
                             ?>
 
 
-                               <!-- <a data-toggle="modal" data-target="#mensagemContrato" href="#"><img style="opacity: 90%; cursor:not-allowed" class="imagemPequena" title="Recuperar Contrato" src="<?php echo BASE_URL; ?>assets/imagens/document.svg" /></a>-->
+                                <!-- <a data-toggle="modal" data-target="#mensagemContrato" href="#"><img style="opacity: 90%; cursor:not-allowed" class="imagemPequena" title="Recuperar Contrato" src="<?php echo BASE_URL; ?>assets/imagens/document.svg" /></a>-->
 
 
                             <?php

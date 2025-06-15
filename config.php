@@ -13,6 +13,7 @@ $config = array();
         //ASAAS - url base de cobranças
         define("BASE_URL_PAYMENT","https://api-sandbox.asaas.com/v3/payments");
         define("BASE_URL_CUSTOMERS","https://api-sandbox.asaas.com/v3/customers");
+
        
     }else{
         //alerar a configuração no servidor

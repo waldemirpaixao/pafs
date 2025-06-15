@@ -25,6 +25,7 @@ class CobrancaController extends Controller
 
 
 
+            $this->viewData['idEmpresa']  = $_SESSION['idEmpresa'];
             $this->loadTemplateLoginCompany("cobrancaTodos", $this->viewData);
         }
     }

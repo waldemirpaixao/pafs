@@ -65,21 +65,38 @@
         <input type="text" placeholder="Digite o nome do cliente..." class="campoTexto" id="nomeCliente">
     </div>
     <?php
+
     $cliente = new Clientes();
+
     $allClient = $cliente->getAllCliente($_SESSION['idEmpresa']);
-    //print_r($allClient);
-    // exit();
+
+    $pagina = $page;//vindo do clicar na página
+
+
+    $totalDeItens = count($allClient);
+
+    $itensPorPagina = 10; //quantidade de itens por página
+
+
+    $respostaClientePorPagina = $cliente->getClientePorPagina($pagina, $itensPorPagina, $_SESSION['idEmpresa']);
+
+    $totalPaginas = ceil($totalDeItens / $itensPorPagina); //total de páginas, arredondando para cima
 
 
 
-    if ($allClient != NULL) {
+
+
+
+
+
+    if ($respostaClientePorPagina != NULL) {
 
 
 
 
 
 
-        foreach ($allClient as $clientes) {
+        foreach ($respostaClientePorPagina as $clientes) {
 
 
             $venda = new Venda();
@@ -118,7 +135,7 @@
 
                             <img id="<?php echo $clientes['idClientes']; ?>" onclick="mostrar(this)" class="imagemPequena ponteiro" title="Detalhe" src="<?php echo BASE_URL; ?>assets/imagens/detalhes.png" /></a>
                             <a id="atualizar" href="<?php echo BASE_URL; ?>Clientes/atualizarClientes/?id=<?php echo $clientes['idClientes']; ?>"><img class="imagemPequena" title="Atualizar" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
-                            <a href="<?php echo BASE_URL; ?>Clientes/deletarClientes/<?php echo $clientes['idClientes']; ?>"><img  onclick="return confirm('Deseja realmente deletar o cliente <?php echo $clientes['nomeClientes'];?>')" class="imagemPequena" title="Excluir" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
+                            <a href="<?php echo BASE_URL; ?>Clientes/deletarClientes/<?php echo $clientes['idClientes']; ?>"><img onclick="return confirm('Deseja realmente deletar o cliente <?php echo $clientes['nomeClientes']; ?>')" class="imagemPequena" title="Excluir" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
                         </div>
                     </div>
 
@@ -179,7 +196,29 @@
 
         <?php
     }
+
+    if ($totalPaginas > 1) : //verifica se há mais de uma página
+
         ?>
+
+            <div class="alinhamentoCentro">
+                <ul class="pagination">
+
+                    <?php
+                    for ($q = 1; $q <= $totalPaginas; $q++) :
+                        if ($pagina == $q) :
+                    ?>
+                            <li class="active"><a href="<?php echo BASE_URL; ?>Clientes/pagina/<?php echo $q; ?>"><?php echo $q; ?></a></li>
+                        <?php else : ?>
+                            <li><a href="<?php echo BASE_URL; ?>Clientes/pagina/<?php echo $q; ?>"><?php echo $q; ?></a></li>
+                    <?php
+                        endif;
+                    endfor;
+                    ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
 
             </div>
 
@@ -318,5 +357,7 @@
             </div>
         </div>
     </div>
+
+
 </div>
 </div>

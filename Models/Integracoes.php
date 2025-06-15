@@ -75,15 +75,17 @@ class Integracoes extends Model
         return $excluir->execute();
     }
 
-    public function getIntegracaoById($idIntegracao)
+    public function getEmpresaById($idEmpresa)
     {
-        $sql = "SELECT * FROM integracao WHERE idIntegracao = :idIntegracao";
+        $sql = "SELECT * FROM integracao WHERE empresa_idEmpresa = :idEmpresa";
         $query = $this->db->prepare($sql);
-        $query->bindValue(":idIntegracao", $idIntegracao);
+        $query->bindValue(":idEmpresa", $idEmpresa);
         $query->execute();
+        $integracao = $query->fetch();
 
         if ($query->rowCount() > 0) {
-            return $query->fetch();
+
+            return $integracao['chave'];
         } else {
             return null; // Retorna null se não encontrar a integração
         }

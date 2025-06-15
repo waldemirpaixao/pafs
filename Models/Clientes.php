@@ -18,7 +18,7 @@ class Clientes extends Model {
 
 
         define("situacao", "ativo");
-        $sql = "SELECT * FROM clientes WHERE empresa_idEmpresa = :id and situacao = :situacao";
+        $sql = "SELECT * FROM clientes WHERE empresa_idEmpresa = :id and situacao = :situacao ORDER BY nomeClientes ASC";
 
         $select = $this->db->prepare($sql);
         $select->bindValue(":id", $idEmpresa);
@@ -33,6 +33,32 @@ class Clientes extends Model {
         } else {
 
             return NULL;
+        }
+    }
+
+
+    public function getClientePorPagina($pagina, $itensPorPagina, $idEmpresa) {
+        if (!is_numeric($pagina) || $pagina < 1) {
+            $pagina = 1;
+        }
+        $offset = ($pagina - 1) * $itensPorPagina;
+
+        $sql = "SELECT * FROM clientes WHERE empresa_idEmpresa = :id and situacao = :situacao ORDER BY nomeClientes ASC LIMIT :offset, :itensPorPagina";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":situacao", self::ATIVO);
+        $select->bindValue(":offset", $offset, \PDO::PARAM_INT);
+        $select->bindValue(":itensPorPagina", $itensPorPagina, \PDO::PARAM_INT);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+
+            return $select->fetchAll();
+        } else {
+
+            return $select->fetchAll();
         }
     }
 

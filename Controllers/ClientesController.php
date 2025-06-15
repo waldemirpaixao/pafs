@@ -6,25 +6,48 @@ use \Core\Controller;
 use \Models\Clientes;
 
 
-class ClientesController extends Controller {
+class ClientesController extends Controller
+{
 
-    public function index() {
+      private $viewData = [];
 
-        $viewData = array();
+    public function index()
+    {
+
+        
+        
 
         if (!isset($_SESSION['idColaboradores']) && empty($_SESSION['idColaboradores'])) {
 
 
-            $this->loadTemplate("home", $viewData);
+            
+            $this->loadTemplate("home", $this->viewData);
         } else {
 
+          
 
+             $this->viewData["page"] = 1;
 
-            $this->loadTemplateLoginCompany("clientes", $viewData);
+            $this->loadTemplateLoginCompany("clientes", $this->viewData);
         }
     }
 
-    public function registerClientes() {
+
+      public function pagina($id){
+
+          $this->viewData["page"] = $id;
+
+            $this->loadTemplateLoginCompany("clientes", $this->viewData);
+      }
+    
+
+
+
+
+
+
+    public function registerClientes()
+    {
 
 
         $nome = addslashes($_POST['nome']);
@@ -40,21 +63,20 @@ class ClientesController extends Controller {
         $bairro = addslashes($_POST['bairro']);
         $cidade = addslashes($_POST['cidade']);
         $estado = addslashes($_POST['estado']);
-       // $assinaturaDigital = addslashes(md5($_POST['nome']));
+        // $assinaturaDigital = addslashes(md5($_POST['nome']));
 
 
 
 
 
-        
+
         $clientes = new Clientes();
 
         if ($clientes->checkCpf($cpf)) {
-            
-            
-             $viewData["mensagem"] = "Cliente Já Cadastrado";
-              $this->loadTemplateLoginCompany("clientes", $viewData);
-            
+
+
+            $viewData["mensagem"] = "Cliente Já Cadastrado";
+            $this->loadTemplateLoginCompany("clientes", $viewData);
         } else {
             $viewData["mensagem"] = $clientes->inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $_SESSION['idEmpresa']);
 
@@ -63,7 +85,8 @@ class ClientesController extends Controller {
         }
     }
 
-    public function atualizarClientes() {
+    public function atualizarClientes()
+    {
 
 
         $id = $_GET['id'];
@@ -75,7 +98,8 @@ class ClientesController extends Controller {
         $this->loadTemplateLoginCompany("atualizarClientes", $viewData);
     }
 
-    public function atualizar() {
+    public function atualizar()
+    {
 
         $id = addslashes($_POST['id']);
         $nome = addslashes($_POST['nome']);
@@ -102,7 +126,8 @@ class ClientesController extends Controller {
     }
 
 
-    public function pesquisar(){
+    public function pesquisar()
+    {
 
 
         $pesquisarCPF = $_GET['pesquisarCPF'];
@@ -111,29 +136,23 @@ class ClientesController extends Controller {
         $clienteArray['cliente'] = $clientes->pesquisarCpf($pesquisarCPF);
 
 
-        if(isset($clienteArray)){
+        if (isset($clienteArray)) {
 
             $clienteArray['status'] = "OK";
 
             echo json_encode($clienteArray);
-
-        }else{
+        } else {
 
             $clienteArray['status'] = "NOTOK";
 
             echo json_encode($clienteArray);
-
         }
-
-
-
-
-
     }
 
 
 
-    public function pesquisarCliente(){
+    public function pesquisarCliente()
+    {
 
 
         $nomeCliente = $_POST['nomeCliente'];
@@ -142,36 +161,37 @@ class ClientesController extends Controller {
         $clienteArray['clienteJson'] = $clientes->pesquisarCliente($nomeCliente);
 
 
-        if(isset($clienteArray)){
+        if (isset($clienteArray)) {
 
             $clienteArray['status'] = "OK";
 
             echo json_encode($clienteArray);
-
-        }else{
+        } else {
 
             $clienteArray['status'] = "NOTOK";
 
             echo json_encode($clienteArray);
-
         }
-
-
-
-
-
     }
 
 
 
-    public function deletarClientes($idCliente){
+    public function deletarClientes($idCliente)
+    {
 
 
 
         echo $idCliente;
         exit;
+    }
+
+    public function listarClientes($pagina){
+
+
+
 
     }
+    
 
     
 }
