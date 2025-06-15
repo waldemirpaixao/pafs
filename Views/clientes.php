@@ -55,25 +55,22 @@
     </div>
 
 
-    <br />
-    <br />
-    <br />
-    <br />
+
 
     <br />
     <div class="margin-15">
         <input type="text" placeholder="Digite o nome do cliente..." class="campoTexto" id="nomeCliente">
     </div>
-    <br/>
+    <br />
     <Strong>Nome</Strong>
-    <hr/>
+    <hr />
     <?php
 
     $cliente = new Clientes();
 
     $allClient = $cliente->getAllCliente($_SESSION['idEmpresa']);
 
-    $pagina = $page;//vindo do clicar na página
+    $pagina = $page; //vindo do clicar na página
 
 
     $totalDeItens = count($allClient);
@@ -183,7 +180,7 @@
 
                 </div>
 
-<hr/>
+                <hr />
 
             <?php
         } //end foreach

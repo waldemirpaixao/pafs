@@ -19,7 +19,7 @@
 
     if (isset($mensagem)) :
 
-        if ($mensagem == "Dependente cadastrado com sucesso!" || $mensagem == "Dependente deletado com sucesso!" ) :
+        if ($mensagem == "Dependente cadastrado com sucesso!" || $mensagem == "Dependente deletado com sucesso!") :
 
 
     ?>
@@ -52,23 +52,28 @@
         <div>
             <h1 class="estiloBorda">Cadastro de dependentes</h1>
         </div>
+
+
         <!--Link do modal-->
         <div class=" card circulo">
 
             <img alt="Adicionar Dependentes" title="Adicionar Dependentes" data-toggle="modal" data-target="#clientes" class="circulo" src="<?php echo BASE_URL; ?>assets/imagens/add.svg">
         </div>
     </div>
+    <br />
 
-
+    <div class="margin-15">
+        <input type="text" placeholder="Digite o nome do cliente..." class="campoTexto" id="nomeCliente">
+    </div>
 
 
     <br />
-    <br />
-    <br />
-    <br />
+    <div class="tirinhas">
+        <div class="subtirinhas"><strong>Nome</strong></div>
 
+    </div>
 
-
+    <hr />
 
     <?php
     $dependentes = new Dependentes();
@@ -89,18 +94,20 @@
 
             <div class="tirinhas">
 
-                <div class="subtirinhas"><?php echo $todosDependentes['nomeDependentes']; ?></div>
-                <div class="subtirinhas"><?php echo "CPF: " . $todosDependentes['cpfDependentes']; ?></div>
-                <div class="subtirinhas"><?php echo "Titular: " . $todosDependentes['nomeClientes']; ?></div>
+
+                <div class="subtirinhas">
+                    <?php echo $todosDependentes['nomeDependentes']; ?>
+
+                </div>
+
+
                 <div class="subtirinhas">
                     <div class="alinhamentoDireito">
-                        <img id="<?php echo $todosDependentes['idDependentes']; ?>" onclick="mostrar(this)" class="imagemPequena ponteiro" title="Detalhe" src="<?php echo BASE_URL; ?>assets/imagens/detalhes.png" /></a>
-                        <a id="atualizar" href="<?php echo BASE_URL; ?>Dependentes/atualizarDependentes/?id=<?php echo $todosDependentes['idDependentes']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
-                        <a href="<?php echo BASE_URL; ?>Dependentes/deletarDependentes/<?php echo $todosDependentes['idDependentes']; ?>"><img  onclick=" return confirm('Deseja escluir realmente o dependente <?= $todosDependentes['nomeDependentes']; ?> ?')"  class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
                         <div>
+                            <img id="<?php echo $todosDependentes['idDependentes']; ?>" onclick="mostrar(this)" class="imagemPequena ponteiro" title="Detalhe" src="<?php echo BASE_URL; ?>assets/imagens/detalhes.png" /></a>
+                            <a id="atualizar" href="<?php echo BASE_URL; ?>Dependentes/atualizarDependentes/?id=<?php echo $todosDependentes['idDependentes']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
+                            <a href="<?php echo BASE_URL; ?>Dependentes/deletarDependentes/<?php echo $todosDependentes['idDependentes']; ?>"><img onclick=" return confirm('Deseja escluir realmente o dependente <?= $todosDependentes['nomeDependentes']; ?> ?')" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -116,7 +123,7 @@
 
                 </div>
             </div>
-
+            <hr />
 
 
 

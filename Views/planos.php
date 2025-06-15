@@ -7,19 +7,18 @@
     <br>
     <br>
 
-    <div  class="flexivel">
+    <div class="flexivel">
         <div>
             <h1 class="estiloBorda">Planos Funerais</h1>
         </div>
         <!--Link do modal-->
-        <div  class=" card circulo">
+        <div class=" card circulo">
 
             <img alt="Adicionar Planos" title="Adicionar Planos" data-toggle="modal" data-target="#planos" class="circulo" src="<?php echo BASE_URL; ?>assets/imagens/add.svg">
         </div>
     </div>
-    <br />
-    <br />
-    <br />
+    <hr/>
+    
 
     <?php
 
@@ -40,8 +39,7 @@
     endif;
     ?>
 
-    <br />
-    <br />
+  
 
 
 
@@ -68,12 +66,17 @@
                 <div class="subtirinhas"><?php echo "R$ " . $planos['valorPlanos']; ?></div>
                 <div class="subtirinhas"><?php echo $planos['comissaoPlanos'] . "%"; ?></div>
 
-                <div class="subtirinhas"><a id="atualizar" href="<?php echo BASE_URL; ?>Planos/atualizarPlanos/?id=<?php echo $planos['idPlanos']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a></div>
-
-                <div class="subtirinhas"><a href="<?php echo BASE_URL; ?>Planos/deletarPlanos/?id=<?php echo $planos['idPlanos']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a></div>
+                <div class="subtirinhas">
+                    <div>
+                        <div class="alinhamentoDireito">
+                            <a id="atualizar" href="<?php echo BASE_URL; ?>Planos/atualizarPlanos/?id=<?php echo $planos['idPlanos']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/refresh.svg" /></a>
+                            <a href="<?php echo BASE_URL; ?>Planos/deletarPlanos/?id=<?php echo $planos['idPlanos']; ?>"><img class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/delete.svg" /></a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-
+<hr/>
 
         <?php
         }

@@ -58,8 +58,8 @@
 
 
     <h1 class="estiloBorda">Venda de Planos</h1>
-    <br />
-    <br />
+    <br/>
+    <hr/>
 
     <!--Link do modal-->
     <!-- <div class=" card circulo">
@@ -101,13 +101,19 @@
                     <div class="subtirinhas"><?php echo $clientes['nomeClientes']; ?></div>
 
 
-                    <div class="subtirinhas alinhamentoDireito">
-                        <a id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Realizar compras" title="carrinho de compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg" /></a>
-                        <a id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png" /></a>
+                    <div class="subtirinhas">
+                        <div class="alinhamentoDireito">
+                            <div>
+                                <a id="atualizar" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Realizar compras" title="carrinho de compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/supermarket.svg" /></a>
+                                <a id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png" /></a>
+                            </div>
+                        </div>
+
                     </div>
 
 
                 </div>
+                <hr/>
 
 
             <?php
@@ -127,15 +133,19 @@
 
 
 
-                    <div class="subtirinhas alinhamentoDireito">
-                        <a id="atualizar" href="<?php echo BASE_URL; ?>AtualizarFormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="Atualizar compras" title="Atualizar compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png" /></a>
-                        <a id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png" /></a>
+                    <div class="subtirinhas">
+                        <div class="alinhamentoDireito">
+                            <div>
+                                <a id="atualizar" href="<?php echo BASE_URL; ?>AtualizarFormularioVendaPlanos/atualizarPlanos/<?php echo $clientes['idClientes']; ?>"><img alt="Atualizar compras" title="Atualizar compras" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/atualizar_compras.png" /></a>
+                                <a id="evoluirContrato" href="<?php echo BASE_URL; ?>FormularioVendaPlanos/planos/<?php echo $clientes['idClientes']; ?>"><img alt="Evoluir Contrato" title="Evoluir Contrato" class="imagemPequena" src="<?php echo BASE_URL; ?>assets/imagens/contrato.png" /></a>
+                            </div>
+                        </div>
                     </div>
 
 
 
                 </div>
-
+<hr/>
 
         <?php
             endif;
