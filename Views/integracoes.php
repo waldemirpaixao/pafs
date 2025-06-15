@@ -14,12 +14,13 @@
 
     <?php
 
-    use Models\DiaAreceber;
 
 
     if (isset($mensagem)) :
 
-        if ($mensagem == "Cadastrado com Sucesso!" || $mensagem == "Atualizado com Sucesso!") :
+        
+
+        if ($mensagem == "Salvo com sucesso!" || $mensagem == "Atualizado com Sucesso!") :
 
 
     ?>
@@ -28,7 +29,7 @@
 
         <?php
 
-        elseif ($mensagem == "Erro ao cadastrar!" || $mensagem == "Erro ao atualizar!") :
+        elseif ($mensagem == "Erro ao salvar!" || $mensagem == "Erro ao atualizar!") :
 
 
         ?>
@@ -48,88 +49,33 @@
 
 
 
-    <?php
-
-    $diasAreceber = new DiaAreceber();
-    $diaAreceberArray = $diasAreceber->getAllByEmpresa($_SESSION['idEmpresa']);
 
 
-    if (!isset($diaAreceberArray)):
+    <h1 class="estiloBorda">Integrações</h1>
 
-    ?>
+    <br />
 
+    <!--<h4 style="opacity: 0.8;">Escolha o banco para integração.</h4>-->
 
+    <br />
 
-        <input type="hidden" id="idEmpresa" value="<?php echo $idEmpresa; ?>" />
+    <img src=<?php echo BASE_URL . "assets/imagens/banco-asaas.jpeg"; ?> title="Banco Asaas" alt="Banco Assas" />
 
-        <h1 class="estiloBorda">Integrações</h1>
-
-        <br />
-
-        <h4 style="opacity: 0.8;">Escolha o banco para integração.</h4>
-
-        <br />
-
-        <form method="POST" action="<?php echo BASE_URL; ?>Bancos/cadastrar">
+    <form method="POST" action="<?php echo BASE_URL; ?>Integracoes/cadastrar">
 
 
-            <input type="text" id="idEmpresa" value="<?php echo $idEmpresa; ?>" />
+        <input type="hidden" name="idEmpresa" id="idEmpresa" value="<?php echo $idEmpresa; ?>" />
+        <input class="campoTexto" type="hidden" name="nomeBanco" value="ASAAS GESTÃO FINANCEIRA INSTITUIÇÃO DE PAGAMENTOS S.A." />
 
-            <label class="rotulo">Qual o banco?</label>
-
-            <select name="nomeBanco" class="campoTexto" id="listabancos">
-
-                <option value="vazio">Escolha o seu banco...</option>
-
-            </select>
-
-            <label class="rotulo">Qual a chave?</label>
-            <input class="campoTexto" type="text" name="chave" />
+        <label class="rotulo">Qual a chave?</label>
+        <input class="campoTexto" type="text" name="chave" />
 
 
-            <input type="submit" class="botao" value="Salvar">
+        <input type="submit" class="botao" value="Salvar">
 
 
-        </form>
-
-    <?php
-
-    else:
-
-    ?>
+    </form>
 
 
 
-        <h1 class="estiloBorda">Integrações</h1>
-
-        <br />
-
-        <h4 style="opacity: 0.8;">Escolha o banco para integração.</h4>
-
-        <br />
-
-        <form method="POST" action="<?php echo BASE_URL; ?>Integracoes/cadastrar">
-
-
-            <input type="hidden" id="idEmpresa" value="<?php echo $idEmpresa; ?>" />
-
-            <label class="rotulo">Qual o banco?</label>
-
-            <select name="nomeBanco" class="campoTexto" id="listabancos">
-
-                <option value="vazio">Escolha o seu banco...</option>
-
-            </select>
-
-            <label class="rotulo">Qual a chave?</label>
-            <input class="campoTexto" type="text" name="chave" />
-
-
-            <input type="submit" class="botao" value="Salvar">
-
-
-        </form>
-
-
-    <?php endif; ?>
 </div>

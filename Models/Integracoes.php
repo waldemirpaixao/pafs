@@ -4,19 +4,20 @@
 namespace Models;
 
 use Core\Model;
+use Mpdf\Utils\Arrays;
 use PDOException;
 
 class Integracoes extends Model
 {
     public function inserir($idEmpresa, $nomeDoBanco, $chave)
     {
-        $sql = "INSERT INTO integracoes(nomeBanco, idEmpresa, chave) VALUES(:nomeBanco, :idEmpresa, :chave)";
+        $sql = "INSERT INTO integracao(nomeBanco, chave, empresa_idEmpresa) VALUES(:nomeBanco, :chave, :idEmpresa)";
         $inserir = $this->db->prepare($sql);
 
         try {
             $this->db->beginTransaction();
 
-            $inserir->bindValue(":nomeDoBanco", $nomeDoBanco);
+            $inserir->bindValue(":nomeBanco", $nomeDoBanco);
             $inserir->bindValue(":idEmpresa", $idEmpresa);
             $inserir->bindValue(":chave", $chave);
 
@@ -36,14 +37,16 @@ class Integracoes extends Model
 
     public function checKIntegracao($idEmpresa, $nomeBanco, $chave)
     {
-        $sql = "SELECT * FROM integracoes WHERE idEmpresa = :idEmpresa AND nomeBanco = :nomeBanco AND chave = :chave";
+        $sql = "SELECT * FROM integracao WHERE empresa_idEmpresa = :idEmpresa AND chave = :chave";
         $check = $this->db->prepare($sql);
 
         $check->bindValue(":idEmpresa", $idEmpresa);
-        $check->bindValue(":nomeBanco", $nomeBanco);
         $check->bindValue(":chave", $chave);
         $check->execute();
 
+         $contagem  = $check->rowCount(); // Debugging line to check for errors
+        
+       
         if ($check->rowCount() > 0) {
             return true; // Já existe uma integração com esse banco
         } else {
@@ -52,7 +55,7 @@ class Integracoes extends Model
     }
     public function getIntegracoes($idEmpresa)
     {
-        $sql = "SELECT * FROM integracoes WHERE idEmpresa = :idEmpresa";
+        $sql = "SELECT * FROM integracao WHERE empresa_idEmpresa = :idEmpresa";
         $query = $this->db->prepare($sql);
         $query->bindValue(":idEmpresa", $idEmpresa);
         $query->execute();
@@ -65,7 +68,7 @@ class Integracoes extends Model
     }
     public function excluir($idIntegracao)
     {
-        $sql = "DELETE FROM integracoes WHERE idIntegracao = :idIntegracao";
+        $sql = "DELETE FROM integracao WHERE idIntegracao = :idIntegracao";
         $excluir = $this->db->prepare($sql);
 
         $excluir->bindValue(":idIntegracao", $idIntegracao);
@@ -74,7 +77,7 @@ class Integracoes extends Model
 
     public function getIntegracaoById($idIntegracao)
     {
-        $sql = "SELECT * FROM integracoes WHERE idIntegracao = :idIntegracao";
+        $sql = "SELECT * FROM integracao WHERE idIntegracao = :idIntegracao";
         $query = $this->db->prepare($sql);
         $query->bindValue(":idIntegracao", $idIntegracao);
         $query->execute();
@@ -86,3 +89,5 @@ class Integracoes extends Model
         }
     }
 }
+
+

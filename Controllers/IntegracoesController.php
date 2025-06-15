@@ -35,30 +35,43 @@ class IntegracoesController extends Controller
     public function cadastrar()
     {
 
-        $idEmpresa = addslashes($_POST['idEmpresa']);
-        $nomeDoBanco = addslashes($_POST['nomeDoBanco']);
-        $chave = addslashes($_POST['chave']);
+        $idEmpresa = trim(addslashes($_POST['idEmpresa']));
+        $nomeDoBanco = trim(addslashes($_POST['nomeBanco']));
+        $chave = trim(addslashes($_POST['chave']));
+
+
+       
 
 
         $integracoes = new Integracoes();
 
 
-        if ($integracoes->checKIntegracao($idEmpresa, $nomeDoBanco, $chave)) {
+        if ($retorno = $integracoes->checKIntegracao($idEmpresa, $nomeDoBanco, $chave)) {
+            unset($viewData);
             $this->viewData['mensagem'] = "Chave já cadastrada!";
-            $this->loadTemplateLoginCompany("integracoes", $this->viewData);
-            return;
+            
+           // $this->loadTemplateLoginCompany("integracoes", $this->viewData);
+            //return;
         } else {
 
             $inserido = $integracoes->inserir($idEmpresa, $nomeDoBanco, $chave);
 
 
             if ($inserido) {
+                 unset($viewData);
                 $this->viewData['mensagem'] = "Salvo com sucesso!";
-                $this->loadTemplateLoginCompany("integracoes", $this->viewData);
+               // $this->loadTemplateLoginCompany("integracoes", $this->viewData);
             } else {
-                $this->viewData['mensagem'] = "Erro ao cadastrar!";
-                $this->loadTemplateLoginCompany("integracoes", $this->viewData);
+                 unset($viewData);
+                $this->viewData['mensagem'] = "Erro ao salvar!";
+                //$this->loadTemplateLoginCompany("integracoes", $this->viewData);
             }
         }
+
+
+        $this->viewData['retono'] = $retorno;
+        $this->loadTemplateLoginCompany("integracoes", $this->viewData);
+
+       
     }
 }
