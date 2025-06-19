@@ -11,8 +11,11 @@ $config = array();
         $config['dbpass'] = 'waldemir';
         
         //ASAAS - url base de cobranças
-        define("BASE_URL_PAYMENT","https://api-sandbox.asaas.com/v3/payments");
-        define("BASE_URL_CUSTOMERS","https://api-sandbox.asaas.com/v3/customers");
+       define("BASE_URL_PAYMENT","https://api-sandbox.asaas.com/v3/payments");
+       define("BASE_URL_CUSTOMERS","https://api-sandbox.asaas.com/v3/customers");
+
+        //define("BASE_URL_PAYMENT","https://api.asaas.com/v3/payments");
+        //define("BASE_URL_CUSTOMERS","https://api.asaas.com/v3/customers");
 
        
     }else{
@@ -22,6 +25,9 @@ $config = array();
         $config['host'] = 'localhost';
         $config['dbuser'] = 'pafsco96_systempafs';
         $config['dbpass'] = 'Sucesso@2023'; 
+
+         
+
 
         //ASAAS - url base de cobranças
         define("BASE_URL_PAYMENT","https://api.asaas.com/v3/payments");

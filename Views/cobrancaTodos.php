@@ -49,7 +49,7 @@ use  \Models\Venda;
 
 
 $integracoes = new Integracoes();
-$access_token = $integracoes->getEmpresaById($idEmpresa);
+$access_token = trim($integracoes->getEmpresaById($idEmpresa));
 
 
     
