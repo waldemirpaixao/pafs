@@ -2476,19 +2476,25 @@ and open the template in the editor.
                         //PEGA OS PLANOS CORRESPONDENTES COM A EMPRESA
                         $planos = new Planos();
                         $arrayPlanos = $planos->getAllPlanos($_SESSION['idEmpresa']);
-                       
+
 
 
                         $letras = ["a)", "b)", "c)", "d)", "e)", "f)", "g)", "h)", "i)", "j)", "k)", "l)", "m)", "n)", "o)", "p)", "q)", "r)", "s)", "t)", "u)", "v)", "w)", "x)", "y)", "z)"];
                         $indice = 0;
-                        foreach ($arrayPlanos as $plano ) :
-                         
-                                echo $letras[$indice] . " " .  $plano['nomePlanos'] . ": R$ " . number_format($plano['valorPlanos'], 2, ",", ".") * $plano['parcela'] . " pagos em  " . $plano['parcela'] ." parcelas de R$ " . number_format($plano['valorPlanos'], 2, ",", ".") . " com indenização de R$ " . number_format($plano['indenizacao'], 2, ",", ".") . " em caso de morte acidental do segurado. <br />";
-                               $indice++;
-                    
+                        foreach ($arrayPlanos as $plano) :
+                            $valor = str_replace(",", ".", $plano['valorPlanos']); // se tiver vírgula
+                            $valor = floatval($valor);
+
+                            $parcela = intval($plano['parcela']); // se tiver vírgula
+                           
+                            $total = $valor * $parcela;
+
+                            echo $letras[$indice] . " " .  $plano['nomePlanos'] . ": R$ " . number_format($total, 2, ",", ".") . " pagos em  " . $plano['parcela'] . " parcelas de R$ " . number_format($plano['valorPlanos'], 2, ",", ".") . " com indenização de R$ " . number_format($plano['indenizacao'], 2, ",", ".") . " em caso de morte acidental do segurado. <br />";
+                            $indice++;
+
                         endforeach;
                         ?>
-                        
+
                     </p>
 
                     <p class="justificar rotulo">
@@ -2586,27 +2592,25 @@ and open the template in the editor.
                         cadastrado no seguro oferecido pelo plano contratado, e seus dependentes que estiverem
                         cadastrados no seguro oferecido pelo plano, terão direito a cobertura nacional,
                         e os dependentes que não estiverem inclusos no seguro, só terão direito a assistência funeral no estado de Sergipe.<br />
-                        II - A CONTRATADA prestará os serviços pactuados neste instrumento em um raio máximo de 1 .OOO km
-                        sendo do plano Ouro, iniciados na sede da CONTRATADA.<br />
-                        III - Quando a remoção, ultrapassar a quilometragem franqueada pela CONTRATADA conforme opção,
+                        II - Quando a remoção, ultrapassar a quilometragem franqueada pela CONTRATADA conforme opção,
                         a diferença correspondente ficará por conta da família que pagará à CONTRATADA com base na
                         tabela da ABREDIF (Associação Brasileira das Empresas e Diretores Funerários).<br />
-                        IV - Este contrato não cobre terrenos em cemitérios, gavetas, jazidos, sepultamento
+                        III - Este contrato não cobre terrenos em cemitérios, gavetas, jazidos, sepultamento
                         de membros amputados ou outros fornecimentos não previstos no contrato.
                         Suspende-se as garantias conferidas por este contrato em caso de calamidade pública,
                         revoluções, guerras, ou qualquer outro movimento semelhante.<br />
-                        V - Caso haja duplicidade de qualquer beneficiário em outro contrato que não o presente,
+                        IV - Caso haja duplicidade de qualquer beneficiário em outro contrato que não o presente,
                         ficam inteiramente revogadas e sem efeito as condições contidas naquele contrato,
                         passando a vigorar única e tão somente as condições contidas neste contrato.<br />
-                        VI - Se houver alguma despesa para liberação do corpo do falecido, será por conta da família.<br />
-                        VII - O CONTRATANTE que durante a vigência deste contrato atrasar três mensalidades consecutivas
+                        V - Se houver alguma despesa para liberação do corpo do falecido, será por conta da família.<br />
+                        VI - O CONTRATANTE que durante a vigência deste contrato atrasar três mensalidades consecutivas
                         ou alternadas, terá todos os seus direitos suspensos temporariamente.<br />
-                        VIII - No caso de falecimento do CONTRATANTE, o presente passará a seus dependentes, devendo ser obedecida ordem de sucessão legal.<br />
-                        IX - Não se responsabiliza a CONTRATADA por serviço executados por terceiros não autorizados.<br />
-                        X - Incide sobre este Plano Funerário o Imposto Sobre Serviços - ISS.<br />
-                        XI - O cancelamento, exclusões, inclusões e substituições serão feitas apenas mediante solicitação escrita com firma reconhecida
+                        VII - No caso de falecimento do CONTRATANTE, o presente passará a seus dependentes, devendo ser obedecida ordem de sucessão legal.<br />
+                        VIII - Não se responsabiliza a CONTRATADA por serviço executados por terceiros não autorizados.<br />
+                        IX - Incide sobre este Plano Funerário o Imposto Sobre Serviços - ISS.<br />
+                        X - O cancelamento, exclusões, inclusões e substituições serão feitas apenas mediante solicitação escrita com firma reconhecida
                         pelo CONTRATANTE (titular) do contrato.<br />
-                        XII - Fica eleito o foro da PAFS, para dirimir qualquer duvida decorrente do presente contrato.<br />
+                        XI - Fica eleito o foro da PAFS, para dirimir qualquer duvida decorrente do presente contrato.<br />
                         E, por assim estarem de perfeito acordo em tudo quando foi lavrado neste contrato, obrigam-se a cumpri-lo assinando.<br />
                     </p>
                     <p class="rotulo" style="padding-top:20px;">
