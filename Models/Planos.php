@@ -93,13 +93,13 @@ class Planos extends Model
 
     //inserir planos
 
-    public function inserir($nomePlanos, $valorPlanos, $comissaoPlanos, $idEmpresa, $comSemSeguro, $descricao)
+    public function inserir($nomePlanos, $valorPlanos, $comissaoPlanos, $idEmpresa, $comSemSeguro, $descricao, $parcela, $indenizacao)
     {
 
 
 
 
-        $sql = "INSERT INTO planos (nomePlanos, valorPlanos, empresa_idEmpresa, dataCadastroPlanos, dataCadastroAtualizacaoPlanos,  comissaoPlanos, descricao) VALUES (:nomePlanos, :valorPlanos,:idEmpresa,now(),now(),:comissaoPlanos, :descricao)";
+        $sql = "INSERT INTO planos (nomePlanos, valorPlanos, empresa_idEmpresa, dataCadastroPlanos, dataCadastroAtualizacaoPlanos,  comissaoPlanos, descricao, parcela, indenizacao) VALUES (:nomePlanos, :valorPlanos,:idEmpresa,now(),now(),:comissaoPlanos, :descricao, :parcela, :indenizacao)";
 
         $inserir = $this->db->prepare($sql);
         $inserir->bindValue(':idEmpresa', $idEmpresa);
@@ -107,6 +107,8 @@ class Planos extends Model
         $inserir->bindValue(':valorPlanos', $valorPlanos);
         $inserir->bindValue(':comissaoPlanos', $comissaoPlanos);
         $inserir->bindValue(':descricao', $descricao);
+        $inserir->bindValue(':parcela', $parcela);
+        $inserir->bindValue(':indenizacao', $indenizacao);
 
 
         $inserido = $inserir->execute();
@@ -155,12 +157,12 @@ class Planos extends Model
 
 
 
-    public function atualizar($nomePlanos, $valorPlanos, $comissaoPlanos, $idPlanos,$idEmpresa,$descricao)
+    public function atualizar($nomePlanos, $valorPlanos, $comissaoPlanos, $idPlanos,$idEmpresa,$descricao,$parcela, $indenizacao)
     {
 
 
 
-        $sql = "UPDATE planos SET nomePlanos = :nomePlanos, valorPlanos = :valorPlanos, dataCadastroAtualizacaoPlanos = now(),  comissaoPlanos = :comissaoPlanos, descricao = :descricao  WHERE idPlanos = :idPlanos and empresa_idEmpresa = :idEmpresa";
+        $sql = "UPDATE planos SET nomePlanos = :nomePlanos, valorPlanos = :valorPlanos, dataCadastroAtualizacaoPlanos = now(),  comissaoPlanos = :comissaoPlanos, descricao = :descricao, parcela = :parcela, indenizacao = :indenizacao  WHERE idPlanos = :idPlanos and empresa_idEmpresa = :idEmpresa";
 
         $atual = $this->db->prepare($sql);
         $atual->bindValue(':idPlanos', $idPlanos);
@@ -169,8 +171,9 @@ class Planos extends Model
         $atual->bindValue(':comissaoPlanos', $comissaoPlanos);
         $atual->bindValue(':idEmpresa', $idEmpresa);
         $atual->bindValue(':descricao', $descricao);
+        $atual->bindValue(':parcela', $parcela);
+        $atual->bindValue(':indenizacao', $indenizacao);
         
-
 
         $atualizado = $atual->execute();
 

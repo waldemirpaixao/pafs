@@ -42,12 +42,15 @@ class planosController extends Controller {
         $valorPlanos = addslashes(str_replace(",",".",$_POST['valorPlano']));
         $descricao = addslashes($_POST['descricao']);
         $comissaoPlanos = addslashes($_POST['comissaoPlano']);
+         $parcela = addslashes($_POST['parcela']);
+        $indenizacao = addslashes(str_replace(".","",$_POST['indenizacao']));
+        $indenizacao = str_replace(",",".",$indenizacao);
 
         $idComplemento = $_POST['comSemSeguro'][0];
 
        
         $planos = new Planos();
-        $viewData['mensagem'] = $planos->atualizar($nomePlanos, $valorPlanos, $comissaoPlanos, $idPlanos,$_SESSION['idEmpresa'],$descricao);
+        $viewData['mensagem'] = $planos->atualizar($nomePlanos, $valorPlanos, $comissaoPlanos, $idPlanos,$_SESSION['idEmpresa'],$descricao, $parcela, $indenizacao);
         $viewData['idPlanos'] = $idPlanos;
 
 
@@ -79,6 +82,9 @@ class planosController extends Controller {
         $descricao = addslashes($_POST['descricao']);
         $comissaoPlanos = addslashes($_POST['comissaoPlano']);
         $comSemSeguro = $_POST['comSemSeguro'];
+        $parcela = addslashes($_POST['parcela']);
+        $indenizacao = addslashes(str_replace(".","",$_POST['indenizacao']));
+        $indenizacao = str_replace(",",".",$indenizacao);
         
         $planos = new Planos();
         
@@ -94,7 +100,7 @@ class planosController extends Controller {
         if (isset($_POST['comSemSeguro']) && !empty($_POST['comSemSeguro'])) {
 
             
-            $viewData['mensagem'] = $planos->inserir($nomePlanos, $valorPlanos, $comissaoPlanos, $_SESSION['idEmpresa'],  $comSemSeguro, $descricao);
+            $viewData['mensagem'] = $planos->inserir($nomePlanos, $valorPlanos, $comissaoPlanos, $_SESSION['idEmpresa'],  $comSemSeguro, $descricao,$parcela, $indenizacao);
 
             $this->loadTemplateLoginCompany("planos", $viewData);
         } else {

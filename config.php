@@ -21,9 +21,9 @@ $config = array();
     }else{
         //alerar a configuração no servidor
         define("BASE_URL", "https://sistema.pafs.com.br/");
-        $config['dbname'] = 'pafsco96_pafs';
+        $config['dbname'] = 'pafs_prod';
         $config['host'] = 'localhost';
-        $config['dbuser'] = 'pafsco96_systempafs';
+        $config['dbuser'] = 'pafs_prod';
         $config['dbpass'] = 'Sucesso@2023'; 
 
          

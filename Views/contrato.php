@@ -2476,15 +2476,19 @@ and open the template in the editor.
                         //PEGA OS PLANOS CORRESPONDENTES COM A EMPRESA
                         $planos = new Planos();
                         $arrayPlanos = $planos->getAllPlanos($_SESSION['idEmpresa']);
+                       
 
 
+                        $letras = ["a)", "b)", "c)", "d)", "e)", "f)", "g)", "h)", "i)", "j)", "k)", "l)", "m)", "n)", "o)", "p)", "q)", "r)", "s)", "t)", "u)", "v)", "w)", "x)", "y)", "z)"];
+                        $indice = 0;
+                        foreach ($arrayPlanos as $plano ) :
+                         
+                                echo $letras[$indice] . " " .  $plano['nomePlanos'] . ": R$ " . number_format($plano['valorPlanos'], 2, ",", ".") * $plano['parcela'] . " pagos em  " . $plano['parcela'] ." parcelas de R$ " . number_format($plano['valorPlanos'], 2, ",", ".") . " com indenização de R$ " . number_format($plano['indenizacao'], 2, ",", ".") . " em caso de morte acidental do segurado. <br />";
+                               $indice++;
+                    
+                        endforeach;
                         ?>
-                        a) <?php echo $arrayPlanos[1][1] ?>: <strong> R$ <?php echo str_replace(".", ",", $arrayPlanos[1][2]) ?> </strong></strong><br />
-                        b) <?php echo $arrayPlanos[2][1] ?>: <strong> R$ <?php echo str_replace(".", ",", $arrayPlanos[2][2]) ?> </strong></strong><br />
-                        c) <?php echo $arrayPlanos[3][1] ?>: <strong> R$ <?php echo str_replace(".", ",", $arrayPlanos[3][2]) ?> </strong></strong><br />
-                        d) <?php echo $arrayPlanos[0][1] ?>: <strong> R$ <?php echo str_replace(".", ",", $arrayPlanos[0][2]) ?> </strong> <br />
-
-
+                        
                     </p>
 
                     <p class="justificar rotulo">
