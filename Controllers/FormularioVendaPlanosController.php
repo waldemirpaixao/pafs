@@ -91,7 +91,11 @@ class FormularioVendaPlanosController extends Controller
         $portabilidade = addslashes($_POST['portabilidade']);
 
       
+        if(isset($_POST['valorExtraDependente']) && !empty($_POST['valorExtraDependente'])){
         $valorExtraDependente = addslashes($_POST['valorExtraDependente']); //ok
+        }else{
+            $valorExtraDependente = 0.00;
+        }
         $adesao = addslashes($_POST['adesao']); //oK
         $dataVencimento = addslashes($_POST['dataVencimento']); //ok
         $idClientes = addslashes($_POST['idCliente']); //ok
@@ -107,9 +111,11 @@ class FormularioVendaPlanosController extends Controller
         $dataFimContratoNovo = date_format(date_create($dataFimContrato),"Y-m-d");
 
 
-        $desconto = addslashes(str_replace(",",".",$_POST['desconto']));
-                
-
+        if(isset($_POST['desconto']) && !empty($_POST['desconto'])){
+            $desconto = addslashes(str_replace(",",".",$_POST['desconto']));
+        }else{
+            $desconto = 0.00;
+        }
 
 
         /* id da empresa */
@@ -137,7 +143,6 @@ class FormularioVendaPlanosController extends Controller
         $idFormaPagamento = $_POST['formaPagamento']; //Array
 
        
-
 
 
 
@@ -183,12 +188,14 @@ class FormularioVendaPlanosController extends Controller
         $this->formaPagamentoArray = $formaDePagamento->getFormaPagamentoById($idFormaPagamento, $idEmpresa);
         $idFormaPagamento = $this->formaPagamentoArray['idformaPagamento'];
 
+        
+        
 
 
         $receberPagamentosDosClientes = new ReceberPagamentosDosClientes();
-        $recebidoPagamento = $receberPagamentosDosClientes->inserir($idEmpresa, $idClientes, $this::NUMEROPARCELAS, $dataAdesao, $dataVencimento, $valorPlanoParcial, $valorExtraDependente, $desconto, $this->statusPagamentoId, $idFormaPagamento, $idVenda, $idVendedor, $_SESSION['ano']);
+        $receberPagamentosDosClientes->inserir($idEmpresa, $idClientes, $this::NUMEROPARCELAS, $dataAdesao, $dataVencimento, $valorPlanoParcial, $valorExtraDependente, $desconto, $this->statusPagamentoId, $idFormaPagamento, $idVenda, $idVendedor, $_SESSION['ano']);
+        
 
-       
         //print_r($idDependentes);
 
         //Venda de dependente

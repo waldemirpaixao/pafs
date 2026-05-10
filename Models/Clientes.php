@@ -62,6 +62,23 @@ class Clientes extends Model {
         }
     }
 
+    public function getTotalClientes($idEmpresa) {
+        $sql = "SELECT COUNT(*) as total FROM clientes WHERE empresa_idEmpresa = :id and situacao = :situacao";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":situacao", self::ATIVO);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
     public function inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $idEmpresa) {
 
 

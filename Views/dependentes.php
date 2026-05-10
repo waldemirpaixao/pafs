@@ -199,7 +199,35 @@
             <ul class="pagination">
 
                 <?php
-                for ($q = 1; $q <= $totalPaginas; $q++) :
+                // Paginação enxuta: mostra apenas algumas páginas ao redor da atual
+                $maxLinks = 5; // Número máximo de links de página a mostrar
+                $inicio = max(1, $pagina - floor($maxLinks / 2));
+                $fim = min($totalPaginas, $inicio + $maxLinks - 1);
+
+                // Ajusta o início se o fim estiver no limite
+                if ($fim - $inicio + 1 < $maxLinks) {
+                    $inicio = max(1, $fim - $maxLinks + 1);
+                }
+
+                // Link para Anterior
+                if ($pagina > 1) :
+                ?>
+                    <li><a href="<?php echo BASE_URL; ?>Dependentes/pagina/<?php echo $pagina - 1; ?>">&laquo; Anterior</a></li>
+                <?php endif; ?>
+
+                <?php
+                // Link para primeira página se necessário
+                if ($inicio > 1) :
+                ?>
+                    <li><a href="<?php echo BASE_URL; ?>Dependentes/pagina/1">1</a></li>
+                    <?php if ($inicio > 2) : ?>
+                        <li class="disabled"><span>...</span></li>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                <?php
+                // Links das páginas centrais
+                for ($q = $inicio; $q <= $fim; $q++) :
                     if ($pagina == $q) :
                 ?>
                         <li class="active"><a href="<?php echo BASE_URL; ?>Dependentes/pagina/<?php echo $q; ?>"><?php echo $q; ?></a></li>
@@ -209,6 +237,24 @@
                     endif;
                 endfor;
                 ?>
+
+                <?php
+                // Link para última página se necessário
+                if ($fim < $totalPaginas) :
+                    if ($fim < $totalPaginas - 1) :
+                ?>
+                        <li class="disabled"><span>...</span></li>
+                    <?php endif; ?>
+                    <li><a href="<?php echo BASE_URL; ?>Dependentes/pagina/<?php echo $totalPaginas; ?>"><?php echo $totalPaginas; ?></a></li>
+                <?php endif; ?>
+
+                <?php
+                // Link para Próximo
+                if ($pagina < $totalPaginas) :
+                ?>
+                    <li><a href="<?php echo BASE_URL; ?>Dependentes/pagina/<?php echo $pagina + 1; ?>">Próximo &raquo;</a></li>
+                <?php endif; ?>
+
             </ul>
         </div>
     <?php endif; ?>

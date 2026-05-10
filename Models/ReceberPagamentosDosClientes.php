@@ -26,8 +26,8 @@ class ReceberPagamentosDosClientes extends Model
 
 
 
-        $sql = "INSERT INTO receberPagamentosDosClientes(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,valorExtraDependente,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
-            . " VALUES(:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor,:valorExtraDependente, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+        $sql = "INSERT INTO receberPagamentosDosClientes(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,valorExtraDependente,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, colaboradores_idColaboradores, ano)"
+            . " VALUES(:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor,:valorExtraDependente, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idColaboradores, :ano )";
 
 
         $inserir = $this->db->prepare($sql);
@@ -47,7 +47,7 @@ class ReceberPagamentosDosClientes extends Model
             $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
             $inserir->bindValue(':idFormaPagamento', $formaPagamento);
             $inserir->bindValue(':idVenda', $idVenda);
-            $inserir->bindValue(':idVendedores', $idVendedor);
+            $inserir->bindValue(':idColaboradores', $idVendedor);
             $inserir->bindValue(':ano', $ano);
     
             $inserido = $inserir->execute();
@@ -87,8 +87,8 @@ class ReceberPagamentosDosClientes extends Model
 
 
 
-        $sql = "INSERT INTO receberPagamentosDosClientes(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,valorExtraDependente,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, venda_vendedores_idVendedores, ano)"
-            . " VALUES (:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idVendedores, :ano )";
+        $sql = "INSERT INTO receberPagamentosDosClientes(empresa_idEmpresa,clientes_idClientes,numeroParcelas,dataPagamento,dataVencimentoBoleto, valor,valorExtraDependente,desconto, estatusPagamento_idestatusPagamento, formaPagamento_idformaPagamento, venda_idVenda, colaboradores_idColaboradores, ano)"
+            . " VALUES (:idEmpresa, :idClientes, :numeroParcelas, :dataPagamento, :dataVencimentoBoleto, :valor, :valorExtraDependente, :desconto, :idEstatusPagamento, :idFormaPagamento, :idVenda, :idColaboradores, :ano )";
 
 
         $inserir = $this->db->prepare($sql);
@@ -108,7 +108,7 @@ class ReceberPagamentosDosClientes extends Model
             $inserir->bindValue(':idEstatusPagamento', $statusPagamento);
             $inserir->bindValue(':idFormaPagamento', $formaPagamento);
             $inserir->bindValue(':idVenda', $idVenda);
-            $inserir->bindValue(':idVendedores', $idVendedor);
+            $inserir->bindValue(':idColaboradores', $idVendedor);
             $inserir->bindValue(':ano', $ano);
     
             $inserido = $inserir->execute();
