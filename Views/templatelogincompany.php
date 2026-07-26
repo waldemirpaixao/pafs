@@ -80,7 +80,7 @@ and open the template in the editor.
 
             <ul>
 
-                <li><a href="<?php echo BASE_URL; ?>Home/">Dashboard Financeiro</a></li>
+                <li><a id="dashboard" href="<?php echo BASE_URL; ?>Home/">Dashboard Financeiro</a></li>
 
                 <li><a id="menuConfiguracoes" href="#">Configurações &nbsp;&nbsp;&nbsp;&nbsp;<img width="10px" src="<?php echo BASE_URL; ?>/assets/imagens/down.svg"></a></li>
                 <div id="submenuConfiguracoes">

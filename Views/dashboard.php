@@ -6,6 +6,13 @@ $meses = array(
     9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'
 );
 ?>
+<script type="text/javascript">
+        $("li").removeClass("stiloFixo");
+        $("li").removeClass("stiloFixoSubmenu");
+        $('li').eq(0).addClass('stiloFixo');
+        // $('li').eq(5).addClass('stiloFixoSubmenu');
+        // $("#submenuConfiguracoes").fadeToggle("slow");
+    </script>
 
 <style>
     * {

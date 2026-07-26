@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
+
+
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - PAFS</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css" rel="stylesheet">
+
     <style>
         :root {
             --primary: #2c3e50;
@@ -259,7 +265,10 @@
         }
     </style>
 </head>
+
 <body>
+
+    
     <div class="dashboard-container">
         <!-- Header -->
         <div class="header-dashboard">
@@ -454,7 +463,11 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { font: { size: 12 } }
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -477,9 +490,9 @@
             data: {
                 labels: ['Recebido', 'Pendente', 'Atrasado'],
                 datasets: [{
-                    data: statusPagamentos && Object.keys(statusPagamentos).length > 0 
-                        ? [statusPagamentos.recebido || 0, statusPagamentos.pendente || 0, statusPagamentos.atrasado || 0]
-                        : [0, 0, 0],
+                    data: statusPagamentos && Object.keys(statusPagamentos).length > 0 ?
+                        [statusPagamentos.recebido || 0, statusPagamentos.pendente || 0, statusPagamentos.atrasado || 0] :
+                        [0, 0, 0],
                     backgroundColor: ['#27ae60', '#f39c12', '#e74c3c'],
                     borderColor: '#fff',
                     borderWidth: 2
@@ -490,7 +503,11 @@
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { font: { size: 12 } }
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
                     }
                 }
             }
@@ -521,7 +538,11 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { font: { size: 12 } }
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -550,11 +571,16 @@
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { font: { size: 12 } }
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
                     }
                 }
             }
         });
     </script>
 </body>
+
 </html>

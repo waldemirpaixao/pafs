@@ -72,9 +72,11 @@ $(function () {
 
   //menu Vendas
   $("#menuVendas").bind("click", function () {
-    $("#submenuVendas").fadeToggle("slow");
     $("li").removeClass("stiloFixo");
-    $("li").eq(14).addClass("stiloFixo");
+     $("li").eq(14).addClass("stiloFixo");
+    $("#submenuVendas").fadeToggle("slow");
+    
+   
 
     // $('li').eq(8).addClass('stiloFixo');
   });

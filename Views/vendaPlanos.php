@@ -1,10 +1,8 @@
 <script type="text/javascript">
-    //Submenu
-    $('li').eq(10).addClass('stiloFixoSubmenu');
+    $('li').eq(14).addClass('stiloFixo');
+    $('#submenuVendas li').eq(0).addClass('stiloFixoSubmenu');
 
-    //Menu
-    $('li').eq(9).addClass('stiloFixo');
-    $("#submenuVendas").fadeToggle("slow");
+     $("#submenuVendas").fadeToggle("slow");
 </script>
 
 <div class="margem">
@@ -16,20 +14,7 @@
 
 
     <?php
-    /*echo "SERVER";
-      print_r("\n");
-      echo print_r($_SERVER);
-      print_r("\n");
-      echo "--------------------------------------------";
-      print_r("\n");
-      echo "REQUEST";
-      print_r("\n");
-      echo print_r($_REQUEST);
-      echo "\n";
-        echo "Ano corrente";
-      echo $_SESSION['ano'];*/
-
-
+   
     use \Models\Clientes;
     use Models\Venda;
 

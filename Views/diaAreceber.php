@@ -1,7 +1,8 @@
 <script type="text/javascript">
-    $('li').eq(1).addClass('stiloFixo');
-    $('li').eq(5).addClass('stiloFixoSubmenu');
-    $("#submenuConfiguracoes").fadeToggle("slow");
+    $('li').eq(16).addClass('stiloFixo');
+    $('#submenuFinanceiro li').eq(1).addClass('stiloFixoSubmenu');
+
+     $("#submenuFinanceiro").fadeToggle("slow");
 </script>
 
 <div class="margem">

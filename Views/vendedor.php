@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
 <script type="text/javascript">
-    $('li').eq(8).addClass('stiloFixoSubmenu');
-    $('li').eq(3).addClass('stiloFixo');
+    $('li').eq(7).addClass('stiloFixo');
+    $('#submenuCadastros li').eq(4).addClass('stiloFixoSubmenu');
+
     $("#submenuCadastros").fadeToggle("slow");
 </script>
 <br>

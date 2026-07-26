@@ -1,6 +1,9 @@
 
-<script>
-       $('li').eq(15).addClass('stiloFixo');
+<script type="text/javascript">
+    $('li').eq(21).addClass('stiloFixo');
+    $('#submenuContrato li').eq(0).addClass('stiloFixoSubmenu');
+
+     $("#submenuContrato").fadeToggle("slow");
 </script>
 <div class="margem">
 <br/>
