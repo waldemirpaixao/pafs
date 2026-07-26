@@ -79,6 +79,39 @@ class Clientes extends Model {
         }
     }
 
+    public function getTotalClientesByEmpresa($idEmpresa) {
+        $sql = "SELECT COUNT(*) as total FROM clientes WHERE empresa_idEmpresa = :id";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getTotalClientesAtivosByEmpresa($idEmpresa) {
+        $sql = "SELECT COUNT(*) as total FROM clientes WHERE empresa_idEmpresa = :id AND situacao = :ativo";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":ativo", self::ATIVO);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
     public function inserir($nome, $dataNascimento, $rg, $cpf, $telefone, $email, $endereco, $cep, $complemento, $pontoreferencia, $bairro, $cidade, $estado, $idEmpresa) {
 
 

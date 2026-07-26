@@ -216,4 +216,20 @@ class Dependentes extends Model
         }
     }
 
+    public function getTotalDependentesByEmpresa($idEmpresa) {
+        $sql = "SELECT COUNT(*) as total FROM dependentes WHERE empresa_idEmpresa = :id";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
 }

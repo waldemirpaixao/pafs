@@ -5,6 +5,12 @@ namespace Controllers;
 use \Core\Controller;
 use \Models\Colaborador;
 use \Models\Empresa;
+use \Models\Clientes;
+use \Models\Dependentes;
+use \Models\Venda;
+use \Models\Contrato;
+use \Models\ReceberPagamentosDosClientes;
+use \Models\Saida;
 
 class HomeController extends Controller {
 
@@ -22,11 +28,62 @@ class HomeController extends Controller {
 
        
         } else {
-
-
-
+            // Carregar dados financeiros para o dashboard
+            $viewData = $this->getDashboardData();
             $this->loadTemplateLoginCompany("dashboard", $viewData);
         }
+    }
+
+    private function getDashboardData() {
+        $idEmpresa = $_SESSION['idEmpresa'];
+        $anoAtual = date('Y');
+        $mesAtual = date('m');
+
+        $viewData = array();
+
+        // Total de Clientes Ativos
+        $clientesModel = new Clientes();
+        $viewData['totalClientes'] = $clientesModel->getTotalClientesByEmpresa($idEmpresa);
+        $viewData['clientesAtivos'] = $clientesModel->getTotalClientesAtivosByEmpresa($idEmpresa);
+
+        // Total de Dependentes
+        $dependentesModel = new Dependentes();
+        $viewData['totalDependentes'] = $dependentesModel->getTotalDependentesByEmpresa($idEmpresa);
+
+        // Planos Ativos
+        $vendaModel = new Venda();
+        $viewData['planosAtivos'] = $vendaModel->getTotalPlanosAtivosByEmpresa($idEmpresa);
+        $viewData['planosInativos'] = $vendaModel->getTotalPlanosInativosByEmpresa($idEmpresa);
+
+        // Faturamento do Mês
+        $viewData['faturamentoMes'] = $vendaModel->getFaturamentoMesByEmpresa($idEmpresa, $mesAtual, $anoAtual);
+        $viewData['faturamentoAno'] = $vendaModel->getFaturamentoAnualByEmpresa($idEmpresa, $anoAtual);
+
+        // Pagamentos
+        $pagamentoModel = new ReceberPagamentosDosClientes();
+        $viewData['pagamentosRecebidos'] = $pagamentoModel->getPagamentosRecebidosMesAtualByEmpresa($idEmpresa, $mesAtual, $anoAtual);
+        $viewData['pagamentosAReceber'] = $pagamentoModel->getPagamentosAReceberByEmpresa($idEmpresa);
+        $viewData['inadimplentes'] = $pagamentoModel->getClientesInadimplentesByEmpresa($idEmpresa);
+
+        // Vendas do Mês
+        $viewData['vendasMes'] = $vendaModel->getTotalVendasMesByEmpresa($idEmpresa, $mesAtual, $anoAtual);
+        $viewData['vendasAno'] = $vendaModel->getTotalVendasAnualByEmpresa($idEmpresa, $anoAtual);
+
+        // Cancelamentos
+        $contratoModel = new Contrato();
+        $viewData['contratosCancelados'] = $contratoModel->getContratosCanceladosByEmpresa($idEmpresa);
+        $viewData['contratosAtivos'] = $contratoModel->getContratosAtivosByEmpresa($idEmpresa);
+
+        // Despesas do Mês
+        $despesasModel = new Saida();
+        $viewData['despesasMes'] = $despesasModel->getDespesasMesByEmpresa($idEmpresa, $mesAtual, $anoAtual);
+
+        // Dados para Gráficos
+        $viewData['vendasPorMes'] = $vendaModel->getVendasPorMesAnual($idEmpresa, $anoAtual);
+        $viewData['faturamentoPorMes'] = $vendaModel->getFaturamentoPorMesAnual($idEmpresa, $anoAtual);
+        $viewData['statusPagamentos'] = $pagamentoModel->getStatusPagamentosResume($idEmpresa, $mesAtual, $anoAtual);
+
+        return $viewData;
     }
 
     // make login
@@ -83,9 +140,9 @@ class HomeController extends Controller {
         //captura o ano corrente
         $_SESSION['ano'] =  date("Y");
         
+        // Carregar dados financeiros para o dashboard
+        $viewData = $this->getDashboardData();
         
-        
-    
         $this->loadTemplateLoginCompany("dashboard", $viewData);
        
        

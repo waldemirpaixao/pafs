@@ -265,4 +265,160 @@ class Venda extends Model
 
 
   }
+
+  public function getTotalPlanosAtivosByEmpresa($idEmpresa) {
+    $sql = "SELECT COUNT(*) as total FROM venda WHERE empresa_idEmpresa = :id AND vendaAtual = :ativo";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":ativo", self::SIM);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      $result = $select->fetch();
+      return $result['total'];
+    } else {
+      return 0;
+    }
+  }
+
+  public function getTotalPlanosInativosByEmpresa($idEmpresa) {
+    $sql = "SELECT COUNT(*) as total FROM venda WHERE empresa_idEmpresa = :id AND vendaAtual = :inativo";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":inativo", 'nao');
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      $result = $select->fetch();
+      return $result['total'];
+    } else {
+      return 0;
+    }
+  }
+
+  public function getFaturamentoMesByEmpresa($idEmpresa, $mes, $ano) {
+    $sql = "SELECT COALESCE(SUM(valorPlanos), 0) as total FROM venda 
+            WHERE empresa_idEmpresa = :id 
+            AND MONTH(dataVenda) = :mes 
+            AND YEAR(dataVenda) = :ano";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":mes", $mes, \PDO::PARAM_INT);
+    $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      $result = $select->fetch();
+      return $result['total'];
+    } else {
+      return 0;
+    }
+  }
+
+  public function getFaturamentoAnualByEmpresa($idEmpresa, $ano) {
+    $sql = "SELECT COALESCE(SUM(valorPlanos), 0) as total FROM venda 
+            WHERE empresa_idEmpresa = :id 
+            AND YEAR(dataVenda) = :ano";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      $result = $select->fetch();
+      return $result['total'];
+    } else {
+      return 0;
+    }
+  }
+
+  public function getTotalVendasMesByEmpresa($idEmpresa, $mes, $ano) {
+    $sql = "SELECT COUNT(*) as total FROM venda 
+            WHERE empresa_idEmpresa = :id 
+            AND MONTH(dataVenda) = :mes 
+            AND YEAR(dataVenda) = :ano";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":mes", $mes, \PDO::PARAM_INT);
+    $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      $result = $select->fetch();
+      return $result['total'];
+    } else {
+      return 0;
+    }
+  }
+
+  public function getTotalVendasAnualByEmpresa($idEmpresa, $ano) {
+    $sql = "SELECT COUNT(*) as total FROM venda 
+            WHERE empresa_idEmpresa = :id 
+            AND YEAR(dataVenda) = :ano";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      $result = $select->fetch();
+      return $result['total'];
+    } else {
+      return 0;
+    }
+  }
+
+  public function getVendasPorMesAnual($idEmpresa, $ano) {
+    $sql = "SELECT MONTH(dataVenda) as mes, COUNT(*) as total, COALESCE(SUM(valorPlanos), 0) as faturamento 
+            FROM venda 
+            WHERE empresa_idEmpresa = :id 
+            AND YEAR(dataVenda) = :ano
+            GROUP BY MONTH(dataVenda)
+            ORDER BY mes ASC";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      return $select->fetchAll();
+    } else {
+      return array();
+    }
+  }
+
+  public function getFaturamentoPorMesAnual($idEmpresa, $ano) {
+    $sql = "SELECT MONTH(dataVenda) as mes, COALESCE(SUM(valorPlanos), 0) as total 
+            FROM venda 
+            WHERE empresa_idEmpresa = :id 
+            AND YEAR(dataVenda) = :ano
+            GROUP BY MONTH(dataVenda)
+            ORDER BY mes ASC";
+
+    $select = $this->db->prepare($sql);
+    $select->bindValue(":id", $idEmpresa);
+    $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+    $selected = $select->execute();
+
+    if ($selected) {
+      return $select->fetchAll();
+    } else {
+      return array();
+    }
+  }
 }

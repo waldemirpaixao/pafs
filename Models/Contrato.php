@@ -235,4 +235,38 @@ class Contrato extends Model{
 
     }
 
+    public function getContratosCanceladosByEmpresa($idEmpresa) {
+        $sql = "SELECT COUNT(*) as total FROM contrato WHERE empresa_idEmpresa = :id AND contratoAtivo = :inativo";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":inativo", 'nao');
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getContratosAtivosByEmpresa($idEmpresa) {
+        $sql = "SELECT COUNT(*) as total FROM contrato WHERE empresa_idEmpresa = :id AND contratoAtivo = :ativo";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":ativo", 'sim');
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
 }

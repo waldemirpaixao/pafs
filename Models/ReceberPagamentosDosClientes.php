@@ -259,4 +259,85 @@ class ReceberPagamentosDosClientes extends Model
             return $ex->getMessage();
         }
     }
+
+    public function getPagamentosRecebidosMesAtualByEmpresa($idEmpresa, $mes, $ano) {
+        $sql = "SELECT COALESCE(SUM(valor), 0) as total FROM receberPagamentosDosClientes 
+                WHERE empresa_idEmpresa = :id 
+                AND dataPagamento IS NOT NULL
+                AND MONTH(dataPagamento) = :mes 
+                AND YEAR(dataPagamento) = :ano";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":mes", $mes, \PDO::PARAM_INT);
+        $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getPagamentosAReceberByEmpresa($idEmpresa) {
+        $sql = "SELECT COALESCE(SUM(valor), 0) as total FROM receberPagamentosDosClientes 
+                WHERE empresa_idEmpresa = :id 
+                AND (estatusPagamento_idestatusPagamento != 4 OR dataPagamento IS NULL)";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getClientesInadimplentesByEmpresa($idEmpresa) {
+        $sql = "SELECT COUNT(DISTINCT clientes_idClientes) as total FROM receberPagamentosDosClientes 
+                WHERE empresa_idEmpresa = :id 
+                AND dataVencimentoBoleto < CURDATE()
+                AND dataPagamento IS NULL";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            $result = $select->fetch();
+            return $result['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getStatusPagamentosResume($idEmpresa, $mes, $ano) {
+        $sql = "SELECT estatusPagamento_idestatusPagamento, COUNT(*) as total 
+                FROM receberPagamentosDosClientes 
+                WHERE empresa_idEmpresa = :id 
+                AND MONTH(dataVencimentoBoleto) = :mes 
+                AND YEAR(dataVencimentoBoleto) = :ano
+                GROUP BY estatusPagamento_idestatusPagamento";
+
+        $select = $this->db->prepare($sql);
+        $select->bindValue(":id", $idEmpresa);
+        $select->bindValue(":mes", $mes, \PDO::PARAM_INT);
+        $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+        $selected = $select->execute();
+
+        if ($selected) {
+            return $select->fetchAll();
+        } else {
+            return array();
+        }
+    }
 }

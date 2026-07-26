@@ -54,4 +54,25 @@ class Saida extends Model
 
 
    }
+
+   public function getDespesasMesByEmpresa($idEmpresa, $mes, $ano) {
+       $sql = "SELECT COALESCE(SUM(valor), 0) as total FROM despesas 
+               WHERE empresa_idEmpresa = :id 
+               AND MONTH(dataDespesa) = :mes 
+               AND YEAR(dataDespesa) = :ano";
+
+       $select = $this->db->prepare($sql);
+       $select->bindValue(":id", $idEmpresa);
+       $select->bindValue(":mes", $mes, \PDO::PARAM_INT);
+       $select->bindValue(":ano", $ano, \PDO::PARAM_INT);
+
+       $selected = $select->execute();
+
+       if ($selected) {
+           $result = $select->fetch();
+           return $result['total'];
+       } else {
+           return 0;
+       }
+   }
 }

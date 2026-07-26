@@ -222,27 +222,39 @@ margin-bottom: 30px;
 .menuarea li:nth-child(1){ /*Home*/
 
 
-    background-image: url(../imagens/home.png);
+    background-image: url(../imagens/dinheiro.png);
     
     
 }
 
-.menuarea li:nth-child(2){
+.menuarea li:nth-child(2){ /*Configurações*/
 
 
     background-image: url(../imagens/service.png);
 }
 
+
+
+
+
 #submenuConfiguracoes li:nth-child(1){
 
 
-    background-image: url(../imagens/company.png);
+    background-image: url(../imagens/depende.png);
 }
+
+#submenuConfiguracoes li:nth-child(1){
+
+
+    background-image: url(../imagens/dependente.png);
+    
+}
+
 
 #submenuConfiguracoes li:nth-child(2){
 
 
-    background-image: url(../imagens/cadastrar.png);
+    background-image: url(../imagens/credit_cards1.png);
     
 }
 
@@ -269,18 +281,78 @@ margin-bottom: 30px;
 
 
 
-.menuarea li:nth-child(4){
+.menuarea li:nth-child(4){/*Cadastros*/
 
 
-    background-image: url(../imagens/seller.png);
+    background-image: url(../imagens/cadastrar.png);
 }
 
 
-.menuarea li:nth-child(6){
+#submenuCadastros li:nth-child(1){
+background-image: url(../imagens/company.png);
+}
+
+#submenuCadastros li:nth-child(2){
+background-image: url(../imagens/partner.png);
+}
+#submenuCadastros li:nth-child(3){
+background-image: url(../imagens/dependente.png);
+}
+#submenuCadastros li:nth-child(4){
+background-image: url(../imagens/product.png);
+}
+
+#submenuCadastros li:nth-child(4){
+background-image: url(../imagens/list.png);
+}
+
+#submenuCadastros li:nth-child(5){
+background-image: url(../imagens/seller.png);
+}
+
+
+.menuarea li:nth-child(6){/*vendas*/
 
 
     background-image: url(../imagens/credit-cards.png);
 }
+
+
+.menuarea li:nth-child(8){/*cobrança*/
+
+
+    background-image: url(../imagens/credit_cards1.png);
+}
+
+
+.menuarea li:nth-child(10){ /*Contrato*/
+
+
+    background-image: url(../imagens/contrato.png);
+}
+
+
+
+#submenuContrato li:nth-child(1){
+
+
+    background-image: url(../imagens/refresh.svg);
+}
+
+#submenuContrato li:nth-child(2){
+
+
+    background-image: url(../imagens/assinatura.svg);
+}
+
+
+.menuarea li:nth-child(12){ /*Integrações*/
+
+
+    background-image: url(../imagens/integration.png);
+}
+
+
 
 
 #submenuVendas li:nth-child(1){
@@ -322,90 +394,6 @@ margin-bottom: 30px;
     background-image: url(../imagens/lucro.png);
 }
 
-
-#submenuContrato li:nth-child(3){
-
-
-    background-image: url(../imagens/contrato.png);
-}
-
-
-.menuarea li:nth-child(8){
-
-
-    background-image: url(../imagens/category.png);
-}
-
-
-
-/*.menuarea li:nth-child(4){
-
-
-    background-image: url(../imagens/order.png);
-}
-
-#submenu li:nth-child(1){
-
-
-    background-image: url(../imagens/category.png);
-}
-
-#submenu li:nth-child(2){
-
-
-    background-image: url(../imagens/cadastrar.png);
-}
-
-#submenu li:nth-child(3){
-
-
-    background-image: url(../imagens/list.png);
-}
-
-
-.menuarea li:nth-last-child(5){
-
-
-
-    background-image: url(../imagens/credit-cards.png);
-}
-
-
-
-.menuarea li:nth-child(7){
-
-
-    background-image: url(../imagens/notice.png);
-}
-
-
-.menuarea li:nth-last-child(3){
-
-
-    background-image: url(../imagens/suggestion.png);
-}
-
-.menuarea li:nth-last-child(2){
-
-
-    background-image: url(../imagens/help.png);
-}
-
-.menuarea li:nth-last-child(1){
-
-
-    background-image: url(../imagens/partner.png);
-}
-
-.menuProdutos li:nth-child(1){
-
-    background-image: url(../imagens/restaurant.png);
-}
-
-.menuServicos li:nth-child(1){
-    background-image: url(../imagens/service.png);
-
-}*/
 
 .areaContentLogin{
 
