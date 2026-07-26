@@ -37,7 +37,7 @@
           
         </form>
         <br>
-        <div style="width: 100%; text-align: right;">Versão 1.0 - beta</div>
+        <div style="width: 100%; text-align: right;">Versão 1.1</div>
        
    
 </div>
